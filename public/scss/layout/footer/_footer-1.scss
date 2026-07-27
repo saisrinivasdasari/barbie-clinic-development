@@ -1,0 +1,117 @@
+.site-footer{
+	&.style-1{
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		
+		.footer-title {
+			font-weight: 500;
+		}	
+		.widget_services{
+			padding-left: 30px;
+			
+			@include custommq ($max:1380px){
+				padding-left: 0;				
+			}
+		}
+		.footer-middle{
+			
+			.fm-inner{
+				border-radius: 30px;
+				padding: 25px 40px;
+				background-color: #fff;
+				
+				@include respond('phone-land'){
+					padding: 25px 25px;
+				}
+			}
+			.title{
+				margin-bottom: 3px;
+			}
+			.text{
+				font-size: 15px;
+				margin-bottom: 0;
+			}
+		}
+		&.overlay-secondary-dark::before{
+			background-color: #07121E;
+		}
+		.fb-inner{
+			border: 0;
+			padding: 20px 0;
+		}
+		.footer-head{
+			.fh-inner{
+				padding-top: 40px;
+				padding-bottom: 10px;
+				border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+			}
+		}
+		&.footer-dark{
+			--bs-body-color: #BED2E7;
+			background-color: #07121E;
+			
+			.text-body{
+				color: var(--bs-body-color) !important;
+			}
+			.footer-middle{
+				.fm-inner{
+					background-color: #07121E;
+				}
+			}
+			.dzSubscribe.style-1 {
+				.input-group .form-control{
+					background: #07121E;
+					border: 1px solid #07121E;
+					color: #fff;
+					
+					&:-webkit-autofill,
+					&:-webkit-autofill:hover,
+					&:-webkit-autofill:focus,
+					&:-webkit-autofill:active{
+						-webkit-text-fill-color: #fff;
+					}
+				}
+				&.r-rounded{
+					.input-group .form-control{
+						border-radius: 60px !important;
+					}
+				}
+			}
+			.footer-head{
+				.fh-inner{
+					border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+				}
+			}
+		}
+	}
+	
+}
+
+.dzSubscribe {
+	&.r-rounded{
+		.input-group{
+			.form-control{
+				border-radius: 60px !important;
+			}
+			.input-group-addon i{
+				color: var(--bs-primary);
+			}
+		}
+	}
+}
+
+@keyframes btn-hover {
+	0% {
+	  transform: translateY(0%); 
+	}
+	25% {
+	  transform: translateY(-100%); 
+	}
+	75% {
+	  transform: translateY(50%);
+	}
+	100% {
+	  transform: translateY(100%); 
+	} 
+}

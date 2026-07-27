@@ -3,24 +3,575 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --bs-primary: #0052cc;
+  --bs-secondary: #0a3366;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism & Micro-animations */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Hero Banner Layout Adjustments */
+.hero-banner.style-1 {
+  height: auto !important;
+  min-height: auto !important;
+  padding-top: 110px;
+  padding-bottom: 50px;
+}
+
+.hero-thumbnail img.thumbnail {
+  width: 100%;
+  height: 640px;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 28px;
+  box-shadow: 0 25px 50px rgba(10, 51, 102, 0.18);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  .hero-banner.style-1 {
+    padding-top: 90px;
+    padding-bottom: 30px;
+  }
+
+  .hero-thumbnail img.thumbnail {
+    height: 480px;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero-thumbnail img.thumbnail {
+    height: 360px;
+  }
+}
+
+/* 2-Line Continuous Scrolling Marquee */
+.dz-marquee.style-1 .marquee-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.dz-marquee.style-1 .marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.dz-marquee.style-1 .marquee-track .marquee-list {
+  display: flex;
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: ticker 30s linear infinite;
+}
+
+.dz-marquee.style-1 .marquee-track.marquee-reverse .marquee-list {
+  animation: tickerReverse 30s linear infinite;
+}
+
+.dz-marquee.style-1:hover .marquee-track .marquee-list {
+  animation-play-state: paused;
+}
+
+@keyframes tickerReverse {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* About Section Media Adjustments */
+.content-wrapper.style-1 .content-media {
+  margin-bottom: 30px !important;
+}
+
+.content-wrapper.style-1 .content-media .dz-media {
+  border-radius: 120px 24px 24px 120px !important;
+  height: 500px !important;
+  overflow: hidden;
+}
+
+.content-wrapper.style-1 .content-media .dz-media img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* Service Card Expandable Accordion Flex */
+.dz-flex-wrapper {
+  display: flex !important;
+  gap: 1.25rem !important;
+  min-height: 480px;
+  width: 100%;
+  position: relative;
+  counter-reset: flex-item-counter;
+}
+
+.dz-flex-wrapper .dz-flex-item {
+  flex: 1 1 0px !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: 480px !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+  transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease, box-shadow 0.3s ease !important;
+  cursor: pointer;
+  margin: 0 !important;
+}
+
+.dz-flex-wrapper .dz-flex-item:hover {
+  transform: translateY(-4px);
+}
+
+.dz-flex-wrapper .dz-flex-item.active {
+  flex: 3.5 1 0px !important;
+  box-shadow: 0 20px 50px rgba(10, 51, 102, 0.16) !important;
+}
+
+/* Inactive Head View */
+.dz-flex-wrapper .dz-flex-head {
+  height: 100% !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  background-size: cover !important;
+  background-position: center !important;
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  padding: 1.75rem 1.25rem !important;
+  z-index: 2 !important;
+  transition: opacity 0.3s ease !important;
+  opacity: 1 !important;
+  border-radius: 24px !important;
+}
+
+.dz-flex-wrapper .dz-flex-item.active .dz-flex-head {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.dz-flex-wrapper .dz-flex-head::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(10, 51, 102, 0.85) 100%) !important;
+  border-radius: inherit !important;
+}
+
+.dz-flex-wrapper .dz-flex-head::before {
+  display: none !important;
+}
+
+.dz-flex-wrapper .dz-flex-head .title {
+  position: relative !important;
+  z-index: 2 !important;
+  color: #ffffff !important;
+  font-size: 1.3rem !important;
+  font-weight: 600 !important;
+  writing-mode: vertical-rl !important;
+  transform: rotate(180deg) !important;
+  letter-spacing: 0.5px !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.dz-flex-wrapper .dz-flex-head .btn-arrow {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  color: var(--bs-primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Active Info View */
+.dz-flex-wrapper .dz-flex-info::before {
+  display: none !important;
+}
+
+.dz-flex-wrapper .dz-flex-info {
+  height: 100% !important;
+  width: 100% !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: #ffffff !important;
+  padding: 1.25rem !important;
+  z-index: 3 !important;
+  display: flex !important;
+  gap: 1.25rem !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.35s ease 0.1s !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
+.dz-flex-wrapper .dz-flex-item.active .dz-flex-info {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.dz-flex-wrapper .dz-flex-info .dz-card-media {
+  flex: 0 0 210px !important;
+  width: 210px !important;
+  min-width: 210px !important;
+  height: 100% !important;
+  position: relative !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.dz-flex-wrapper .dz-flex-info .dz-card-media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.dz-flex-wrapper .dz-flex-info .dz-card-content {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  padding-right: 0.25rem !important;
+}
+
+@media (max-width: 991px) {
+  .dz-flex-wrapper {
+    flex-direction: column !important;
+    min-height: auto !important;
+  }
+
+  .dz-flex-wrapper .dz-flex-item,
+  .dz-flex-wrapper .dz-flex-item.active {
+    flex: none !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .dz-flex-wrapper .dz-flex-head {
+    display: none !important;
+  }
+
+  .dz-flex-wrapper .dz-flex-info {
+    position: relative !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    height: auto !important;
+    flex-direction: column !important;
+  }
+
+  .dz-flex-wrapper .dz-flex-info .dz-card-media {
+    flex: none !important;
+    width: 100% !important;
+    height: 220px !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Featured Procedure Cards Styling */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 18px 40px rgba(10, 51, 102, 0.12) !important;
+}
+
+.procedure-card {
+  height: 420px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.procedure-card .dz-media {
+  height: 60% !important;
+  flex: 0 0 60% !important;
+  width: 100% !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.procedure-card .dz-media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.5s ease;
+}
+
+.procedure-card:hover .dz-media img {
+  transform: scale(1.06);
+}
+
+.procedure-card .procedure-content {
+  height: 40% !important;
+  flex: 0 0 40% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding-top: 0.75rem !important;
+}
+
+/* Footer Social Media Buttons */
+.social-btn {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.social-btn i {
+  font-size: 1.15rem !important;
+  color: #ffffff !important;
+}
+
+.social-btn:hover {
+  transform: translateY(-4px) scale(1.08) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+.social-btn.facebook-btn:hover {
+  background: #1877F2 !important;
+  border-color: #1877F2 !important;
+}
+
+.social-btn.instagram-btn:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+  border-color: #dc2743 !important;
+}
+
+.social-btn.youtube-btn:hover {
+  background: #FF0000 !important;
+  border-color: #FF0000 !important;
+}
+
+.social-btn.whatsapp-btn:hover {
+  background: #25D366 !important;
+  border-color: #25D366 !important;
+}
+
+/* Before / After Comparison Images */
+.twentytwenty-container {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  width: 100%;
+  min-height: 280px;
+  max-height: 360px;
+  background: #e2e8f0;
+}
+
+.twentytwenty-container img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 280px;
+}
+
+/* Video Modal Backdrop */
+.video-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 51, 102, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.video-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Custom animations */
+@keyframes floatAnim {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.move-3 {
+  animation: floatAnim 4s ease-in-out infinite;
+}
+
+.move-4 {
+  animation: floatAnim 5s ease-in-out infinite reverse;
+}
+
+.dz-team .dz-media img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.shop-card .dz-media img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Header & Mobile Drawer Styles */
+@media (max-width: 991px) {
+  .header-nav.w3menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 1050;
+    padding: 2rem 1.5rem;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .header-nav.w3menu.show {
+    left: 0;
+  }
+
+  .menu-close.fade-overlay.show {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+  }
+
+  .w3menu-toggler {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1060;
+  }
+
+  .w3menu-toggler span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--bs-secondary);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .extra-nav-left {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .w3menu-toggler {
+    display: none !important;
+  }
+}
+
+/* Responsive Mobile Layout Overrides */
+@media (max-width: 768px) {
+  .hero-banner .title {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .dz-flex-wrapper {
+    flex-direction: column;
+  }
+
+  .dz-flex-item {
+    min-width: 100% !important;
+  }
+
+  .dz-flex-item.active {
+    flex: none;
+  }
+
+  .twentytwenty-container {
+    min-height: 220px;
+  }
+
+  .twentytwenty-container img {
+    min-height: 220px;
+  }
 }
