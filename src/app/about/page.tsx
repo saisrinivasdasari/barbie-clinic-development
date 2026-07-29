@@ -63,8 +63,8 @@ export default function Page() {
               <div className="col-xl-7 col-lg-6 m-b30 position-relative">
                 <div className="info-content">
                   <div className="section-head style-1 m-b30 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
-                    <h2 className="title m-b15">Over a Decade of Excellence in Clinical & Aesthetic Dermatology</h2>
-                    <p>Established in 2009, Barbie Skin & Laser Clinic is dedicated to providing scientifically proven, safe, and effective advanced skin and hair treatments. As a dedicated vitiligo treatment center, we are committed to revolutionizing care and making high-quality cosmetic procedures accessible to all.</p>
+                    <h2 className="title m-b15">Over 3 Decades of Excellence in Clinical & Aesthetic Dermatology</h2>
+                    <p>Backed by over 30 years of clinical experience, Barbie Skin & Laser Clinic is dedicated to providing scientifically proven, safe, and effective advanced skin and hair treatments. As a dedicated vitiligo treatment center, we are committed to revolutionizing care and making high-quality cosmetic procedures accessible to all.</p>
                     <p className="m-t10">Our mission is straightforward: <strong>"99% committed to getting you clear skin."</strong> We achieve this through individualized treatments, medical compliance, and a patient-centric approach.</p>
                   </div>
                   <div className="d-flex align-items-center m-b15 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
@@ -76,7 +76,7 @@ export default function Page() {
                         <img className="avatar rounded-circle avatar-md border border-white border-2 object-fit-cover" src="/images/avatar/telugu/avatar4.png" alt="Telugu Patient 4" style={{ width: 44, height: 44 }} />
                       </div>
                       <div className="clearfix">
-                        <span>300k+ Happy Patients Since 2009</span>
+                        <span>300k+ Happy Patients | 30 Years Experience</span>
                       </div>
                     </div>
                   </div>
@@ -110,7 +110,7 @@ export default function Page() {
                       "99% Committed to Getting You Clear Skin"
                     </h3>
                     <p className="text-muted mb-4" style={{ fontSize: '0.925rem', lineHeight: '1.65' }}>
-                      Since 2009, Barbie Clinic has pioneered results-driven clinical dermatology and laser therapies. We ensure every patient receives customized, safe, and highly effective clinical care.
+                      With over 30 years of clinical experience, Barbie Clinic has pioneered results-driven clinical dermatology and laser therapies. We ensure every patient receives customized, safe, and highly effective clinical care.
                     </p>
 
                     <div className="d-flex flex-column gap-2.5 mb-4">
@@ -178,7 +178,7 @@ export default function Page() {
                       <div className="col-md-4">
                         <div className="p-2.5 bg-light rounded-3 border border-light-subtle h-100">
                           <span className="fw-bold text-secondary d-block small mb-0.5"><i className="feather icon-heart text-primary me-1"></i>Customer First</span>
-                          <span className="text-muted" style={{ fontSize: '0.75rem' }}>300k+ clients treated since 2009.</span>
+                          <span className="text-muted" style={{ fontSize: '0.75rem' }}>300k+ clients treated with 30 years of expertise.</span>
                         </div>
                       </div>
                       <div className="col-md-4">
@@ -420,7 +420,7 @@ export default function Page() {
                   <div className="dz-content text-center">
                     <h3 className="dz-name"><Link href="/about">Dr. M.N. Rao</Link></h3>
                     <span className="dz-position">Senior Dermatologist & Cosmetologist</span>
-                    <p className="mt-2 text-muted small">MBBS & Diploma from Osmania Medical College. Over two decades of clinical experience in Vitiligo laser therapies and cosmetology.</p>
+                    <p className="mt-2 text-muted small">MBBS & Diploma from Osmania Medical College. Over 30 years of clinical experience in Vitiligo laser therapies and cosmetology.</p>
                   </div>
                   <div className="dz-media">
                     <img src="/images/team/img1.webp" alt="Dr. M.N. Rao" />
@@ -513,7 +513,7 @@ export default function Page() {
                         </div>
                         <div>
                           <h6 className="fw-bold text-secondary mb-0.5" style={{ fontSize: '0.875rem' }}>300,000+ Happy Patients</h6>
-                          <p className="text-muted mb-0 small" style={{ fontSize: '0.775rem' }}>Trusted since 2009 in South India.</p>
+                          <p className="text-muted mb-0 small" style={{ fontSize: '0.775rem' }}>Backed by 30 years of clinical excellence in South India.</p>
                         </div>
                       </div>
                     </div>

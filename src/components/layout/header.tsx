@@ -168,7 +168,7 @@ export default function Header() {
                 </Link>
               </div>
               <p>
-                Barbie Skin & Laser Clinic, established in 2009, is a dedicated vitiligo treatment center, cosmetic and laser clinic. We are committed to revolutionizing care and accessibility to advanced skin and hair treatments.
+                Barbie Skin & Laser Clinic, backed by over 30 years of clinical experience, is a dedicated vitiligo treatment center, cosmetic and laser clinic. We are committed to revolutionizing care and accessibility to advanced skin and hair treatments.
               </p>
             </div>
 

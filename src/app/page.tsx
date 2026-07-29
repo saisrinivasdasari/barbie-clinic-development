@@ -180,7 +180,7 @@ export default function Page() {
                       Glow with Confidence — Precision Skin & Laser Therapies
                     </h1>
                     <div className="content-bx style-2 secondary m-b40 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
-                      Barbie Skin & Laser Clinic, established in 2009. We specialize in advanced laser therapies, facial rejuvenation, and cosmetic treatments designed for your absolute skin health.
+                      Barbie Skin & Laser Clinic, backed by over 30 years of clinical experience. We specialize in advanced laser therapies, facial rejuvenation, and cosmetic treatments designed for your absolute skin health.
                     </div>
                     <div className="d-flex align-items-center flex-wrap gap-3">
                       <Link href="/contact" className="btn btn-lg btn-icon btn-primary wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
@@ -206,7 +206,7 @@ export default function Page() {
                     <li><i className="fa fa-star text-warning"></i></li>
                   </ul>
                   <span className="rating text-primary m-r5 fw-bold">(4.9)</span>
-                  <span className="text">300k+ Happy Clients Since 2009</span>
+                  <span className="text">300k+ Happy Clients | 30 Years Experience</span>
                 </div>
               </div>
 
@@ -281,8 +281,8 @@ export default function Page() {
               <div className="col-xl-7 col-lg-6 m-b30 position-relative">
                 <div className="info-content ps-xl-4">
                   <div className="section-head style-1 m-b30 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
-                    <h2 className="title m-b15 fw-bold text-secondary">Over a Decade of Excellence in Clinical & Aesthetic Dermatology</h2>
-                    <p className="text-muted leading-relaxed">Established in 2009, Barbie Skin & Laser Clinic is dedicated to providing scientifically proven, safe, and effective advanced skin and hair treatments. As a dedicated vitiligo treatment center, we are committed to revolutionizing care and making high-quality cosmetic procedures accessible to all. We employ experienced specialists and use USFDA-approved equipment to deliver personalized solutions with minimal downtime.</p>
+                    <h2 className="title m-b15 fw-bold text-secondary">Over 3 Decades of Excellence in Clinical & Aesthetic Dermatology</h2>
+                    <p className="text-muted leading-relaxed">Backed by over 30 years of clinical experience, Barbie Skin & Laser Clinic is dedicated to providing scientifically proven, safe, and effective advanced skin and hair treatments. As a dedicated vitiligo treatment center, we are committed to revolutionizing care and making high-quality cosmetic procedures accessible to all. We employ experienced specialists and use USFDA-approved equipment to deliver personalized solutions with minimal downtime.</p>
                   </div>
                   <div className="d-flex align-items-center m-b15 flex-wrap gap-3">
                     <div className="info-widget style-1 bg-white p-3 rounded-4 shadow-sm border border-light d-flex align-items-center gap-3">
@@ -633,7 +633,7 @@ export default function Page() {
                     <div className="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill fw-bold mb-2">Senior Doctor Spotlight</div>
                     <h2 className="title fw-bold text-secondary">Dr. M.N. Rao</h2>
                     <p className="fw-normal text-muted leading-relaxed mt-2">
-                      <strong className="text-secondary fw-semibold">Dr. M.N. Rao</strong> is a highly respected Senior Dermatologist and Cosmetologist with over two decades of experience in treating complex vitiligo patches, laser procedures, and advanced clinical aesthetics. He holds an MBBS and a postgraduate Diploma in Dermatology from Osmania Medical College.
+                      <strong className="text-secondary fw-semibold">Dr. M.N. Rao</strong> is a highly respected Senior Dermatologist and Cosmetologist with over 30 years of experience in treating complex vitiligo patches, laser procedures, and advanced clinical aesthetics. He holds an MBBS and a postgraduate Diploma in Dermatology from Osmania Medical College.
                     </p>
                   </div>
                   <h4 className="text-primary fw-bold mb-3">Specializations</h4>

@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Barbie Skin & Laser Clinic | Dedicated Vitiligo & Cosmetic Center",
-  description: "Barbie Skin & Laser Clinic, established in 2009. Leading vitiligo treatment center, cosmetic & laser clinic offering advanced, USFDA-approved skin and hair treatments.",
+  description: "Barbie Skin & Laser Clinic, backed by over 30 years of clinical experience. Leading vitiligo treatment center, cosmetic & laser clinic offering advanced, USFDA-approved skin and hair treatments.",
 };
 
 export default function RootLayout({
