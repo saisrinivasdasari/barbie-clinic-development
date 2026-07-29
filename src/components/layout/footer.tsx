@@ -19,8 +19,7 @@ export default function Footer() {
               >
                 <div className="footer-logo logo-white d-flex align-items-center">
                   <Link href="/" className="text-decoration-none">
-                    <span className="fs-3 fw-bold text-white" style={{ letterSpacing: "1px" }}>BARBIE</span>
-                    <span className="fs-6 fw-medium text-light ms-2" style={{ textTransform: "uppercase", letterSpacing: "1px" }}>Skin & Laser</span>
+                    <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" className="bg-white p-2 rounded-3" style={{ height: "52px", width: "auto" }} />
                   </Link>
                 </div>
               </div>
