@@ -30,7 +30,7 @@ export default function Header() {
               {/* Website Logo */}
               <div className="logo-header logo-dark d-flex align-items-center">
                 <Link href="/" className="text-decoration-none">
-                  <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" style={{ height: "46px", width: "auto" }} />
+                  <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" style={{ height: "65px", width: "auto", objectFit: "contain" }} />
                 </Link>
               </div>
 
@@ -54,7 +54,7 @@ export default function Header() {
               <div className={`header-nav w3menu w3menu-center justify-content-center mo-left ${isMobileMenuOpen ? "show" : ""}`} id="W3Menu">
                 <div className="logo-header logo-dark d-lg-none d-flex align-items-center m-b20">
                   <Link href="/" className="text-decoration-none" onClick={() => setIsMobileMenuOpen(false)}>
-                    <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" style={{ height: "42px", width: "auto" }} />
+                    <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" style={{ height: "54px", width: "auto", objectFit: "contain" }} />
                   </Link>
                 </div>
 
@@ -161,7 +161,7 @@ export default function Header() {
             <div className="widget">
               <div className="sidebar-header m-b20">
                 <Link href="/" className="text-decoration-none" onClick={() => setIsSidebarOpen(false)}>
-                  <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" style={{ height: "44px", width: "auto" }} />
+                  <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" style={{ height: "58px", width: "auto", objectFit: "contain" }} />
                 </Link>
               </div>
               <p>

@@ -19,7 +19,7 @@ export default function Footer() {
               >
                 <div className="footer-logo logo-white d-flex align-items-center">
                   <Link href="/" className="text-decoration-none">
-                    <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" className="bg-white p-2 rounded-3" style={{ height: "52px", width: "auto" }} />
+                    <img src="/barbie-logo.png" alt="Barbie Skin & Laser Clinic" className="bg-white px-3 py-2 rounded-3 shadow-sm" style={{ height: "68px", width: "auto", objectFit: "contain" }} />
                   </Link>
                 </div>
               </div>
