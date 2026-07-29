@@ -59,16 +59,7 @@ export default function Footer() {
                 </p>
                 <div className="d-flex align-items-center gap-3 flex-wrap mb-2">
                   <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn facebook-btn"
-                    title="Facebook"
-                  >
-                    <FaFacebookF size={20} />
-                  </a>
-                  <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/barbieskinandlaserclinic_/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-btn instagram-btn"
@@ -77,22 +68,22 @@ export default function Footer() {
                     <FaInstagram size={22} />
                   </a>
                   <a
-                    href="https://youtube.com"
+                    href="https://www.facebook.com/BarbieSkinAndLaserClinic"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-btn facebook-btn"
+                    title="Facebook"
+                  >
+                    <FaFacebookF size={20} />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@BarbieSkinandLaserClinic"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-btn youtube-btn"
                     title="YouTube"
                   >
                     <FaYoutube size={22} />
-                  </a>
-                  <a
-                    href="https://wa.me/918832421234"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-btn whatsapp-btn"
-                    title="WhatsApp"
-                  >
-                    <FaWhatsapp size={22} />
                   </a>
                 </div>
               </div>

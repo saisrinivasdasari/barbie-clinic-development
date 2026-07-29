@@ -84,23 +84,18 @@ export default function Header() {
                 <div className="dz-social-icon">
                   <ul>
                     <li>
-                      <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
-                        <i className="fa-brands fa-linkedin"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+                      <a href="https://www.instagram.com/barbieskinandlaserclinic_/" target="_blank" rel="noreferrer" title="Instagram">
                         <i className="fa-brands fa-instagram"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+                      <a href="https://www.facebook.com/BarbieSkinAndLaserClinic" target="_blank" rel="noreferrer" title="Facebook">
                         <i className="fa-brands fa-facebook-f"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="https://twitter.com" target="_blank" rel="noreferrer">
-                        <i className="fa-brands fa-x-twitter"></i>
+                      <a href="https://www.youtube.com/@BarbieSkinandLaserClinic" target="_blank" rel="noreferrer" title="YouTube">
+                        <i className="fa-brands fa-youtube"></i>
                       </a>
                     </li>
                   </ul>
@@ -228,27 +223,17 @@ export default function Header() {
               <div className="dz-social-icon style-1">
                 <ul>
                   <li>
-                    <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
-                      <i className="fa-brands fa-linkedin"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+                    <a href="https://www.instagram.com/barbieskinandlaserclinic_/" target="_blank" rel="noreferrer" title="Instagram">
                       <i className="fa-brands fa-instagram"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+                    <a href="https://www.facebook.com/BarbieSkinAndLaserClinic" target="_blank" rel="noreferrer" title="Facebook">
                       <i className="fa-brands fa-facebook-f"></i>
                     </a>
                   </li>
                   <li>
-                    <a href="https://twitter.com" target="_blank" rel="noreferrer">
-                      <i className="fa-brands fa-x-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
+                    <a href="https://www.youtube.com/@BarbieSkinandLaserClinic" target="_blank" rel="noreferrer" title="YouTube">
                       <i className="fa-brands fa-youtube"></i>
                     </a>
                   </li>

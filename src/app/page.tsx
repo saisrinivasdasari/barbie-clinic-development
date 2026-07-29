@@ -220,9 +220,9 @@ export default function Page() {
           </div>
           <div className="vertical-info left">
             <ul className="social-list">
-              <li><a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
-              <li><a href="https://www.facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
-              <li><a href="https://twitter.com" target="_blank" rel="noreferrer">Twitter</a></li>
+              <li><a href="https://www.instagram.com/barbieskinandlaserclinic_/" target="_blank" rel="noreferrer">Instagram</a></li>
+              <li><a href="https://www.facebook.com/BarbieSkinAndLaserClinic" target="_blank" rel="noreferrer">Facebook</a></li>
+              <li><a href="https://www.youtube.com/@BarbieSkinandLaserClinic" target="_blank" rel="noreferrer">YouTube</a></li>
             </ul>
             <Link href="/contact" className="btn btn-white btn-sm px-2 py-3 btn-shadow rounded">LET'S TALK</Link>
           </div>
