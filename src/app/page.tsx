@@ -586,36 +586,88 @@ export default function Page() {
               <p className="text-muted">Qualified specialists committed to clinical excellence, safe diagnostics, and patient satisfaction.</p>
             </div>
             <div className="row justify-content-center g-4">
-              {/* Doctor 1 */}
-              <div className="col-xl-5 col-md-6">
-                <div className="dz-team style-1 bg-light p-4 rounded-4 shadow-sm text-center">
-                  <div className="dz-media mb-3 rounded-4 overflow-hidden shadow-sm" style={{ height: 300 }}>
-                    <img src="/Doctor-imgs/Dr. M.N. Rao.png" alt="Dr. M.N. Rao" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top' }} />
+              {/* Doctor 1: Dr. M.N. Rao */}
+              <div className="col-xl-5 col-lg-6 col-md-6">
+                <div className="bg-white rounded-4 shadow-sm border border-light-subtle hover-lift text-center overflow-hidden position-relative h-100 d-flex flex-column" style={{ transition: 'all 0.3s ease' }}>
+                  {/* Doctor Image Container (70% Visual Frame) */}
+                  <div className="w-100 position-relative overflow-hidden" style={{ height: 340 }}>
+                    <img src="/Doctor-imgs/Dr. M.N. Rao.png" alt="Dr. M.N. Rao" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'center 15%' }} />
+                    <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%)' }}></div>
+                    <span className="badge bg-white text-primary shadow-sm px-3 py-1.5 rounded-pill position-absolute top-0 start-0 m-3 fw-semibold small d-inline-flex align-items-center gap-1.5" style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(255,255,255,0.92)' }}>
+                      <i className="feather icon-award text-primary fs-6"></i> 30+ Yrs Clinical Experience
+                    </span>
+                    <span className="badge bg-secondary text-white shadow-sm px-2.5 py-1 rounded-pill position-absolute bottom-0 start-0 m-3 fw-medium small">
+                      OMC Postgraduate Alumni
+                    </span>
                   </div>
-                  <div className="dz-content">
-                    <h3 className="dz-name fw-bold text-secondary mb-1"><Link href="/about" className="text-secondary text-decoration-none">Dr. M.N. Rao</Link></h3>
-                    <span className="dz-position d-block text-primary fw-medium mb-3">Senior Dermatologist & Cosmetologist</span>
-                    <p className="text-muted small">Postgraduate Diploma in Dermatology (OMC Alumni). Over 30 years of clinical expertise in Vitiligo laser therapy and cosmetic surgery.</p>
-                    <Link href="/contact" className="btn btn-primary rounded-pill px-4">
-                      <i className="feather icon-calendar m-r5"></i> Book Consultation
-                    </Link>
+
+                  {/* Doctor Info Content (Clean Padded Body) */}
+                  <div className="p-4 d-flex flex-column justify-content-between flex-grow-1 bg-white">
+                    <div>
+                      <h3 className="fw-bold text-secondary mb-1 fs-4">
+                        <Link href="/about" className="text-secondary text-decoration-none">Dr. M.N. Rao</Link>
+                      </h3>
+                      <div className="mb-2.5">
+                        <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-semibold" style={{ fontSize: '0.8rem' }}>
+                          Senior Dermatologist & Cosmetologist
+                        </span>
+                      </div>
+                      <p className="text-muted small mb-3" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+                        MBBS & Diploma from Osmania Medical College. Over 30 years of clinical experience in Vitiligo laser therapies and cosmetology.
+                      </p>
+                    </div>
+
+                    <div className="d-flex align-items-center justify-content-center gap-2 pt-3 border-top border-light-subtle">
+                      <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm">
+                        <i className="feather icon-calendar me-1.5"></i> Book Consultation
+                      </Link>
+                      <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
+                        <i className="feather icon-phone-call fs-6"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Doctor 2 */}
-              <div className="col-xl-5 col-md-6">
-                <div className="dz-team style-1 bg-light p-4 rounded-4 shadow-sm text-center">
-                  <div className="dz-media mb-3 rounded-4 overflow-hidden shadow-sm" style={{ height: 300 }}>
-                    <img src="/Doctor-imgs/Dr. G. Megha.mala.png" alt="Dr. G. Megha.mala" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top' }} />
+              {/* Doctor 2: Dr. G. Megha.mala */}
+              <div className="col-xl-5 col-lg-6 col-md-6">
+                <div className="bg-white rounded-4 shadow-sm border border-light-subtle hover-lift text-center overflow-hidden position-relative h-100 d-flex flex-column" style={{ transition: 'all 0.3s ease' }}>
+                  {/* Doctor Image Container (70% Visual Frame) */}
+                  <div className="w-100 position-relative overflow-hidden" style={{ height: 340 }}>
+                    <img src="/Doctor-imgs/Dr. G. Megha.mala.png" alt="Dr. G. Megha.mala" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top center' }} />
+                    <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%)' }}></div>
+                    <span className="badge bg-white text-primary shadow-sm px-3 py-1.5 rounded-pill position-absolute top-0 start-0 m-3 fw-semibold small d-inline-flex align-items-center gap-1.5" style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(255,255,255,0.92)' }}>
+                      <i className="feather icon-star text-primary fs-6"></i> Aesthetic Medicine Specialist
+                    </span>
+                    <span className="badge bg-secondary text-white shadow-sm px-2.5 py-1 rounded-pill position-absolute bottom-0 start-0 m-3 fw-medium small">
+                      MBBS (2021) & Aesthetic Diploma
+                    </span>
                   </div>
-                  <div className="dz-content">
-                    <h3 className="dz-name fw-bold text-secondary mb-1"><Link href="/about" className="text-secondary text-decoration-none">Dr. G. Megha.mala</Link></h3>
-                    <span className="dz-position d-block text-primary fw-medium mb-3">Aesthetic Practitioner</span>
-                    <p className="text-muted small">Specialist in chemical peeling, facial rejuvenation, laser hair removal, and custom anti-acne protocols.</p>
-                    <Link href="/contact" className="btn btn-primary rounded-pill px-4">
-                      <i className="feather icon-calendar m-r5"></i> Book Consultation
-                    </Link>
+
+                  {/* Doctor Info Content (Clean Padded Body) */}
+                  <div className="p-4 d-flex flex-column justify-content-between flex-grow-1 bg-white">
+                    <div>
+                      <h3 className="fw-bold text-secondary mb-1 fs-4">
+                        <Link href="/about" className="text-secondary text-decoration-none">Dr. G. Megha.mala</Link>
+                      </h3>
+                      <div className="mb-2.5">
+                        <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-semibold" style={{ fontSize: '0.8rem' }}>
+                          Aesthetic Practitioner & Laser Specialist
+                        </span>
+                      </div>
+                      <p className="text-muted small mb-3" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+                        MBBS & Diploma in Aesthetic Medicine. Specialized in chemical peeling, facial rejuvenation, anti-acne, and hair removal.
+                      </p>
+                    </div>
+
+                    <div className="d-flex align-items-center justify-content-center gap-2 pt-3 border-top border-light-subtle">
+                      <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm">
+                        <i className="feather icon-calendar me-1.5"></i> Book Consultation
+                      </Link>
+                      <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
+                        <i className="feather icon-phone-call fs-6"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
