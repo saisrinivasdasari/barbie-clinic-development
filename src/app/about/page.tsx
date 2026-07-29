@@ -413,31 +413,31 @@ export default function Page() {
               <h2 className="title m-b10">Our Consulting Dermatologists</h2>
               <p>Qualified specialists committed to clinical excellence, safe diagnostics, and patient satisfaction.</p>
             </div>
-            <div className="row justify-content-center">
+            <div className="row justify-content-center g-4">
               {/* Doctor 1 */}
-              <div className="col-xl-5 col-md-6 m-b30 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
-                <div className="dz-team style-1 active box-hover">
-                  <div className="dz-content text-center">
-                    <h3 className="dz-name"><Link href="/about">Dr. M.N. Rao</Link></h3>
-                    <span className="dz-position">Senior Dermatologist & Cosmetologist</span>
-                    <p className="mt-2 text-muted small">MBBS & Diploma from Osmania Medical College. Over 30 years of clinical experience in Vitiligo laser therapies and cosmetology.</p>
+              <div className="col-xl-5 col-md-6 m-b30">
+                <div className="dz-team style-1 bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift text-center h-100 d-flex flex-column justify-content-between">
+                  <div className="dz-media mb-3 rounded-4 overflow-hidden shadow-sm" style={{ height: 320 }}>
+                    <img src="/Doctor-imgs/Dr. M.N. Rao.png" alt="Dr. M.N. Rao" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
-                  <div className="dz-media">
-                    <img src="/images/team/img1.webp" alt="Dr. M.N. Rao" />
+                  <div className="dz-content text-center">
+                    <h3 className="dz-name fw-bold text-secondary mb-1"><Link href="/about" className="text-secondary text-decoration-none">Dr. M.N. Rao</Link></h3>
+                    <span className="dz-position d-block text-primary fw-medium mb-2">Senior Dermatologist & Cosmetologist</span>
+                    <p className="mt-2 text-muted small">MBBS & Diploma from Osmania Medical College. Over 30 years of clinical experience in Vitiligo laser therapies and cosmetology.</p>
                   </div>
                 </div>
               </div>
 
               {/* Doctor 2 */}
-              <div className="col-xl-5 col-md-6 m-b30 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
-                <div className="dz-team style-1 box-hover">
-                  <div className="dz-content text-center">
-                    <h3 className="dz-name"><Link href="/about">Dr. G. Megha.mala</Link></h3>
-                    <span className="dz-position">Aesthetic Practitioner</span>
-                    <p className="mt-2 text-muted small">MBBS (2021) & Diploma in Aesthetic Medicine. Specialized in chemical peeling, anti-acne therapies, and unwanted hair removal.</p>
+              <div className="col-xl-5 col-md-6 m-b30">
+                <div className="dz-team style-1 bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift text-center h-100 d-flex flex-column justify-content-between">
+                  <div className="dz-media mb-3 rounded-4 overflow-hidden shadow-sm" style={{ height: 320 }}>
+                    <img src="/Doctor-imgs/Dr. G. Megha.mala.png" alt="Dr. G. Megha.mala" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
-                  <div className="dz-media">
-                    <img src="/images/team/img3.webp" alt="Dr. G. Megha.mala" />
+                  <div className="dz-content text-center">
+                    <h3 className="dz-name fw-bold text-secondary mb-1"><Link href="/about" className="text-secondary text-decoration-none">Dr. G. Megha.mala</Link></h3>
+                    <span className="dz-position d-block text-primary fw-medium mb-2">Aesthetic Practitioner</span>
+                    <p className="mt-2 text-muted small">MBBS (2021) & Diploma in Aesthetic Medicine. Specialized in chemical peeling, anti-acne therapies, and unwanted hair removal.</p>
                   </div>
                 </div>
               </div>

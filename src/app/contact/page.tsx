@@ -150,7 +150,7 @@ export default function Page() {
                 <div className="bg-white rounded-4 shadow-sm border border-light-subtle overflow-hidden h-100 d-flex flex-column justify-content-between hover-lift">
                   {/* Header */}
                   <div className="p-4 border-bottom bg-light-subtle d-flex align-items-center gap-3">
-                    <img src="/images/avatar/middle/avatar1.webp" className="rounded-circle shadow-sm" style={{ width: 56, height: 56, objectFit: 'cover' }} alt="Dr. M.N. Rao" />
+                    <img src="/Doctor-imgs/Dr. M.N. Rao.png" className="rounded-circle shadow-sm" style={{ width: 60, height: 60, objectFit: 'cover', objectPosition: 'top' }} alt="Dr. M.N. Rao" />
                     <div>
                       <h4 className="fw-bold text-secondary mb-1 fs-5">Dr. M.N. Rao</h4>
                       <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium" style={{ fontSize: '0.78rem' }}>
@@ -206,7 +206,7 @@ export default function Page() {
                 <div className="bg-white rounded-4 shadow-sm border border-light-subtle overflow-hidden h-100 d-flex flex-column justify-content-between hover-lift">
                   {/* Header */}
                   <div className="p-4 border-bottom bg-light-subtle d-flex align-items-center gap-3">
-                    <img src="/images/avatar/middle/avatar2.webp" className="rounded-circle shadow-sm" style={{ width: 56, height: 56, objectFit: 'cover' }} alt="Dr. G. Megha.mala" />
+                    <img src="/Doctor-imgs/Dr. G. Megha.mala.png" className="rounded-circle shadow-sm" style={{ width: 60, height: 60, objectFit: 'cover', objectPosition: 'top' }} alt="Dr. G. Megha.mala" />
                     <div>
                       <h4 className="fw-bold text-secondary mb-1 fs-5">Dr. G. Megha.mala</h4>
                       <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium" style={{ fontSize: '0.78rem' }}>

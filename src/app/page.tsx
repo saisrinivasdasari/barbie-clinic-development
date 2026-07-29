@@ -589,13 +589,13 @@ export default function Page() {
               {/* Doctor 1 */}
               <div className="col-xl-5 col-md-6">
                 <div className="dz-team style-1 bg-light p-4 rounded-4 shadow-sm text-center">
-                  <div className="dz-media mb-3">
-                    <img src="/images/team/img1.webp" alt="Dr. M.N. Rao" />
+                  <div className="dz-media mb-3 rounded-4 overflow-hidden shadow-sm" style={{ height: 300 }}>
+                    <img src="/Doctor-imgs/Dr. M.N. Rao.png" alt="Dr. M.N. Rao" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
                   <div className="dz-content">
                     <h3 className="dz-name fw-bold text-secondary mb-1"><Link href="/about" className="text-secondary text-decoration-none">Dr. M.N. Rao</Link></h3>
                     <span className="dz-position d-block text-primary fw-medium mb-3">Senior Dermatologist & Cosmetologist</span>
-                    <p className="text-muted small">Postgraduate Diploma in Dermatology (OMC Alumni). Over 20+ years expertise in Vitiligo laser therapy and cosmetic surgery.</p>
+                    <p className="text-muted small">Postgraduate Diploma in Dermatology (OMC Alumni). Over 30 years of clinical expertise in Vitiligo laser therapy and cosmetic surgery.</p>
                     <Link href="/contact" className="btn btn-primary rounded-pill px-4">
                       <i className="feather icon-calendar m-r5"></i> Book Consultation
                     </Link>
@@ -606,8 +606,8 @@ export default function Page() {
               {/* Doctor 2 */}
               <div className="col-xl-5 col-md-6">
                 <div className="dz-team style-1 bg-light p-4 rounded-4 shadow-sm text-center">
-                  <div className="dz-media mb-3">
-                    <img src="/images/team/img3.webp" alt="Dr. G. Megha.mala" />
+                  <div className="dz-media mb-3 rounded-4 overflow-hidden shadow-sm" style={{ height: 300 }}>
+                    <img src="/Doctor-imgs/Dr. G. Megha.mala.png" alt="Dr. G. Megha.mala" className="w-100 h-100" style={{ objectFit: 'cover', objectPosition: 'top' }} />
                   </div>
                   <div className="dz-content">
                     <h3 className="dz-name fw-bold text-secondary mb-1"><Link href="/about" className="text-secondary text-decoration-none">Dr. G. Megha.mala</Link></h3>
