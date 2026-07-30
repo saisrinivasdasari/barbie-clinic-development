@@ -174,38 +174,38 @@ export default function Page() {
                         Ethical Healthcare Standards
                       </span>
                     </div>
-                    <div className="row g-3 mt-2">
+                    <div className="row g-3.5 mt-3">
                       <div className="col-md-4">
-                        <div className="p-3.5 rounded-3 border border-primary-subtle h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)" }}>
+                        <div className="p-4 rounded-4 border border-primary-subtle h-100 d-flex flex-column justify-content-center shadow-xs" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)", minHeight: 120 }}>
                           <div>
-                            <span className="fw-bold text-secondary d-flex align-items-center gap-1.5 mb-1.5" style={{ fontSize: '0.9rem' }}>
-                              <i className="feather icon-heart text-primary fs-6"></i> Customer First
+                            <span className="fw-bold text-secondary d-flex align-items-center gap-2 mb-2" style={{ fontSize: '0.95rem' }}>
+                              <i className="feather icon-heart text-primary fs-5"></i> Customer First
                             </span>
-                            <span className="text-muted small d-block" style={{ fontSize: '0.8rem', lineHeight: '1.45' }}>
+                            <span className="text-muted d-block" style={{ fontSize: '0.825rem', lineHeight: '1.5' }}>
                               300k+ patients treated with 30 yrs expertise.
                             </span>
                           </div>
                         </div>
                       </div>
                       <div className="col-md-4">
-                        <div className="p-3.5 rounded-3 border border-primary-subtle h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)" }}>
+                        <div className="p-4 rounded-4 border border-primary-subtle h-100 d-flex flex-column justify-content-center shadow-xs" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)", minHeight: 120 }}>
                           <div>
-                            <span className="fw-bold text-secondary d-flex align-items-center gap-1.5 mb-1.5" style={{ fontSize: '0.9rem' }}>
-                              <i className="feather icon-users text-primary fs-6"></i> People Next
+                            <span className="fw-bold text-secondary d-flex align-items-center gap-2 mb-2" style={{ fontSize: '0.95rem' }}>
+                              <i className="feather icon-users text-primary fs-5"></i> People Next
                             </span>
-                            <span className="text-muted small d-block" style={{ fontSize: '0.8rem', lineHeight: '1.45' }}>
+                            <span className="text-muted d-block" style={{ fontSize: '0.825rem', lineHeight: '1.5' }}>
                               Empowered female healthcare workforce.
                             </span>
                           </div>
                         </div>
                       </div>
                       <div className="col-md-4">
-                        <div className="p-3.5 rounded-3 border border-primary-subtle h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)" }}>
+                        <div className="p-4 rounded-4 border border-primary-subtle h-100 d-flex flex-column justify-content-center shadow-xs" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)", minHeight: 120 }}>
                           <div>
-                            <span className="fw-bold text-secondary d-flex align-items-center gap-1.5 mb-1.5" style={{ fontSize: '0.9rem' }}>
-                              <i className="feather icon-check-circle text-primary fs-6"></i> Compliance Best
+                            <span className="fw-bold text-secondary d-flex align-items-center gap-2 mb-2" style={{ fontSize: '0.95rem' }}>
+                              <i className="feather icon-check-circle text-primary fs-5"></i> Compliance Best
                             </span>
-                            <span className="text-muted small d-block" style={{ fontSize: '0.8rem', lineHeight: '1.45' }}>
+                            <span className="text-muted d-block" style={{ fontSize: '0.825rem', lineHeight: '1.5' }}>
                               Strict clinical USFDA safety protocols.
                             </span>
                           </div>
