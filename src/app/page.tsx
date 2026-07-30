@@ -384,7 +384,7 @@ export default function Page() {
                       {/* Left: Image Media */}
                       <div className="dz-card-media position-relative">
                         <img src={service.img} alt={service.title} />
-                        <Link href="/contact" className="btn btn-white position-absolute bottom-0 start-0 m-2 shadow-sm btn-sm fw-medium" style={{ fontSize: '0.75rem', zIndex: 3 }}>
+                        <Link href="/book" className="btn btn-white position-absolute bottom-0 start-0 m-2 shadow-sm btn-sm fw-medium" style={{ fontSize: '0.75rem', zIndex: 3 }}>
                           <i className="feather icon-calendar text-primary me-1"></i>
                           Book Appointment
                         </Link>

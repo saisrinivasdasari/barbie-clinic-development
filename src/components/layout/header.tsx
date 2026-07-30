@@ -120,8 +120,8 @@ export default function Header() {
                       </div>
                     </li>
                     <li className="nav-item item-btn">
-                      <Link href="/contact" className="btn btn-primary btn-hover1">
-                        Appointment
+                      <Link href="/book" className="btn btn-primary btn-hover1">
+                        Book Appointment
                       </Link>
                     </li>
                   </ul>
