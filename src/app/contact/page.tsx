@@ -182,16 +182,6 @@ export default function Page() {
                       </span>
                     </div>
 
-                    <div className="d-flex align-items-center justify-content-between p-3 rounded-3 bg-light mb-2.5">
-                      <div>
-                        <span className="fw-bold text-secondary d-block" style={{ fontSize: '0.9rem' }}>Tue, Thu, Fri</span>
-                        <span className="small text-muted">OPD Consultations</span>
-                      </div>
-                      <span className="badge bg-danger-subtle text-danger px-2.5 py-1.5 rounded-pill fw-semibold" style={{ fontSize: '0.75rem' }}>
-                        Closed
-                      </span>
-                    </div>
-
                     <div className="d-flex align-items-center justify-content-between p-3 rounded-3 bg-light">
                       <div>
                         <span className="fw-bold text-secondary d-block" style={{ fontSize: '0.9rem' }}>Direct Email</span>
@@ -245,16 +235,6 @@ export default function Page() {
                       </div>
                       <span className="badge bg-success-subtle text-success px-2.5 py-1.5 rounded-pill fw-semibold" style={{ fontSize: '0.75rem' }}>
                         <i className="feather icon-check-circle me-1"></i> Available
-                      </span>
-                    </div>
-
-                    <div className="d-flex align-items-center justify-content-between p-3 rounded-3 bg-light mb-2.5">
-                      <div>
-                        <span className="fw-bold text-secondary d-block" style={{ fontSize: '0.9rem' }}>Mon – Fri</span>
-                        <span className="small text-muted">Prior Appointment Only</span>
-                      </div>
-                      <span className="badge bg-secondary-subtle text-secondary px-2.5 py-1.5 rounded-pill fw-semibold" style={{ fontSize: '0.75rem' }}>
-                        On Call
                       </span>
                     </div>
 

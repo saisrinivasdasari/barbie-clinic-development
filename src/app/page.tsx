@@ -119,25 +119,32 @@ export default function Page() {
 
   const testimonials = [
     {
-      text: `"I had severe acne scars and stretch marks. The customized care and chemical peeling at Barbie Clinic completely transformed my skin. I feel so much more confident."`,
-      name: "Olivia Davis",
-      type: "Pimple Scars Care Patient",
-      treatment: "Acne Peeling",
-      img: "/images/testimonial/slider/pic1.jpg"
-    },
-    {
-      text: `"The targeted vitiligo laser treatment for my white patches was extremely precise. I started seeing pigment recovery after just 3 weeks. Dr. Rao's experience is exceptional."`,
-      name: "S. Kumari",
-      type: "Vitiligo laser care Patient",
+      text: `"The targeted vitiligo laser therapy for my white patches was extremely precise. I started seeing natural pigment recovery within weeks. Dr. M.N. Rao Sir's 30+ years of experience is truly exceptional."`,
+      name: "K. Venkat Rao",
+      type: "Vitiligo Laser Therapy Patient",
       treatment: "Vitiligo Laser",
-      img: "/images/testimonial/slider/pic2.jpg"
+      img: "/images/avatar/telugu/avatar2.png"
     },
     {
-      text: `"My hair thinning had made me very self-conscious. Dr. Rao recommended PRP therapy, and after 4 sessions, my hair fall has completely stopped and is visibly thicker."`,
-      name: "Emily Johnson",
-      type: "PRP for Hairfall Patient",
+      text: `"I struggled with severe acne scars and pigmentation for years. The customized chemical peeling treatment at Barbie Clinic completely cleared my skin tone and restored my confidence."`,
+      name: "Sravanthi Reddy",
+      type: "Aesthetic Peeling Patient",
+      treatment: "Acne Peeling",
+      img: "/images/avatar/telugu/avatar1.png"
+    },
+    {
+      text: `"My hair thinning had made me very self-conscious. Dr. M.N. Rao recommended targeted PRP growth factor sessions, and my hair fall completely stopped with noticeable new hair density."`,
+      name: "Raja Sekhar Varma",
+      type: "PRP Hair Regrowth Patient",
       treatment: "PRP Treatment",
-      img: "/images/testimonial/slider/pic3.jpg"
+      img: "/images/avatar/telugu/avatar4.png"
+    },
+    {
+      text: `"Dr. Megha.mala Madam's laser hair reduction treatment was painless, quick, and remarkably smooth. The clinic hygiene and patient care standards at Barbie Clinic are world-class."`,
+      name: "Pravallika Naidu",
+      type: "Laser Hair Reduction Patient",
+      treatment: "Laser Hair Removal",
+      img: "/images/avatar/telugu/avatar3.png"
     }
   ];
 
