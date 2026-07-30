@@ -16,70 +16,75 @@ export default function Page() {
       title: "Vitiligo Treatment",
       subtitle: "Dedicated Vitiligo Care",
       desc: "Dedicated vitiligo treatment center utilizing advanced targeted laser technology for clearing white patches safely and effectively.",
-      img: "/images/services/middle/img1.webp",
+      img: "/images/procedures/vitiligo.png",
       features: [
         "Laser Treatment for White Patches",
         "High Success Rate & Compliance",
         "Individualized Protocols"
       ],
       doctor: "Dr. M.N. Rao",
-      role: "Senior Dermatologist"
+      role: "Senior Dermatologist",
+      doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
     },
     {
       id: 1,
       title: "Anti Acne & Pimples",
       subtitle: "Clear & Spotless Skin",
       desc: "Clinical and aesthetic treatments tailored to clear active acne, control sebum production, and prevent future breakouts.",
-      img: "/images/services/middle/img2.webp",
+      img: "/images/procedures/peeling.png",
       features: [
         "Acne & Pimple Control",
         "Customized Chemical Peeling",
         "Effective Medical Extraction"
       ],
       doctor: "Dr. G. Megha.mala",
-      role: "Aesthetic Specialist"
+      role: "Aesthetic Specialist",
+      doctorImg: "/Doctor-imgs/Dr. G. Megha.mala.png"
     },
     {
       id: 2,
       title: "PRP for Hairfall",
       subtitle: "Hair Regrowth & Restoration",
       desc: "Advanced PRP treatment for hair loss, dandruff, acne scars, under eye, and neck rejuvenation using your own plasma growth factors.",
-      img: "/images/services/middle/img3.webp",
+      img: "/images/procedures/scars.png",
       features: [
         "Halts Hair Loss & Thinning",
         "Acne Scar Rejuvenation",
         "Safe & Natural Procedure"
       ],
       doctor: "Dr. M.N. Rao",
-      role: "Senior Dermatologist"
+      role: "Senior Dermatologist",
+      doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
     },
     {
       id: 3,
       title: "Unwanted Hair Removal",
       subtitle: "Painless Laser Reduction",
       desc: "Ditch the wax and razors. Enjoy smooth, hair-free skin with our safe, quick, and painless laser hair removal procedures.",
-      img: "/images/services/middle/img4.webp",
+      img: "/images/about/why_choose_laser.png",
       features: [
         "USFDA Approved Laser Tech",
         "Painless & Zero Downtime",
         "Safe on All Skin Types"
       ],
       doctor: "Dr. G. Megha.mala",
-      role: "Aesthetic Specialist"
+      role: "Aesthetic Specialist",
+      doctorImg: "/Doctor-imgs/Dr. G. Megha.mala.png"
     },
     {
       id: 4,
       title: "Colour Improvement",
       subtitle: "Skin Brightening & Tone",
       desc: "Advanced laser treatments targeted at pigmented skin lesions, dark skin spots, melasma, and overall complexion improvement.",
-      img: "/images/services/middle/img5.webp",
+      img: "/images/procedures/tightening.png",
       features: [
         "Clears Dark Spots & Melasma",
         "Pigmented Skin Lesion Care",
         "Evens Out Tone & Complexion"
       ],
       doctor: "Dr. M.N. Rao",
-      role: "Senior Dermatologist"
+      role: "Senior Dermatologist",
+      doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
     }
   ];
 
@@ -216,7 +221,7 @@ export default function Page() {
 
                         <div className="pt-2 border-top d-flex align-items-center justify-content-between mt-auto">
                           <div className="d-flex align-items-center gap-2">
-                            <img src="/images/avatar/middle/avatar1.webp" className="rounded-circle shadow-sm" style={{ width: 36, height: 36 }} alt="Doctor" />
+                            <img src={service.doctorImg} className="rounded-circle shadow-sm" style={{ width: 38, height: 38, objectFit: 'cover', objectPosition: 'top' }} alt={service.doctor} />
                             <div>
                               <h6 className="title mb-0 fw-bold" style={{ fontSize: '0.825rem' }}>{service.doctor}</h6>
                               <span className="text-muted" style={{ fontSize: '0.75rem' }}>{service.role}</span>

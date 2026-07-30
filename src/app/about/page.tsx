@@ -224,8 +224,8 @@ export default function Page() {
           <div className="container">
             <div className="section-head style-3 text-center mb-5">
               <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold mb-2">OUR CLINICAL HERITAGE</span>
-              <h2 className="title fw-bold text-secondary mb-2">Our Journey & Milestones</h2>
-              <p className="text-muted mw-100">Growing from a single clinical headquarter in Hyderabad to a leading regional skin & laser clinic network.</p>
+              <h2 className="title fw-bold text-secondary mb-2">Our Journey & Clinical Milestones</h2>
+              <p className="text-muted mw-100">30 years of clinical experience, from our main headquarters in Hyderabad to expanding specialized centers across Telangana and Andhra Pradesh.</p>
             </div>
 
             <div className="row justify-content-center">
@@ -238,80 +238,80 @@ export default function Page() {
                   ></div>
 
                   <div className="d-flex flex-column gap-5">
-                    {/* Milestone 1: 2009 */}
+                    {/* Milestone 1: Foundation */}
                     <div className="row align-items-center position-relative">
                       <div className="col-md-6 text-md-end pe-md-5">
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
-                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">2009</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Founded Headquarters</h5>
+                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">30+ Years Experience</span>
+                          <h5 className="fw-bold text-secondary mb-1.5">Clinical Foundation in Dermatology</h5>
                           <div className="d-flex align-items-center justify-content-md-end gap-1.5 mb-2">
+                            <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
+                              <i className="feather icon-award text-primary me-1"></i>Dr. M.N. Rao (OMC Alumni)
+                            </span>
+                          </div>
+                          <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+                            Dr. M.N. Rao began specialized medical dermatology & cosmetology practice, laying the groundwork for patient-first clinical excellence.
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Center Node Dot */}
+                      <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
+                        <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
+                          <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
+                            30+
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="col-md-6 d-none d-md-block"></div>
+                    </div>
+
+                    {/* Milestone 2: Himayath Nagar HQ */}
+                    <div className="row align-items-center position-relative">
+                      <div className="col-md-6 d-none d-md-block"></div>
+                      
+                      {/* Center Node Dot */}
+                      <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
+                        <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
+                          <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
+                            HQ
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-md-6 text-start ps-md-5">
+                        <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
+                          <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
+                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Main Headquarters</span>
+                          <h5 className="fw-bold text-secondary mb-1.5">Himayath Nagar Flagship Clinic</h5>
+                          <div className="d-flex align-items-center gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
                               <i className="feather icon-map-pin text-primary me-1"></i>Himayath Nagar, Hyderabad
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Established our first clinic HQ in Hyderabad, introducing specialized targeted laser therapies for Vitiligo.
-                          </p>
-                        </div>
-                      </div>
-                      
-                      {/* Center Node Dot */}
-                      <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
-                        <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
-                          <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
-                            09
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="col-md-6 d-none d-md-block"></div>
-                    </div>
-
-                    {/* Milestone 2: 2014 */}
-                    <div className="row align-items-center position-relative">
-                      <div className="col-md-6 d-none d-md-block"></div>
-                      
-                      {/* Center Node Dot */}
-                      <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
-                        <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
-                          <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
-                            14
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-md-6 text-start ps-md-5">
-                        <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
-                          <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
-                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">2014</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Hyderabad Clinical Leader</h5>
-                          <div className="d-flex align-items-center gap-1.5 mb-2">
-                            <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
-                              <i className="feather icon-award text-primary me-1"></i>Clinical Recognition
-                            </span>
-                          </div>
-                          <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Recognized as Hyderabad's leading clinical center for targeted vitiligo care and aesthetic laser treatments.
+                            Established Barbie Skin & Laser Clinic headquarters in Himayath Nagar, equipped with targeted laser tech and dedicated vitiligo care protocols.
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Milestone 3: 2015 */}
+                    {/* Milestone 3: Vitiligo Laser Leadership */}
                     <div className="row align-items-center position-relative">
                       <div className="col-md-6 text-md-end pe-md-5">
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
-                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">2015</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Bengaluru Expansion</h5>
+                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Specialized Vitiligo Center</span>
+                          <h5 className="fw-bold text-secondary mb-1.5">Pioneering Targeted Laser Care</h5>
                           <div className="d-flex align-items-center justify-content-md-end gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
-                              <i className="feather icon-map-pin text-primary me-1"></i>Bengaluru, Karnataka
+                              <i className="feather icon-check-circle text-primary me-1"></i>White Patch Re-pigmentation
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Expanded services to Bengaluru, making high-quality cosmetic skin and laser treatments accessible in Karnataka.
+                            Pioneered non-invasive targeted laser phototherapy for clearing white patches with high clinical success rates and patient safety.
                           </p>
                         </div>
                       </div>
@@ -320,7 +320,7 @@ export default function Page() {
                       <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
                         <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
                           <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
-                            15
+                            TS
                           </div>
                         </div>
                       </div>
@@ -328,7 +328,7 @@ export default function Page() {
                       <div className="col-md-6 d-none d-md-block"></div>
                     </div>
 
-                    {/* Milestone 4: 2017 */}
+                    {/* Milestone 4: Telangana Network */}
                     <div className="row align-items-center position-relative">
                       <div className="col-md-6 d-none d-md-block"></div>
 
@@ -336,7 +336,7 @@ export default function Page() {
                       <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
                         <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
                           <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
-                            17
+                            HYD
                           </div>
                         </div>
                       </div>
@@ -344,34 +344,34 @@ export default function Page() {
                       <div className="col-md-6 text-start ps-md-5">
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
-                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">2017</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Chennai Clinical Reach</h5>
+                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Telangana Expansion</span>
+                          <h5 className="fw-bold text-secondary mb-1.5">Koti & KPHB Colony Branches</h5>
                           <div className="d-flex align-items-center gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
-                              <i className="feather icon-map-pin text-primary me-1"></i>Chennai, Tamil Nadu
+                              <i className="feather icon-map-pin text-primary me-1"></i>Greater Hyderabad Reach
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Opened state-of-the-art clinic branch in Chennai, specializing in painless unwanted hair removal lasers.
+                            Expanded clinical accessibility across Hyderabad with state-of-the-art branch locations in Koti and KPHB Colony (Kukatpally).
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    {/* Milestone 5: 2018 */}
+                    {/* Milestone 5: AP Expansion */}
                     <div className="row align-items-center position-relative">
                       <div className="col-md-6 text-md-end pe-md-5">
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
-                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">2018</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Kochi & Vizag Expansion</h5>
+                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Andhra Pradesh Network</span>
+                          <h5 className="fw-bold text-secondary mb-1.5">Vizag, Vijayawada, Tirupati & Rajahmundry</h5>
                           <div className="d-flex align-items-center justify-content-md-end gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
-                              <i className="feather icon-map-pin text-primary me-1"></i>Kerala & Andhra Pradesh
+                              <i className="feather icon-map-pin text-primary me-1"></i>Andhra Pradesh Centers
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Simultaneously launched fully-equipped clinical branches in Kochi (Kerala) and Vizag (Andhra Pradesh).
+                            Launched regional clinical centers across Andhra Pradesh (Visakhapatnam, Vijayawada, Tirupati, and Rajahmundry), bringing USFDA laser tech closer to home.
                           </p>
                         </div>
                       </div>
@@ -380,7 +380,7 @@ export default function Page() {
                       <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
                         <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
                           <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
-                            18
+                            AP
                           </div>
                         </div>
                       </div>
@@ -388,7 +388,7 @@ export default function Page() {
                       <div className="col-md-6 d-none d-md-block"></div>
                     </div>
 
-                    {/* Milestone 6: 2019 */}
+                    {/* Milestone 6: 300k+ Patients */}
                     <div className="row align-items-center position-relative">
                       <div className="col-md-6 d-none d-md-block"></div>
 
@@ -396,7 +396,7 @@ export default function Page() {
                       <div className="position-absolute start-50 top-50 translate-middle d-none d-md-flex align-items-center justify-content-center z-3">
                         <div className="rounded-circle bg-white p-1 shadow-sm border border-primary border-2">
                           <div className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: 40, height: 40, fontSize: '0.75rem' }}>
-                            19
+                            300k
                           </div>
                         </div>
                       </div>
@@ -404,15 +404,15 @@ export default function Page() {
                       <div className="col-md-6 text-start ps-md-5">
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
-                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">2019</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Pune & Regional Network Scale</h5>
+                          <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Present Day Excellence</span>
+                          <h5 className="fw-bold text-secondary mb-1.5">Trusted by 300,000+ Happy Patients</h5>
                           <div className="d-flex align-items-center gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
-                              <i className="feather icon-check-circle text-primary me-1"></i>7 Regional Locations
+                              <i className="feather icon-users text-primary me-1"></i>Dr. M.N. Rao & Dr. Megha.mala
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Expanded clinical footprint to Pune, establishing a network of 7 premium locations across South India.
+                            Today, Dr. M.N. Rao & Dr. G. Megha.mala lead an empowered clinical team, having delivered personalized skin & hair rejuvenation to over 300,000 satisfied patients.
                           </p>
                         </div>
                       </div>
