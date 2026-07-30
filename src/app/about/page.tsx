@@ -174,23 +174,41 @@ export default function Page() {
                         Ethical Healthcare Standards
                       </span>
                     </div>
-                    <div className="row g-2 mt-1">
+                    <div className="row g-3 mt-2">
                       <div className="col-md-4">
-                        <div className="p-2.5 bg-light rounded-3 border border-light-subtle h-100">
-                          <span className="fw-bold text-secondary d-block small mb-0.5"><i className="feather icon-heart text-primary me-1"></i>Customer First</span>
-                          <span className="text-muted" style={{ fontSize: '0.75rem' }}>300k+ clients treated with 30 years of expertise.</span>
+                        <div className="p-3.5 rounded-3 border border-primary-subtle h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)" }}>
+                          <div>
+                            <span className="fw-bold text-secondary d-flex align-items-center gap-1.5 mb-1.5" style={{ fontSize: '0.9rem' }}>
+                              <i className="feather icon-heart text-primary fs-6"></i> Customer First
+                            </span>
+                            <span className="text-muted small d-block" style={{ fontSize: '0.8rem', lineHeight: '1.45' }}>
+                              300k+ patients treated with 30 yrs expertise.
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="col-md-4">
-                        <div className="p-2.5 bg-light rounded-3 border border-light-subtle h-100">
-                          <span className="fw-bold text-secondary d-block small mb-0.5"><i className="feather icon-users text-primary me-1"></i>People Next</span>
-                          <span className="text-muted" style={{ fontSize: '0.75rem' }}>Empowered female workforce.</span>
+                        <div className="p-3.5 rounded-3 border border-primary-subtle h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)" }}>
+                          <div>
+                            <span className="fw-bold text-secondary d-flex align-items-center gap-1.5 mb-1.5" style={{ fontSize: '0.9rem' }}>
+                              <i className="feather icon-users text-primary fs-6"></i> People Next
+                            </span>
+                            <span className="text-muted small d-block" style={{ fontSize: '0.8rem', lineHeight: '1.45' }}>
+                              Empowered female healthcare workforce.
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div className="col-md-4">
-                        <div className="p-2.5 bg-light rounded-3 border border-light-subtle h-100">
-                          <span className="fw-bold text-secondary d-block small mb-0.5"><i className="feather icon-check-circle text-primary me-1"></i>Compliance Best</span>
-                          <span className="text-muted" style={{ fontSize: '0.75rem' }}>Strict clinical safety protocols.</span>
+                        <div className="p-3.5 rounded-3 border border-primary-subtle h-100 d-flex flex-column justify-content-between" style={{ background: "linear-gradient(145deg, #FFF0F5 0%, #FFF5F7 100%)" }}>
+                          <div>
+                            <span className="fw-bold text-secondary d-flex align-items-center gap-1.5 mb-1.5" style={{ fontSize: '0.9rem' }}>
+                              <i className="feather icon-check-circle text-primary fs-6"></i> Compliance Best
+                            </span>
+                            <span className="text-muted small d-block" style={{ fontSize: '0.8rem', lineHeight: '1.45' }}>
+                              Strict clinical USFDA safety protocols.
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
