@@ -267,8 +267,8 @@ export default function Page() {
             <div className="row content-wrapper style-1 align-items-center">
               <div className="col-xl-5 col-lg-6 m-b15">
                 <div className="content-media position-relative">
-                  <div className="dz-media">
-                    <img src="/images/about/img1.webp" className="rounded-4 shadow" alt="Barbie Skin Clinic Interior" />
+                  <div className="dz-media overflow-hidden rounded-4 shadow-sm" style={{ maxHeight: 440 }}>
+                    <img src="/Clinic-imgs/cosmetologist-woman.jpg" className="w-100 h-100 object-fit-cover rounded-4" alt="Barbie Cosmetology Specialist" />
                   </div>
                   {/* <div className="item3 cursor-pointer position-absolute bottom-0 end-0 m-3" onClick={() => setShowVideoModal(true)}>
                     <div className="word-rotate-box">

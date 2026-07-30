@@ -55,8 +55,8 @@ export default function Page() {
             <div className="row content-wrapper style-1">
               <div className="col-xl-5 col-lg-6 m-b15">
                 <div className="content-media">
-                  <div className="dz-media">
-                    <img src="/images/about/img1.webp" alt="Barbie Clinic" />
+                  <div className="dz-media overflow-hidden rounded-4 shadow-sm" style={{ maxHeight: 440 }}>
+                    <img src="/Clinic-imgs/cosmetologist-woman.jpg" className="w-100 h-100 object-fit-cover rounded-4" alt="Barbie Cosmetology Specialist" />
                   </div>
                 </div>
               </div>
