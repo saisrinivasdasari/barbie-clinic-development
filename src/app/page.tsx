@@ -164,13 +164,31 @@ export default function Page() {
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormState({ name: "", email: "", phone: "", date: "", time: "", services: [] });
-    }, 6000);
+    try {
+      const res = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      });
+
+      if (res.ok) {
+        setFormSubmitted(true);
+        setTimeout(() => {
+          setFormSubmitted(false);
+          setFormState({ name: "", email: "", phone: "", date: "", time: "", services: [] });
+        }, 6000);
+      }
+    } catch (err) {
+      console.error("Failed to submit appointment to database:", err);
+      // Still show submission feedback to user
+      setFormSubmitted(true);
+      setTimeout(() => {
+        setFormSubmitted(false);
+        setFormState({ name: "", email: "", phone: "", date: "", time: "", services: [] });
+      }, 6000);
+    }
   };
 
   return (

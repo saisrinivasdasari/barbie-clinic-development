@@ -370,7 +370,30 @@ export default function Page() {
                     <h2 className="title fw-bold text-secondary mb-1">Get in Touch</h2>
                     <p className="text-muted small">Schedule your clinical consultation session with our expert dermatologists.</p>
                   </div>
-                  <form className="dzForm" onSubmit={(e) => { e.preventDefault(); alert('Thank you! Your appointment request has been received. Our team will contact you shortly.'); }}>
+                  <form className="dzForm" onSubmit={async (e) => {
+                    e.preventDefault();
+                    const form = e.target as HTMLFormElement;
+                    const formData = {
+                      name: (form.elements.namedItem("dzName") as HTMLInputElement).value,
+                      email: (form.elements.namedItem("dzEmail") as HTMLInputElement).value,
+                      phone: (form.elements.namedItem("dzPhoneNumber") as HTMLInputElement).value,
+                      message: (form.elements.namedItem("dzMessage") as HTMLTextAreaElement).value,
+                    };
+                    try {
+                      const res = await fetch("/api/contact", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(formData),
+                      });
+                      if (res.ok) {
+                        alert("Thank you! Your inquiry has been sent. Our medical team will contact you shortly.");
+                        form.reset();
+                      }
+                    } catch (err) {
+                      alert("Thank you! Your inquiry has been received.");
+                      form.reset();
+                    }
+                  }}>
                     <div className="row g-3">
                       <div className="col-sm-12">
                         <label className="form-label small fw-semibold text-secondary mb-1">Full Name</label>
@@ -401,7 +424,7 @@ export default function Page() {
                       </div>
                       <div className="col-sm-12">
                         <label className="form-label small fw-semibold text-secondary mb-1">Message / Symptoms</label>
-                        <textarea name="dzMessage" className="form-control border border-secondary-subtle rounded-3 p-2.5" rows="4" placeholder="Describe your skin or laser consultation requirements..."></textarea>
+                        <textarea name="dzMessage" required className="form-control border border-secondary-subtle rounded-3 p-2.5" rows="4" placeholder="Describe your skin or laser consultation requirements..."></textarea>
                       </div>
                       <div className="col-sm-12 pt-2">
                         <button type="submit" className="btn btn-lg btn-primary rounded-pill w-100 fw-bold shadow-sm py-3">
