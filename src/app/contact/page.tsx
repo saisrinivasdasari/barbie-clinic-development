@@ -161,6 +161,17 @@ export default function Page() {
 
                   {/* Schedule List */}
                   <div className="p-4 flex-grow-1">
+                    {/* Specializations */}
+                    <div className="mb-3 border-bottom pb-3">
+                      <span className="d-block text-secondary fw-semibold mb-2" style={{ fontSize: '0.78rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Clinical Specializations</span>
+                      <div className="d-flex flex-wrap gap-1.5">
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Vitiligo Laser Specialist</span>
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Cosmetic Dermatology</span>
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Laser Resurfacing</span>
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>PRP Hairfall Therapies</span>
+                      </div>
+                    </div>
+
                     <div className="d-flex align-items-center justify-content-between p-3 rounded-3 bg-light mb-2.5">
                       <div>
                         <span className="fw-bold text-secondary d-block" style={{ fontSize: '0.9rem' }}>Mon, Wed, Sat, Sun</span>
@@ -217,6 +228,16 @@ export default function Page() {
 
                   {/* Schedule List */}
                   <div className="p-4 flex-grow-1">
+                    {/* Specializations */}
+                    <div className="mb-3 border-bottom pb-3">
+                      <span className="d-block text-secondary fw-semibold mb-2" style={{ fontSize: '0.78rem', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Clinical Specializations</span>
+                      <div className="d-flex flex-wrap gap-1.5">
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Chemical Peeling</span>
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Facial Rejuvenation</span>
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Anti-Acne & Scar Care</span>
+                        <span className="badge bg-light text-secondary border px-2.5 py-1 rounded-pill" style={{ fontSize: '0.75rem' }}><i className="feather icon-check-circle text-primary me-1"></i>Laser Hair Removal</span>
+                      </div>
+                    </div>
                     <div className="d-flex align-items-center justify-content-between p-3 rounded-3 bg-light mb-2.5">
                       <div>
                         <span className="fw-bold text-secondary d-block" style={{ fontSize: '0.9rem' }}>Sat, Sun</span>
