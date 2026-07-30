@@ -722,58 +722,147 @@ export default function Page() {
         </section>
         */}
 
-        {/* Why Choose Us */}
+        {/* Clinical Video Showcase Section */}
         <section className="content-inner bg-white py-5">
           <div className="container">
-            <div className="row content-wrapper style-4 align-items-center g-4">
-              <div className="col-xl-6 col-lg-5">
-                <div className="content-info">
-                  <div className="section-head style-1 m-b30">
-                    <h2 className="title fw-bold text-secondary">Why Choose Barbie Skin & Laser Clinic</h2>
-                    <p className="text-muted">We deliver results with safe procedures, expert medical compliance, and customer-first care protocols.</p>
+            <div className="section-head style-3 text-center mb-5">
+              <span className="badge bg-danger-subtle text-danger px-3 py-1.5 rounded-pill fw-bold mb-2.5 d-inline-flex align-items-center gap-1.5" style={{ fontSize: '0.825rem' }}>
+                <i className="fa-brands fa-youtube fs-6"></i> CLINICAL RESULTS & PATIENT STORIES
+              </span>
+              <h2 className="title fw-bold text-secondary mb-2" style={{ fontSize: '2.2rem' }}>Watch Barbie Clinic Treatment Transformations</h2>
+              <p className="text-muted mw-100" style={{ fontSize: '0.975rem' }}>Explore real procedure demonstrations, patient testimonials, and expert medical insights directly from our clinical team.</p>
+            </div>
+
+            <div className="row g-4">
+              {/* Video 1 */}
+              <div className="col-lg-4 col-md-6">
+                <div className="bg-white rounded-4 p-2.5 border border-light-subtle shadow-sm hover-lift h-100 d-flex flex-column justify-content-between">
+                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-xs mb-3">
+                    <iframe
+                      src="https://www.youtube.com/embed/QafbPFeeDa8?rel=0"
+                      title="Barbie Clinic Laser Treatment Showcase"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
                   </div>
-                  <div className="row g-3 mb-4">
-                    <div className="col-sm-6"><i className="feather icon-check text-primary me-2"></i>USFDA Approved Equipment</div>
-                    <div className="col-sm-6"><i className="feather icon-check text-primary me-2"></i>Individualized Treatments</div>
-                    <div className="col-sm-6"><i className="feather icon-check text-primary me-2"></i>Highly Experienced Specialists</div>
-                    <div className="col-sm-6"><i className="feather icon-check text-primary me-2"></i>Cost-Effective & Clear Pricing</div>
-                    <div className="col-sm-6"><i className="feather icon-check text-primary me-2"></i>Quick & Painless Procedures</div>
-                    <div className="col-sm-6"><i className="feather icon-check text-primary me-2"></i>Strict Privacy & Comfort</div>
-                  </div>
-                  <div className="d-flex align-items-center gap-3">
-                    <Link href="/contact" className="btn btn-lg btn-secondary rounded-pill">
-                      Book Appointment <i className="feather icon-arrow-right ms-2"></i>
-                    </Link>
-                    <div className="d-flex align-items-center gap-2 border-start ps-3">
-                      <i className="feather icon-phone-call text-primary fs-3"></i>
-                      <div>
-                        <span className="d-block small text-muted">Call HQ</span>
-                        <a href="tel:+918832421234" className="fw-bold text-secondary text-decoration-none">+91 8832421234</a>
-                      </div>
-                    </div>
+                  <div className="px-2 pb-2">
+                    <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium mb-1.5" style={{ fontSize: '0.75rem' }}>Clinical Laser Therapy</span>
+                    <h5 className="fw-bold text-secondary mb-1" style={{ fontSize: '1rem' }}>Advanced Laser Treatment & Clinical Results</h5>
+                    <p className="text-muted small mb-0">Step-by-step laser procedure demonstration for skin clarity and rejuvenation.</p>
                   </div>
                 </div>
               </div>
-              <div className="col-xl-6 col-lg-7">
-                <div className="row g-3">
-                  <div className="col-6">
-                    <div className="position-relative overflow-hidden rounded-4 shadow-sm h-100">
-                      <img src="/images/about/why_choose_laser.png" className="w-100 h-100 object-fit-cover rounded-4" style={{ height: 280, minHeight: 280 }} alt="Advanced Laser Technology" />
-                      <div className="position-absolute bottom-0 start-0 m-2.5 bg-white bg-opacity-90 px-2.5 py-1.5 rounded-3 shadow-sm">
-                        <span className="small fw-bold text-primary" style={{ fontSize: '0.75rem' }}>USFDA Approved Equipment</span>
-                      </div>
-                    </div>
+
+              {/* Video 2 */}
+              <div className="col-lg-4 col-md-6">
+                <div className="bg-white rounded-4 p-2.5 border border-light-subtle shadow-sm hover-lift h-100 d-flex flex-column justify-content-between">
+                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-xs mb-3">
+                    <iframe
+                      src="https://www.youtube.com/embed/Nk8qVezY-aI?rel=0"
+                      title="Barbie Clinic Patient Transformation"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
                   </div>
-                  <div className="col-6">
-                    <div className="position-relative overflow-hidden rounded-4 shadow-sm h-100">
-                      <img src="/images/about/why_choose_patient.png" className="w-100 h-100 object-fit-cover rounded-4" style={{ height: 280, minHeight: 280 }} alt="Patient Care & Comfort" />
-                      <div className="position-absolute bottom-0 start-0 m-2.5 bg-white bg-opacity-90 px-2.5 py-1.5 rounded-3 shadow-sm">
-                        <span className="small fw-bold text-primary" style={{ fontSize: '0.75rem' }}>Personalized Care</span>
-                      </div>
-                    </div>
+                  <div className="px-2 pb-2">
+                    <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium mb-1.5" style={{ fontSize: '0.75rem' }}>Patient Experience</span>
+                    <h5 className="fw-bold text-secondary mb-1" style={{ fontSize: '1rem' }}>Patient Transformation & Recovery Journey</h5>
+                    <p className="text-muted small mb-0">Real patient testimonial detailing skin treatment experience and outcomes.</p>
                   </div>
                 </div>
               </div>
+
+              {/* Video 3 */}
+              <div className="col-lg-4 col-md-6">
+                <div className="bg-white rounded-4 p-2.5 border border-light-subtle shadow-sm hover-lift h-100 d-flex flex-column justify-content-between">
+                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-xs mb-3">
+                    <iframe
+                      src="https://www.youtube.com/embed/c7M-sGfDjPg?rel=0"
+                      title="Barbie Clinic Vitiligo Therapy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <div className="px-2 pb-2">
+                    <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium mb-1.5" style={{ fontSize: '0.75rem' }}>Vitiligo Protocol</span>
+                    <h5 className="fw-bold text-secondary mb-1" style={{ fontSize: '1rem' }}>Vitiligo Laser Therapy & Pigmentation Progress</h5>
+                    <p className="text-muted small mb-0">Specialized targeted phototherapy and laser care for vitiligo patches.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video 4 */}
+              <div className="col-lg-4 col-md-6">
+                <div className="bg-white rounded-4 p-2.5 border border-light-subtle shadow-sm hover-lift h-100 d-flex flex-column justify-content-between">
+                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-xs mb-3">
+                    <iframe
+                      src="https://www.youtube.com/embed/F-Xg7wpVEnE?rel=0"
+                      title="Barbie Clinic Chemical Peeling"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <div className="px-2 pb-2">
+                    <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium mb-1.5" style={{ fontSize: '0.75rem' }}>Acne & Scar Care</span>
+                    <h5 className="fw-bold text-secondary mb-1" style={{ fontSize: '1rem' }}>Chemical Peeling & Acne Scar Treatment</h5>
+                    <p className="text-muted small mb-0">Medical-grade chemical peeling procedure for acne spots and smooth texture.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video 5 */}
+              <div className="col-lg-4 col-md-6">
+                <div className="bg-white rounded-4 p-2.5 border border-light-subtle shadow-sm hover-lift h-100 d-flex flex-column justify-content-between">
+                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-xs mb-3">
+                    <iframe
+                      src="https://www.youtube.com/embed/tv6TKXUBomA?rel=0"
+                      title="Barbie Clinic Rejuvenation Insights"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <div className="px-2 pb-2">
+                    <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium mb-1.5" style={{ fontSize: '0.75rem' }}>Skin Rejuvenation</span>
+                    <h5 className="fw-bold text-secondary mb-1" style={{ fontSize: '1rem' }}>Facial Glow & Skin Tightening Protocols</h5>
+                    <p className="text-muted small mb-0">Advanced aesthetic therapies for anti-aging and facial rejuvenation.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Video 6 */}
+              <div className="col-lg-4 col-md-6">
+                <div className="bg-white rounded-4 p-2.5 border border-light-subtle shadow-sm hover-lift h-100 d-flex flex-column justify-content-between">
+                  <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-xs mb-3">
+                    <iframe
+                      src="https://www.youtube.com/embed/z0yXbl415kw?rel=0"
+                      title="Barbie Clinic Doctor Consultation"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <div className="px-2 pb-2">
+                    <span className="badge bg-primary-subtle text-primary px-2.5 py-1 rounded-pill fw-medium mb-1.5" style={{ fontSize: '0.75rem' }}>Doctor Insights</span>
+                    <h5 className="fw-bold text-secondary mb-1" style={{ fontSize: '1rem' }}>Senior Dermatologist Guidance & Advice</h5>
+                    <p className="text-muted small mb-0">Expert medical advice and procedure overview from Dr. M.N. Rao.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Subscribe CTA Banner */}
+            <div className="mt-5 p-4 rounded-4 text-center d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 shadow-sm border border-light-subtle" style={{ background: 'linear-gradient(135deg, #FFF0F3 0%, #FFE6EC 100%)' }}>
+              <div className="text-center text-md-start">
+                <h4 className="fw-bold text-secondary mb-1">Want to See More Patient Transformations?</h4>
+                <p className="text-muted small mb-0">Subscribe to the official Barbie Skin & Laser Clinic YouTube channel for weekly medical skin care updates.</p>
+              </div>
+              <a
+                href="https://www.youtube.com/@BarbieSkinandLaserClinic"
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-danger rounded-pill px-4 py-2.5 fw-bold shadow-sm d-inline-flex align-items-center gap-2 flex-shrink-0"
+              >
+                <i className="fa-brands fa-youtube fs-5"></i> Subscribe On YouTube
+              </a>
             </div>
           </div>
         </section>
