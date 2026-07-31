@@ -610,8 +610,8 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                                 type="button"
                                 className={`btn btn-sm rounded-pill px-3 py-1.5 fw-medium transition-all ${
                                   selectedSlot === slot
-                                    ? "btn-primary shadow-sm"
-                                    : "btn-outline-primary bg-white text-secondary"
+                                    ? "btn-primary text-white shadow-sm"
+                                    : "btn-light border border-primary-subtle text-primary"
                                 }`}
                                 onClick={() => setSelectedSlot(slot)}
                                 style={{ fontSize: '0.825rem' }}
