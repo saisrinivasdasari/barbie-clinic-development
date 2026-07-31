@@ -608,13 +608,32 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                               <button
                                 key={slot}
                                 type="button"
-                                className={`btn btn-sm rounded-pill px-3 py-1.5 fw-medium transition-all ${
+                                className={`btn btn-sm rounded-pill px-3 py-1.5 fw-semibold transition-all ${
                                   selectedSlot === slot
                                     ? "btn-primary text-white shadow-sm"
-                                    : "btn-light border border-primary-subtle text-primary"
+                                    : "bg-white border text-dark"
                                 }`}
                                 onClick={() => setSelectedSlot(slot)}
-                                style={{ fontSize: '0.825rem' }}
+                                style={{
+                                  fontSize: '0.825rem',
+                                  color: selectedSlot === slot ? '#ffffff' : '#212529',
+                                  borderColor: selectedSlot === slot ? '#e25b8b' : '#e5e7eb',
+                                  backgroundColor: selectedSlot === slot ? '#e25b8b' : '#ffffff',
+                                }}
+                                onMouseEnter={(e) => {
+                                  if (selectedSlot !== slot) {
+                                    e.currentTarget.style.backgroundColor = '#e25b8b';
+                                    e.currentTarget.style.color = '#ffffff';
+                                    e.currentTarget.style.borderColor = '#e25b8b';
+                                  }
+                                }}
+                                onMouseLeave={(e) => {
+                                  if (selectedSlot !== slot) {
+                                    e.currentTarget.style.backgroundColor = '#ffffff';
+                                    e.currentTarget.style.color = '#212529';
+                                    e.currentTarget.style.borderColor = '#e5e7eb';
+                                  }
+                                }}
                               >
                                 <i className="feather icon-clock me-1" style={{ fontSize: '0.75rem' }}></i>
                                 {formattedTime}
