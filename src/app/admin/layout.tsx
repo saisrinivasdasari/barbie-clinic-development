@@ -85,31 +85,49 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main Content Area */}
       <div className="flex-grow-1 d-flex flex-column min-w-0 overflow-x-hidden">
-        {/* Topbar Header */}
-        <header className="bg-white border-bottom border-light-subtle px-4 py-3 d-flex align-items-center justify-content-between sticky-top shadow-xs">
-          <div className="d-flex align-items-center gap-2">
-            <h5 className="fw-bold text-secondary mb-0">Clinic Management Dashboard</h5>
+        {/* Sleek Modern Admin Header Strip */}
+        <header className="bg-white border-bottom border-light-subtle px-4 py-3 d-flex align-items-center justify-content-between shadow-xs" style={{ minHeight: "64px" }}>
+          {/* Left: Location & Title */}
+          <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-2 bg-light px-3 py-1.5 rounded-pill border border-light-subtle">
+              <span className="badge bg-primary text-white rounded-circle p-1 d-flex align-items-center justify-content-center" style={{ width: 18, height: 18 }}>
+                <i className="feather icon-map-pin" style={{ fontSize: "0.65rem" }}></i>
+              </span>
+              <span className="fw-semibold text-secondary" style={{ fontSize: "0.825rem" }}>
+                Barbie Dermatology Clinic
+              </span>
+              <span className="text-muted" style={{ fontSize: "0.775rem" }}>
+                • Himayath Nagar HQ
+              </span>
+            </div>
           </div>
 
+          {/* Right: Actions & User Profile */}
           <div className="d-flex align-items-center gap-3">
-            <Link href="/book" className="btn btn-primary btn-sm rounded-pill px-3 shadow-xs">
-              <i className="feather icon-plus me-1"></i>New Booking Wizard
+            <Link
+              href="/"
+              target="_blank"
+              className="btn btn-sm btn-light border border-light-subtle text-secondary rounded-pill px-3 py-1.5 fw-medium d-flex align-items-center gap-1.5 shadow-xs"
+              style={{ fontSize: "0.825rem" }}
+            >
+              <i className="feather icon-external-link text-primary"></i>
+              <span>Main Website</span>
             </Link>
 
-            <div className="dropdown">
-              <div className="d-flex align-items-center gap-2 cursor-pointer">
-                <img
-                  src="/Doctor-imgs/Dr. M.N. Rao.png"
-                  alt="Admin Avatar"
-                  className="rounded-circle border border-primary border-2 shadow-xs"
-                  style={{ width: 38, height: 38, objectFit: 'cover', objectPosition: 'top' }}
-                />
-                <div className="d-none d-sm-block text-start">
-                  <span className="fw-bold text-secondary d-block" style={{ fontSize: '0.825rem', lineHeight: '1.2' }}>
-                    Dr. M.N. Rao
-                  </span>
-                  <span className="text-muted" style={{ fontSize: '0.725rem' }}>Super Admin</span>
-                </div>
+            <div className="d-flex align-items-center gap-2.5 bg-light px-3 py-1.5 rounded-pill border border-light-subtle">
+              <div
+                className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center shadow-xs"
+                style={{ width: 34, height: 34 }}
+              >
+                <i className="feather icon-user fs-6"></i>
+              </div>
+              <div className="d-none d-sm-block text-start">
+                <span className="fw-bold text-secondary d-block" style={{ fontSize: "0.85rem", lineHeight: "1.1" }}>
+                  Front Desk
+                </span>
+                <span className="text-muted d-block" style={{ fontSize: "0.725rem", lineHeight: "1.2" }}>
+                  Clinic Reception
+                </span>
               </div>
             </div>
           </div>

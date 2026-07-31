@@ -22,6 +22,26 @@ export default function DoctorManagementPage() {
   const [blockTimeSlot, setBlockTimeSlot] = useState("10:00");
   const [blockReason, setBlockReason] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
+  const [slotDropdownOpen, setSlotDropdownOpen] = useState(false);
+
+  const timeSlotsList = [
+    { value: "10:00", label: "10:00 AM" },
+    { value: "10:30", label: "10:30 AM" },
+    { value: "11:00", label: "11:00 AM" },
+    { value: "11:30", label: "11:30 AM" },
+    { value: "12:00", label: "12:00 PM" },
+    { value: "12:30", label: "12:30 PM" },
+    { value: "13:00", label: "01:00 PM" },
+    { value: "13:30", label: "01:30 PM" },
+    { value: "16:00", label: "04:00 PM" },
+    { value: "16:30", label: "04:30 PM" },
+    { value: "17:00", label: "05:00 PM" },
+    { value: "17:30", label: "05:30 PM" },
+    { value: "18:00", label: "06:00 PM" },
+    { value: "18:30", label: "06:30 PM" },
+    { value: "19:00", label: "07:00 PM" },
+    { value: "19:30", label: "07:30 PM" },
+  ];
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -247,23 +267,31 @@ export default function DoctorManagementPage() {
                   </div>
                 </div>
 
-                {/* Tabs */}
-                <div className="nav nav-pills bg-light p-1 rounded-pill border">
+                {/* Segmented Tab Control */}
+                <div className="d-flex align-items-center bg-light p-1 rounded-3 border border-light-subtle">
                   <button
-                    className={`nav-link rounded-pill px-3 py-1.5 small fw-bold ${
-                      activeTab === "schedule" ? "active bg-primary text-white" : "text-muted"
+                    type="button"
+                    className={`btn btn-sm rounded-2 px-3 py-1.5 fw-semibold transition-all ${
+                      activeTab === "schedule"
+                        ? "btn-primary shadow-xs text-white"
+                        : "text-secondary text-decoration-none"
                     }`}
+                    style={{ fontSize: "0.825rem" }}
                     onClick={() => setActiveTab("schedule")}
                   >
-                    Working Schedule
+                    <i className="feather icon-clock me-1.5"></i>Working Schedule
                   </button>
                   <button
-                    className={`nav-link rounded-pill px-3 py-1.5 small fw-bold ${
-                      activeTab === "availability" ? "active bg-primary text-white" : "text-muted"
+                    type="button"
+                    className={`btn btn-sm rounded-2 px-3 py-1.5 fw-semibold transition-all ${
+                      activeTab === "availability"
+                        ? "btn-primary shadow-xs text-white"
+                        : "text-secondary text-decoration-none"
                     }`}
+                    style={{ fontSize: "0.825rem" }}
                     onClick={() => setActiveTab("availability")}
                   >
-                    Block Offline Slots
+                    <i className="feather icon-slash me-1.5"></i>Block Offline Slots
                   </button>
                 </div>
               </div>
@@ -374,14 +402,57 @@ export default function DoctorManagementPage() {
                         />
                       </div>
 
-                      <div className="col-sm-3">
-                        <label className="form-label small fw-bold text-secondary mb-1">Time Slot (30-min)</label>
-                        <input
-                          type="time"
-                          className="form-control rounded-3 p-2.5 border-secondary-subtle"
-                          value={blockTimeSlot}
-                          onChange={(e) => setBlockTimeSlot(e.target.value)}
-                        />
+                      <div className="col-sm-3 position-relative">
+                        <label className="form-label small fw-bold text-secondary mb-1">Select 30-Min Slot</label>
+                        <div className="dropdown">
+                          <button
+                            type="button"
+                            className="btn bg-white border border-light-subtle text-secondary w-100 rounded-3 p-2.5 text-start d-flex align-items-center justify-content-between fw-semibold shadow-xs"
+                            onClick={() => setSlotDropdownOpen(!slotDropdownOpen)}
+                          >
+                            <span className="text-secondary">{timeSlotsList.find((s) => s.value === blockTimeSlot)?.label || blockTimeSlot}</span>
+                            <i className="feather icon-chevron-down ms-1 text-muted"></i>
+                          </button>
+
+                          {slotDropdownOpen && (
+                            <>
+                              <div
+                                className="position-fixed top-0 start-0 w-100 h-100"
+                                style={{ zIndex: 1040 }}
+                                onClick={() => setSlotDropdownOpen(false)}
+                              />
+                              <div
+                                className="shadow-lg border border-light-subtle rounded-3 p-1 w-100 position-absolute bg-white"
+                                style={{
+                                  maxHeight: "200px",
+                                  overflowY: "scroll",
+                                  WebkitOverflowScrolling: "touch",
+                                  zIndex: 1050,
+                                  top: "100%",
+                                  left: 0,
+                                  boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+                                }}
+                              >
+                                {timeSlotsList.map((s) => (
+                                  <button
+                                    key={s.value}
+                                    type="button"
+                                    className={`dropdown-item rounded-2 py-2 px-3 small fw-medium d-flex align-items-center justify-content-between ${
+                                      blockTimeSlot === s.value ? "active bg-primary text-white" : "text-secondary"
+                                    }`}
+                                    onClick={() => {
+                                      setBlockTimeSlot(s.value);
+                                      setSlotDropdownOpen(false);
+                                    }}
+                                  >
+                                    <span>{s.label}</span>
+                                    {blockTimeSlot === s.value && <i className="feather icon-check"></i>}
+                                  </button>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </div>
                       </div>
 
                       <div className="col-sm-5">

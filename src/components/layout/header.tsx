@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useBooking } from "@/context/BookingContext";
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openBooking } = useBooking();
 
   return (
     <>
@@ -120,9 +122,13 @@ export default function Header() {
                       </div>
                     </li>
                     <li className="nav-item item-btn">
-                      <Link href="/book" className="btn btn-primary btn-hover1">
+                      <button
+                        type="button"
+                        onClick={() => openBooking()}
+                        className="btn btn-primary btn-hover1 border-0"
+                      >
                         Book Appointment
-                      </Link>
+                      </button>
                     </li>
                   </ul>
                 </div>

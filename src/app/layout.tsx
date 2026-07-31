@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "Barbie Skin & Laser Clinic, backed by over 30 years of clinical experience. Leading vitiligo treatment center, cosmetic & laser clinic offering advanced, USFDA-approved skin and hair treatments.",
 };
 
+import { BookingProvider } from "@/context/BookingContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,7 +31,9 @@ export default function RootLayout({
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
       </head>
       <body id="bg" className={`${poppins.variable} font-sans`}>
-        {children}
+        <BookingProvider>
+          {children}
+        </BookingProvider>
 
         {/* Global JS files */}
         <Script src="/js/global.min.js" strategy="beforeInteractive" />

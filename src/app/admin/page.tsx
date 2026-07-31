@@ -205,22 +205,19 @@ export default function AdminDashboardPage() {
                           </td>
                           <td className="text-end pe-4">
                             <div className="d-flex align-items-center justify-content-end gap-1.5">
-                              <button
-                                className="btn btn-sm btn-success rounded-pill px-2.5 py-1"
+                              <select
+                                className="form-select form-select-sm fw-bold border text-secondary"
+                                style={{ fontSize: "0.75rem", width: "110px" }}
+                                value={apt.status}
                                 disabled={actionLoading === apt.id}
-                                onClick={() => handleUpdateStatus(apt.id, "Accepted")}
-                                title="Accept Appointment"
+                                onChange={(e) => handleUpdateStatus(apt.id, e.target.value)}
                               >
-                                <i className="feather icon-check me-1"></i>Accept
-                              </button>
-                              <button
-                                className="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1"
-                                disabled={actionLoading === apt.id}
-                                onClick={() => handleUpdateStatus(apt.id, "Rejected")}
-                                title="Reject Appointment"
-                              >
-                                <i className="feather icon-x me-1"></i>Reject
-                              </button>
+                                <option value="Pending">🟡 Pending</option>
+                                <option value="Accepted">🟢 Accept</option>
+                                <option value="Completed">🔵 Done</option>
+                                <option value="Rejected">🔴 Reject</option>
+                                <option value="Cancelled">⚪ Cancel</option>
+                              </select>
                             </div>
                           </td>
                         </tr>
@@ -271,12 +268,19 @@ export default function AdminDashboardPage() {
                         </p>
                       </div>
                       <div>
-                        <span className={`badge ${
-                          apt.status === 'Accepted' ? 'bg-success' :
-                          apt.status === 'Pending' ? 'bg-warning text-dark' : 'bg-secondary'
-                        }`} style={{ fontSize: '0.7rem' }}>
-                          {apt.status}
-                        </span>
+                        <select
+                          className="form-select form-select-sm fw-bold border text-secondary"
+                          style={{ fontSize: "0.725rem", width: "105px" }}
+                          value={apt.status}
+                          disabled={actionLoading === apt.id}
+                          onChange={(e) => handleUpdateStatus(apt.id, e.target.value)}
+                        >
+                          <option value="Pending">🟡 Pending</option>
+                          <option value="Accepted">🟢 Accept</option>
+                          <option value="Completed">🔵 Done</option>
+                          <option value="Rejected">🔴 Reject</option>
+                          <option value="Cancelled">⚪ Cancel</option>
+                        </select>
                       </div>
                     </div>
                   ))}

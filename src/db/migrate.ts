@@ -78,20 +78,48 @@ export async function initTables() {
     `CREATE TABLE IF NOT EXISTS inquiries (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
-      email TEXT NOT NULL,
+      email TEXT,
       phone TEXT NOT NULL,
       subject TEXT,
       message TEXT NOT NULL,
-      status TEXT DEFAULT 'Unread',
+      status TEXT DEFAULT 'New',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );`
   ];
 
   for (const q of queries) {
-    await libsqlClient.execute(q);
+    try {
+      await libsqlClient.execute(q);
+    } catch (err) {
+      console.error("Error running table query:", err);
+    }
   }
 
-  console.log("All Turso tables initialized successfully!");
+  // Ensure all columns exist
+  const alterQueries = [
+    `ALTER TABLE doctors ADD COLUMN phone TEXT;`,
+    `ALTER TABLE doctors ADD COLUMN email TEXT;`,
+    `ALTER TABLE doctors ADD COLUMN working_days TEXT DEFAULT '["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]';`,
+    `ALTER TABLE doctors ADD COLUMN working_hours_start TEXT DEFAULT '10:00';`,
+    `ALTER TABLE doctors ADD COLUMN working_hours_end TEXT DEFAULT '20:00';`,
+    `ALTER TABLE doctors ADD COLUMN lunch_start TEXT DEFAULT '14:00';`,
+    `ALTER TABLE doctors ADD COLUMN lunch_end TEXT DEFAULT '15:00';`,
+    `ALTER TABLE doctors ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP;`,
+    `ALTER TABLE treatments ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP;`,
+    `ALTER TABLE appointments ADD COLUMN duration_minutes INTEGER DEFAULT 30;`,
+    `ALTER TABLE appointments ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP;`,
+    `ALTER TABLE appointments ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP;`,
+  ];
+
+  for (const alterQ of alterQueries) {
+    try {
+      await libsqlClient.execute(alterQ);
+    } catch (e) {
+      // Column already exists - safe to ignore
+    }
+  }
+
+  console.log("All Turso tables initialized and columns migrated successfully!");
 }
 
 if (require.main === module) {

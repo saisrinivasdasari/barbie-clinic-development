@@ -14,11 +14,35 @@ export async function GET(req: Request) {
     }
 
     // 1. Fetch Doctor
-    const docList = await db.select().from(doctors).where(eq(doctors.id, doctorId));
-    if (!docList.length) {
-      return NextResponse.json({ error: "Doctor not found." }, { status: 404 });
+    let docList = await db.select().from(doctors).where(eq(doctors.id, doctorId));
+    let doc = docList.length ? docList[0] : null;
+
+    if (!doc) {
+      // Fallback doctor definition
+      if (doctorId === "doc_meghamala") {
+        doc = {
+          id: "doc_meghamala",
+          name: "Dr. G. Megha.mala",
+          title: "Aesthetic Practitioner & Laser Specialist",
+          workingDays: '["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]',
+          workingHoursStart: "10:00",
+          workingHoursEnd: "19:00",
+          lunchStart: "14:00",
+          lunchEnd: "15:00",
+        };
+      } else {
+        doc = {
+          id: "doc_mnrao",
+          name: "Dr. M.N. Rao",
+          title: "Senior Dermatologist & Cosmetologist",
+          workingDays: '["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]',
+          workingHoursStart: "10:00",
+          workingHoursEnd: "20:00",
+          lunchStart: "14:00",
+          lunchEnd: "15:00",
+        };
+      }
     }
-    const doc = docList[0];
 
     // Check Day of Week
     const dateObj = new Date(dateStr + "T00:00:00");

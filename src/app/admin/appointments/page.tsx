@@ -18,9 +18,36 @@ export default function AppointmentsManagementPage() {
   const [doctorsList, setDoctorsList] = useState([]);
   const [treatmentsList, setTreatmentsList] = useState([]);
 
-  // Active appointment for Detail Modal
+  // Active appointment for Detail Modal & Reschedule Modal
   const [detailApt, setDetailApt] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
+
+  // Reschedule Modal state
+  const [rescheduleApt, setRescheduleApt] = useState(null);
+  const [rescheduleDate, setRescheduleDate] = useState("");
+  const [rescheduleTime, setRescheduleTime] = useState("");
+  const [rescheduleStatus, setRescheduleStatus] = useState("Accepted");
+  const [rescheduleSaving, setRescheduleSaving] = useState(false);
+  const [rescheduleSlotDropdownOpen, setRescheduleSlotDropdownOpen] = useState(false);
+
+  const rescheduleTimeSlotsList = [
+    { value: "10:00", label: "10:00 AM" },
+    { value: "10:30", label: "10:30 AM" },
+    { value: "11:00", label: "11:00 AM" },
+    { value: "11:30", label: "11:30 AM" },
+    { value: "12:00", label: "12:00 PM" },
+    { value: "12:30", label: "12:30 PM" },
+    { value: "13:00", label: "01:00 PM" },
+    { value: "13:30", label: "01:30 PM" },
+    { value: "16:00", label: "04:00 PM" },
+    { value: "16:30", label: "04:30 PM" },
+    { value: "17:00", label: "05:00 PM" },
+    { value: "17:30", label: "05:30 PM" },
+    { value: "18:00", label: "06:00 PM" },
+    { value: "18:30", label: "06:30 PM" },
+    { value: "19:00", label: "07:00 PM" },
+    { value: "19:30", label: "07:30 PM" },
+  ];
 
   useEffect(() => {
     fetchMetadata();
@@ -87,6 +114,73 @@ export default function AppointmentsManagementPage() {
     }
   };
 
+  const handleDeleteAppointment = async (appointmentId: string) => {
+    if (!window.confirm("Are you sure you want to permanently delete this appointment record?")) {
+      return;
+    }
+    setUpdatingId(appointmentId);
+    try {
+      const res = await fetch(`/api/admin/appointments?id=${appointmentId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        fetchAppointments();
+        if (detailApt && detailApt.id === appointmentId) {
+          setDetailApt(null);
+        }
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setUpdatingId(null);
+    }
+  };
+
+  const openRescheduleModal = (apt: any) => {
+    setRescheduleApt(apt);
+    setRescheduleDate(apt.appointmentDate || new Date().toISOString().split("T")[0]);
+    setRescheduleTime(apt.appointmentTime || "10:00 AM");
+    setRescheduleStatus("Accepted");
+  };
+
+  const handleConfirmReschedule = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!rescheduleApt || !rescheduleDate || !rescheduleTime) return;
+
+    setRescheduleSaving(true);
+    try {
+      const res = await fetch("/api/admin/appointments", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          appointmentId: rescheduleApt.id,
+          appointmentDate: rescheduleDate,
+          appointmentTime: rescheduleTime,
+          status: rescheduleStatus,
+        }),
+      });
+
+      if (res.ok) {
+        fetchAppointments();
+
+        // Open WhatsApp notification link to notify patient
+        const cleanPhone = rescheduleApt.phone?.replace(/[^0-9]/g, "") || "";
+        const formattedPhone = cleanPhone.startsWith("91") ? cleanPhone : `91${cleanPhone}`;
+        const msg = encodeURIComponent(
+          `Hello ${rescheduleApt.customerName || "Patient"}, your appointment for ${rescheduleApt.treatmentName || "Consultation"} with ${rescheduleApt.doctorName || "Doctor"} at Barbie Dermatology Clinic has been rescheduled to ${rescheduleDate} at ${rescheduleTime}. Status: ${rescheduleStatus}. Thank you!`
+        );
+        const waUrl = `https://wa.me/${formattedPhone}?text=${msg}`;
+        window.open(waUrl, "_blank");
+
+        setRescheduleApt(null);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setRescheduleSaving(false);
+    }
+  };
+
   const resetFilters = () => {
     setSearch("");
     setSelectedDoctor("all");
@@ -98,41 +192,52 @@ export default function AppointmentsManagementPage() {
   return (
     <div className="container-fluid p-0">
       {/* Title */}
-      <div className="d-flex align-items-center justify-content-between mb-4">
+      <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
         <div>
-          <h3 className="fw-bold text-secondary mb-1">Appointment Management</h3>
+          <h3 className="fw-bold text-secondary mb-1 d-flex align-items-center gap-2">
+            <span>Appointment Management</span>
+            <span className="badge bg-primary-subtle text-primary rounded-pill px-3 py-1 fs-6 fw-semibold">
+              {appointments.length} Bookings
+            </span>
+          </h3>
           <p className="text-muted small mb-0">Search, filter, approve, cancel, and manage all patient bookings.</p>
         </div>
-        <button className="btn btn-outline-secondary btn-sm rounded-pill px-3" onClick={resetFilters}>
-          <i className="feather icon-rotate-ccw me-1"></i>Reset Filters
-        </button>
+        <div className="d-flex align-items-center gap-2">
+          <button className="btn btn-outline-secondary btn-sm rounded-3 px-3 py-2 fw-medium d-flex align-items-center gap-1.5 shadow-xs" onClick={resetFilters}>
+            <i className="feather icon-rotate-ccw fs-6"></i>Reset Filters
+          </button>
+          <button className="btn btn-primary btn-sm rounded-3 px-3 py-2 fw-medium d-flex align-items-center gap-1.5 shadow-xs" onClick={fetchAppointments}>
+            <i className="feather icon-refresh-cw fs-6"></i>Refresh
+          </button>
+        </div>
       </div>
 
-      {/* Search & Filter Bar */}
-      <div className="card border-0 rounded-4 shadow-sm bg-white p-3.5 mb-4">
-        <div className="row g-3">
+      {/* Modern Sleek Search & Filter Control Bar */}
+      <div className="card border-0 rounded-4 shadow-sm bg-white p-3 mb-4">
+        <div className="row g-3 align-items-end">
           {/* Search Box */}
-          <div className="col-lg-3 col-md-6">
-            <label className="form-label small fw-bold text-secondary mb-1">Search Patient / Phone</label>
-            <div className="input-group">
-              <span className="input-group-text bg-light border border-end-0 text-muted">
-                <i className="feather icon-search"></i>
-              </span>
-              <input
-                type="text"
-                className="form-control bg-light border border-start-0 text-secondary"
-                placeholder="Name or phone..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
+          <div className="col-xl-3 col-lg-4 col-md-6">
+            <label className="form-label small fw-bold text-secondary mb-1">
+              <i className="feather icon-search me-1 text-primary"></i>Search Patient / Phone
+            </label>
+            <input
+              type="text"
+              className="form-control rounded-3 border-light-subtle bg-light text-secondary px-3 py-2 shadow-xs"
+              style={{ fontSize: "0.85rem", height: "42px" }}
+              placeholder="Name or phone..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
 
           {/* Filter by Doctor */}
-          <div className="col-lg-2.5 col-md-6">
-            <label className="form-label small fw-bold text-secondary mb-1">Doctor</label>
+          <div className="col-xl-2.5 col-lg-4 col-md-6">
+            <label className="form-label small fw-bold text-secondary mb-1">
+              <i className="feather icon-user me-1 text-primary"></i>Doctor
+            </label>
             <select
-              className="form-select bg-light text-secondary border"
+              className="form-select rounded-3 border-light-subtle bg-light text-secondary px-3 py-2 shadow-xs"
+              style={{ fontSize: "0.85rem", height: "42px" }}
               value={selectedDoctor}
               onChange={(e) => setSelectedDoctor(e.target.value)}
             >
@@ -146,10 +251,13 @@ export default function AppointmentsManagementPage() {
           </div>
 
           {/* Filter by Treatment */}
-          <div className="col-lg-2.5 col-md-6">
-            <label className="form-label small fw-bold text-secondary mb-1">Treatment</label>
+          <div className="col-xl-2.5 col-lg-4 col-md-6">
+            <label className="form-label small fw-bold text-secondary mb-1">
+              <i className="feather icon-layers me-1 text-primary"></i>Treatment
+            </label>
             <select
-              className="form-select bg-light text-secondary border"
+              className="form-select rounded-3 border-light-subtle bg-light text-secondary px-3 py-2 shadow-xs"
+              style={{ fontSize: "0.85rem", height: "42px" }}
               value={selectedTreatment}
               onChange={(e) => setSelectedTreatment(e.target.value)}
             >
@@ -163,28 +271,34 @@ export default function AppointmentsManagementPage() {
           </div>
 
           {/* Filter by Status */}
-          <div className="col-lg-2 col-md-6">
-            <label className="form-label small fw-bold text-secondary mb-1">Status</label>
+          <div className="col-xl-2 col-lg-6 col-md-6">
+            <label className="form-label small fw-bold text-secondary mb-1">
+              <i className="feather icon-disc me-1 text-primary"></i>Status
+            </label>
             <select
-              className="form-select bg-light text-secondary border"
+              className="form-select rounded-3 border-light-subtle bg-light text-secondary px-3 py-2 shadow-xs"
+              style={{ fontSize: "0.85rem", height: "42px" }}
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
             >
               <option value="all">All Statuses</option>
-              <option value="Pending">Pending</option>
-              <option value="Accepted">Accepted</option>
-              <option value="Completed">Completed</option>
-              <option value="Rejected">Rejected</option>
-              <option value="Cancelled">Cancelled</option>
+              <option value="Pending">🟡 Pending</option>
+              <option value="Accepted">🟢 Accepted</option>
+              <option value="Completed">🔵 Completed</option>
+              <option value="Rejected">🔴 Rejected</option>
+              <option value="Cancelled">⚪ Cancelled</option>
             </select>
           </div>
 
           {/* Filter by Date */}
-          <div className="col-lg-2 col-md-6">
-            <label className="form-label small fw-bold text-secondary mb-1">Date</label>
+          <div className="col-xl-2 col-lg-6 col-md-6">
+            <label className="form-label small fw-bold text-secondary mb-1">
+              <i className="feather icon-calendar me-1 text-primary"></i>Date
+            </label>
             <input
               type="date"
-              className="form-control bg-light text-secondary border"
+              className="form-control rounded-3 border-light-subtle bg-light text-secondary px-3 py-2 shadow-xs"
+              style={{ fontSize: "0.85rem", height: "42px" }}
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
             />
@@ -253,21 +367,29 @@ export default function AppointmentsManagementPage() {
                         <span className="badge bg-primary-subtle text-primary font-monospace">{apt.appointmentTime}</span>
                       </td>
                       <td>
-                        <span
-                          className={`badge ${
+                        <select
+                          className={`form-select form-select-sm fw-bold border-0 rounded-pill py-1 px-2.5 ${
                             apt.status === "Accepted"
-                              ? "bg-success"
+                              ? "bg-success text-white"
                               : apt.status === "Pending"
                               ? "bg-warning text-dark"
                               : apt.status === "Completed"
                               ? "bg-info text-white"
                               : apt.status === "Rejected"
-                              ? "bg-danger"
-                              : "bg-secondary"
+                              ? "bg-danger text-white"
+                              : "bg-secondary text-white"
                           }`}
+                          style={{ fontSize: "0.775rem", cursor: "pointer", width: "125px" }}
+                          value={apt.status}
+                          disabled={updatingId === apt.id}
+                          onChange={(e) => handleUpdateStatus(apt.id, e.target.value)}
                         >
-                          {apt.status}
-                        </span>
+                          <option value="Pending" className="bg-white text-dark">🟡 Pending</option>
+                          <option value="Accepted" className="bg-white text-dark">🟢 Accepted</option>
+                          <option value="Completed" className="bg-white text-dark">🔵 Completed</option>
+                          <option value="Rejected" className="bg-white text-dark">🔴 Rejected</option>
+                          <option value="Cancelled" className="bg-white text-dark">⚪ Cancelled</option>
+                        </select>
                       </td>
                       <td className="text-end pe-4">
                         <div className="d-flex align-items-center justify-content-end gap-1.5">
@@ -286,14 +408,25 @@ export default function AppointmentsManagementPage() {
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Accepted")}
                                 title="Accept Appointment"
+                                style={{ fontSize: "0.75rem" }}
                               >
                                 Accept
+                              </button>
+                              <button
+                                className="btn btn-sm btn-outline-primary rounded-pill px-2.5 py-1"
+                                disabled={updatingId === apt.id}
+                                onClick={() => openRescheduleModal(apt)}
+                                title="Reschedule Time/Date"
+                                style={{ fontSize: "0.75rem" }}
+                              >
+                                <i className="feather icon-calendar me-1"></i>Reschedule
                               </button>
                               <button
                                 className="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Rejected")}
                                 title="Reject Appointment"
+                                style={{ fontSize: "0.75rem" }}
                               >
                                 Reject
                               </button>
@@ -306,18 +439,43 @@ export default function AppointmentsManagementPage() {
                                 className="btn btn-sm btn-info text-white rounded-pill px-2.5 py-1"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Completed")}
+                                title="Complete Appointment"
+                                style={{ fontSize: "0.75rem" }}
                               >
-                                Mark Done
+                                Complete
                               </button>
                               <button
                                 className="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Cancelled")}
+                                title="Cancel Appointment"
+                                style={{ fontSize: "0.75rem" }}
                               >
                                 Cancel
                               </button>
                             </>
                           )}
+
+                          {(apt.status === "Cancelled" || apt.status === "Rejected") && (
+                            <button
+                              className="btn btn-sm btn-outline-warning text-dark rounded-pill px-2 py-0.5"
+                              disabled={updatingId === apt.id}
+                              onClick={() => handleUpdateStatus(apt.id, "Pending")}
+                              title="Re-open Appointment"
+                              style={{ fontSize: "0.75rem" }}
+                            >
+                              Re-open
+                            </button>
+                          )}
+
+                          <button
+                            className="btn btn-sm btn-outline-danger rounded-circle p-1.5 ms-1"
+                            disabled={updatingId === apt.id}
+                            onClick={() => handleDeleteAppointment(apt.id)}
+                            title="Delete Appointment"
+                          >
+                            <i className="feather icon-trash-2"></i>
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -354,8 +512,18 @@ export default function AppointmentsManagementPage() {
                       <span className="badge bg-secondary font-monospace">{detailApt.id}</span>
                     </div>
                     <div className="col-6">
-                      <span className="text-muted d-block" style={{ fontSize: "0.75rem" }}>Status</span>
-                      <span className="badge bg-warning text-dark">{detailApt.status}</span>
+                      <span className="text-muted d-block" style={{ fontSize: "0.75rem" }}>Update Status</span>
+                      <select
+                        className="form-select form-select-sm fw-bold border text-secondary"
+                        value={detailApt.status}
+                        onChange={(e) => handleUpdateStatus(detailApt.id, e.target.value)}
+                      >
+                        <option value="Pending">🟡 Pending</option>
+                        <option value="Accepted">🟢 Accepted</option>
+                        <option value="Completed">🔵 Completed</option>
+                        <option value="Rejected">🔴 Rejected</option>
+                        <option value="Cancelled">⚪ Cancelled</option>
+                      </select>
                     </div>
                     <div className="col-6 mt-2">
                       <span className="text-muted d-block" style={{ fontSize: "0.75rem" }}>Customer Name</span>
@@ -393,15 +561,158 @@ export default function AppointmentsManagementPage() {
                   </div>
                 )}
               </div>
-              <div className="modal-footer border-0 px-4 pb-4">
+              <div className="modal-footer border-0 px-4 pb-4 d-flex align-items-center justify-content-between">
                 <button
                   type="button"
-                  className="btn btn-outline-secondary rounded-pill"
+                  className="btn btn-outline-danger rounded-pill px-3"
+                  onClick={() => handleDeleteAppointment(detailApt.id)}
+                >
+                  <i className="feather icon-trash-2 me-1"></i>Delete Appointment
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary rounded-pill px-4"
                   onClick={() => setDetailApt(null)}
                 >
                   Close
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reschedule Appointment Modal */}
+      {rescheduleApt && (
+        <div className="modal fade show d-block" style={{ backgroundColor: "rgba(0,0,0,0.55)", zIndex: 1065 }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+              <div className="modal-header bg-primary text-white px-4 py-3">
+                <h5 className="modal-title fw-bold fs-6 d-flex align-items-center gap-2 mb-0">
+                  <i className="feather icon-calendar"></i>Reschedule Patient Appointment
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close btn-close-white"
+                  onClick={() => setRescheduleApt(null)}
+                ></button>
+              </div>
+              <form onSubmit={handleConfirmReschedule}>
+                <div className="modal-body p-4">
+                  <div className="p-3 bg-light rounded-3 border border-light-subtle mb-3">
+                    <div className="d-flex align-items-center justify-content-between mb-1">
+                      <strong className="text-secondary">{rescheduleApt.customerName}</strong>
+                      <span className="badge bg-secondary font-monospace">{rescheduleApt.id}</span>
+                    </div>
+                    <p className="text-muted small mb-0">
+                      {rescheduleApt.treatmentName} • <strong>{rescheduleApt.doctorName}</strong>
+                    </p>
+                    <div className="text-muted fs-8 mt-1">
+                      Current Slot: <span className="text-danger fw-bold">{rescheduleApt.appointmentDate} at {rescheduleApt.appointmentTime}</span>
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label small fw-bold text-secondary mb-1">New Appointment Date</label>
+                    <input
+                      type="date"
+                      className="form-control rounded-3 border bg-white"
+                      value={rescheduleDate}
+                      required
+                      onChange={(e) => setRescheduleDate(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="mb-3 position-relative">
+                    <label className="form-label small fw-bold text-secondary mb-1">New Available Time Slot</label>
+                    <div className="dropdown">
+                      <button
+                        type="button"
+                        className="btn bg-white border border-light-subtle text-secondary w-100 rounded-3 p-2.5 text-start d-flex align-items-center justify-content-between fw-semibold shadow-xs"
+                        onClick={() => setRescheduleSlotDropdownOpen(!rescheduleSlotDropdownOpen)}
+                      >
+                        <span className="text-secondary">
+                          {rescheduleTimeSlotsList.find((s) => s.value === rescheduleTime)?.label || rescheduleTime}
+                        </span>
+                        <i className="feather icon-chevron-down ms-1 text-muted"></i>
+                      </button>
+
+                      {rescheduleSlotDropdownOpen && (
+                        <>
+                          <div
+                            className="position-fixed top-0 start-0 w-100 h-100"
+                            style={{ zIndex: 1040 }}
+                            onClick={() => setRescheduleSlotDropdownOpen(false)}
+                          />
+                          <div
+                            className="shadow-lg border border-light-subtle rounded-3 p-1 w-100 position-absolute bg-white"
+                            style={{
+                              maxHeight: "190px",
+                              overflowY: "scroll",
+                              WebkitOverflowScrolling: "touch",
+                              zIndex: 1050,
+                              top: "100%",
+                              left: 0,
+                              boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+                            }}
+                          >
+                            {rescheduleTimeSlotsList.map((s) => (
+                              <button
+                                key={s.value}
+                                type="button"
+                                className={`dropdown-item rounded-2 py-2 px-3 small fw-medium d-flex align-items-center justify-content-between ${
+                                  rescheduleTime === s.value ? "active bg-primary text-white" : "text-secondary"
+                                }`}
+                                onClick={() => {
+                                  setRescheduleTime(s.value);
+                                  setRescheduleSlotDropdownOpen(false);
+                                }}
+                              >
+                                <span>{s.label}</span>
+                                {rescheduleTime === s.value && <i className="feather icon-check"></i>}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label small fw-bold text-secondary mb-1">Status After Reschedule</label>
+                    <select
+                      className="form-select rounded-3 border bg-white"
+                      value={rescheduleStatus}
+                      onChange={(e) => setRescheduleStatus(e.target.value)}
+                    >
+                      <option value="Accepted">🟢 Accepted (Confirmed)</option>
+                      <option value="Pending">🟡 Pending (Awaiting Patient Confirmation)</option>
+                    </select>
+                  </div>
+
+                  <div className="p-2.5 bg-success-subtle border border-success-subtle rounded-3 text-success small d-flex align-items-center gap-2">
+                    <i className="feather icon-message-circle fs-5"></i>
+                    <span>Submitting will save changes and launch WhatsApp pre-filled with the new slot details to notify the patient.</span>
+                  </div>
+                </div>
+
+                <div className="modal-footer border-0 px-4 pb-4">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary rounded-pill px-3"
+                    onClick={() => setRescheduleApt(null)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary rounded-pill px-4"
+                    disabled={rescheduleSaving}
+                  >
+                    {rescheduleSaving ? "Saving..." : "Confirm & Send WhatsApp"}
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
