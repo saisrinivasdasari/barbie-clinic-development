@@ -575,3 +575,11 @@ body {
     min-height: 220px;
   }
 }
+
+/* Force Book Appointment button to show on larger screens (desktop) */
+@media (min-width: 991px) {
+  .site-header.style-2 .extra-nav .extra-cell ul.header-right li.item-btn,
+  .site-header.style-3 .extra-nav .extra-cell ul.header-right li.item-btn {
+    display: inline-block !important;
+  }
+}

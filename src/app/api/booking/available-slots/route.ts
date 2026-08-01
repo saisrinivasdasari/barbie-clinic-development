@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { doctors, appointments, doctorBlockedDates, doctorBlockedSlots } from "@/db/schema";
-import { eq, and, ne } from "drizzle-orm";
+import { eq, and, ne, or } from "drizzle-orm";
 
 export async function GET(req: Request) {
   try {
@@ -113,7 +113,7 @@ export async function GET(req: Request) {
       allSlots.push(formatMinutesToTime(current));
     }
 
-    // 4. Fetch Existing Appointments (non-cancelled / non-rejected)
+    // 4. Fetch Existing Appointments (only Accepted or Completed statuses count as booked)
     const existingApts = await db
       .select()
       .from(appointments)
@@ -121,8 +121,10 @@ export async function GET(req: Request) {
         and(
           eq(appointments.doctorId, doctorId),
           eq(appointments.appointmentDate, dateStr),
-          ne(appointments.status, "Cancelled"),
-          ne(appointments.status, "Rejected")
+          or(
+            eq(appointments.status, "Accepted"),
+            eq(appointments.status, "Completed")
+          )
         )
       );
 

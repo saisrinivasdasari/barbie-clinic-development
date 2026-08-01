@@ -100,7 +100,7 @@ const defaultTreatmentsList = [
     subtitle: "Expert Skin & Hair Diagnosis",
     description: "Comprehensive clinical evaluation by senior dermatologists for skin infections, allergies, eczema, psoriasis, and scalp disorders.",
     durationMinutes: 20,
-    imageUrl: "/Doctor-imgs/Dr. M.N. Rao.png",
+    imageUrl: "/images/procedures/consultation.png",
     category: "Clinical Consultation",
   },
   {

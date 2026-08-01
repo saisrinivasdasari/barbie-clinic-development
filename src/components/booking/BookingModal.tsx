@@ -17,6 +17,15 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
 
   const defaultTreatments = [
     {
+      id: "trt_consultation",
+      title: "General Dermatology Consultation",
+      subtitle: "Expert Skin & Hair Diagnosis",
+      description: "Comprehensive clinical evaluation by senior dermatologists for skin infections, allergies, eczema, psoriasis, and scalp disorders.",
+      durationMinutes: 20,
+      imageUrl: "/images/procedures/consultation.png",
+      category: "Clinical Consultation",
+    },
+    {
       id: "trt_vitiligo",
       title: "Vitiligo Treatment",
       subtitle: "Dedicated Vitiligo Care",
@@ -102,9 +111,97 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
   const [customerNotes, setCustomerNotes] = useState("");
   const [bookingResult, setBookingResult] = useState(null);
 
-  // Fetch Treatments on mount
+  // Calendar states
+  const [blockedDates, setBlockedDates] = useState([]);
+  const [workingDays, setWorkingDays] = useState(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+  const [calendarYear, setCalendarYear] = useState(new Date().getFullYear());
+  const [calendarMonth, setCalendarMonth] = useState(new Date().getMonth());
+
+  const resetForm = () => {
+    setStep(1);
+    setSelectedTreatment(null);
+    setSelectedDoctor(null);
+    setSelectedDate(new Date().toISOString().split("T")[0]);
+    setSelectedSlot("");
+    setCustomerName("");
+    setCustomerPhone("");
+    setCustomerEmail("");
+    setCustomerNotes("");
+    setBookingResult(null);
+    setErrorMsg("");
+  };
+
+  const handleStepClick = (num: number) => {
+    if (num === 1) {
+      setStep(1);
+    } else if (num === 2 && selectedTreatment) {
+      setStep(2);
+    } else if (num === 3 && selectedDoctor) {
+      setStep(3);
+    } else if (num === 4 && selectedSlot) {
+      setStep(4);
+    }
+  };
+
+  const fetchBlockedDates = async (doctorId) => {
+    try {
+      const res = await fetch(`/api/booking/blocked-dates?doctorId=${doctorId}`);
+      const json = await res.json();
+      if (json.success) {
+        setBlockedDates(json.blockedDates || []);
+        setWorkingDays(json.workingDays || ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]);
+      }
+    } catch (e) {
+      console.error("Error fetching blocked dates:", e);
+    }
+  };
+
+  const getDaysInMonth = (year: number, month: number) => {
+    const date = new Date(year, month, 1);
+    const days = [];
+    const firstDayIndex = date.getDay();
+    for (let i = 0; i < firstDayIndex; i++) {
+      days.push(null);
+    }
+    while (date.getMonth() === month) {
+      days.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+    return days;
+  };
+
+  const isDateBlocked = (date: Date) => {
+    if (!date) return true;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const compareDate = new Date(date);
+    compareDate.setHours(0, 0, 0, 0);
+    if (compareDate < today) return true;
+
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const dayName = dayNames[date.getDay()];
+    if (!workingDays.includes(dayName)) return true;
+
+    // Format YYYY-MM-DD
+    const y = date.getFullYear();
+    const m = (date.getMonth() + 1).toString().padStart(2, "0");
+    const d = date.getDate().toString().padStart(2, "0");
+    const dateString = `${y}-${m}-${d}`;
+    if (blockedDates.includes(dateString)) return true;
+
+    return false;
+  };
+
+  useEffect(() => {
+    if (step === 3 && selectedDoctor) {
+      fetchBlockedDates(selectedDoctor.id);
+    }
+  }, [step, selectedDoctor]);
+
+  // Fetch Treatments on mount & Reset state when opening
   useEffect(() => {
     if (isOpen) {
+      resetForm();
       fetchTreatments();
     }
   }, [isOpen]);
@@ -121,9 +218,14 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
       const res = await fetch("/api/booking/treatments");
       const json = await res.json();
       if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-        setTreatments(json.data);
+        const sorted = [...json.data].sort((a, b) => {
+          if (a.id === "trt_consultation") return -1;
+          if (b.id === "trt_consultation") return 1;
+          return 0;
+        });
+        setTreatments(sorted);
         if (initialTreatmentId) {
-          const match = json.data.find((t) => t.id === initialTreatmentId);
+          const match = sorted.find((t) => t.id === initialTreatmentId);
           if (match) {
             handleSelectTreatment(match);
           }
@@ -258,6 +360,13 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
       return;
     }
 
+    const dateObj = new Date(selectedDate + "T00:00:00");
+    if (isDateBlocked(dateObj)) {
+      setErrorMsg("The selected date is currently unavailable/blocked. Please select another date.");
+      setStep(3);
+      return;
+    }
+
     setLoading(true);
     setErrorMsg("");
 
@@ -361,7 +470,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
     <div
       className="modal fade show d-block"
       tabIndex={-1}
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.65)", backdropFilter: "blur(6px)", zIndex: 1060 }}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.65)", backdropFilter: "blur(6px)", zIndex: 10050 }}
     >
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
@@ -391,25 +500,43 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
           {/* Stepper Progress Bar */}
           {step < 5 && (
             <div className="px-4 py-2 bg-light border-bottom border-light-subtle d-flex align-items-center justify-content-between">
-              {[1, 2, 3, 4].map((num) => (
-                <div key={num} className="d-flex align-items-center gap-2">
+              {[1, 2, 3, 4].map((num) => {
+                const isClickable = num < step;
+                return (
                   <div
-                    className={`rounded-circle d-flex align-items-center justify-content-center fw-bold ${
-                      step >= num ? "bg-primary text-white" : "bg-white text-muted border"
-                    }`}
-                    style={{ width: 28, height: 28, fontSize: "0.8rem" }}
+                    key={num}
+                    className="d-flex align-items-center gap-2"
+                    onClick={() => isClickable && handleStepClick(num)}
+                    style={{ cursor: isClickable ? "pointer" : "default" }}
                   >
-                    {step > num ? <i className="feather icon-check"></i> : num}
+                    <div
+                      className={`rounded-circle d-flex align-items-center justify-content-center fw-bold transition-all ${
+                        step >= num ? "bg-primary text-white" : "bg-white text-muted border"
+                      }`}
+                      style={{
+                        width: 28,
+                        height: 28,
+                        fontSize: "0.8rem",
+                        transform: isClickable ? "scale(1.05)" : "none"
+                      }}
+                    >
+                      {step > num ? <i className="feather icon-check"></i> : num}
+                    </div>
+                    <span
+                      className={`small fw-medium d-none d-sm-inline transition-all ${
+                        step >= num ? "text-secondary" : "text-muted"
+                      } ${isClickable ? "text-primary text-decoration-underline" : ""}`}
+                      style={{ fontSize: '0.8rem' }}
+                    >
+                      {num === 1 && "Treatment"}
+                      {num === 2 && "Doctor"}
+                      {num === 3 && "Date & Time"}
+                      {num === 4 && "Details"}
+                    </span>
+                    {num < 4 && <i className="feather icon-chevron-right text-muted mx-1 d-none d-sm-inline" style={{ fontSize: '0.8rem' }}></i>}
                   </div>
-                  <span className={`small fw-medium d-none d-sm-inline ${step >= num ? "text-secondary" : "text-muted"}`} style={{ fontSize: '0.8rem' }}>
-                    {num === 1 && "Treatment"}
-                    {num === 2 && "Doctor"}
-                    {num === 3 && "Date & Time"}
-                    {num === 4 && "Details"}
-                  </span>
-                  {num < 4 && <i className="feather icon-chevron-right text-muted mx-1 d-none d-sm-inline" style={{ fontSize: '0.8rem' }}></i>}
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
@@ -444,9 +571,6 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                               style={{ width: 68, height: 68 }}
                             />
                             <div>
-                              <span className="badge bg-light text-primary border me-1" style={{ fontSize: '0.7rem' }}>
-                                <i className="feather icon-clock me-1"></i>{trt.durationMinutes || 30} mins
-                              </span>
                               <h6 className="fw-bold text-secondary mb-1" style={{ fontSize: '0.95rem' }}>{trt.title}</h6>
                               <p className="text-muted small mb-0 text-truncate-2" style={{ fontSize: '0.775rem', lineHeight: '1.35' }}>
                                 {trt.subtitle || trt.description}
@@ -530,13 +654,92 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                   {/* Left: Date Picker */}
                   <div className="col-md-5">
                     <label className="form-label small fw-bold text-secondary mb-1.5">1. Select Appointment Date</label>
-                    <input
-                      type="date"
-                      className="form-control rounded-3 p-2.5 border-secondary-subtle fw-medium"
-                      min={new Date().toISOString().split("T")[0]}
-                      value={selectedDate}
-                      onChange={(e) => handleDateChange(e.target.value)}
-                    />
+                    <div className="card border rounded-4 p-3 bg-white shadow-xs">
+                      {/* Calendar Month/Year Navigation */}
+                      <div className="d-flex align-items-center justify-content-between mb-3">
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary rounded-circle"
+                          onClick={() => {
+                            const newMonth = calendarMonth === 0 ? 11 : calendarMonth - 1;
+                            const newYear = calendarMonth === 0 ? calendarYear - 1 : calendarYear;
+                            setCalendarMonth(newMonth);
+                            setCalendarYear(newYear);
+                          }}
+                          title="Previous Month"
+                        >
+                          <i className="feather icon-chevron-left"></i>
+                        </button>
+                        <strong className="text-secondary" style={{ fontSize: "0.9rem" }}>
+                          {new Date(calendarYear, calendarMonth).toLocaleString("default", {
+                            month: "long",
+                            year: "numeric",
+                          })}
+                        </strong>
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary rounded-circle"
+                          onClick={() => {
+                            const newMonth = calendarMonth === 11 ? 0 : calendarMonth + 1;
+                            const newYear = calendarMonth === 11 ? calendarYear + 1 : calendarYear;
+                            setCalendarMonth(newMonth);
+                            setCalendarYear(newYear);
+                          }}
+                          title="Next Month"
+                        >
+                          <i className="feather icon-chevron-right"></i>
+                        </button>
+                      </div>
+
+                      {/* Day Names Header */}
+                      <div className="row text-center mb-2 fw-bold text-muted" style={{ fontSize: "0.725rem", letterSpacing: "0.5px" }}>
+                        {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day, idx) => (
+                          <div key={idx} className="col p-0" style={{ width: "14.28%", flex: "0 0 14.28%" }}>
+                            {day}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Days Grid */}
+                      <div className="row text-center g-1">
+                        {getDaysInMonth(calendarYear, calendarMonth).map((day, idx) => {
+                          if (!day) {
+                            return <div key={idx} className="col p-0" style={{ width: "14.28%", flex: "0 0 14.28%", height: "32px" }} />;
+                          }
+
+                          const isBlocked = isDateBlocked(day);
+                          const y = day.getFullYear();
+                          const m = (day.getMonth() + 1).toString().padStart(2, "0");
+                          const d = day.getDate().toString().padStart(2, "0");
+                          const dateStr = `${y}-${m}-${d}`;
+                          const isSelected = selectedDate === dateStr;
+
+                          return (
+                            <div key={idx} className="col p-0" style={{ width: "14.28%", flex: "0 0 14.28%" }}>
+                              <button
+                                type="button"
+                                disabled={isBlocked}
+                                className={`btn w-100 p-0 d-flex align-items-center justify-content-center rounded-circle font-monospace ${
+                                  isSelected
+                                    ? "btn-primary text-white shadow-xs fw-bold"
+                                    : isBlocked
+                                    ? "btn-light text-muted text-decoration-line-through opacity-40"
+                                    : "btn-outline-primary border-0 text-dark fw-semibold"
+                                }`}
+                                style={{
+                                  height: "32px",
+                                  fontSize: "0.775rem",
+                                  cursor: isBlocked ? "not-allowed" : "pointer",
+                                }}
+                                onClick={() => handleDateChange(dateStr)}
+                              >
+                                {day.getDate()}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                     <div className="mt-3 p-3 rounded-3 bg-light border border-light-subtle">
                       <div className="d-flex align-items-center gap-2 text-muted small" style={{ fontSize: '0.775rem' }}>
                         <i className="feather icon-clock text-primary"></i>
