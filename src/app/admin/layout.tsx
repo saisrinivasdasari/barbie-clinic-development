@@ -2,11 +2,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const navItems = [
@@ -15,6 +16,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: "Doctor Schedules", href: "/admin/doctors", icon: "feather icon-user-check" },
     { label: "Treatments", href: "/admin/treatments", icon: "feather icon-layers" },
   ];
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/admin/logout", { method: "POST" });
+      if (res.ok) {
+        router.push("/admin/login");
+        router.refresh();
+      }
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
+  };
+
+  if (pathname === "/admin/login") {
+    return <>{children}</>;
+  }
 
   return (
     <div className="d-flex vh-100 overflow-hidden bg-light">
@@ -73,7 +90,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="pt-3 border-top border-secondary mt-auto">
+        <div className="pt-3 border-top border-secondary mt-auto d-flex flex-column gap-2">
           <Link
             href="/"
             className="btn btn-outline-light btn-sm w-100 rounded-pill d-flex align-items-center justify-content-center gap-2"
@@ -81,6 +98,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <i className="feather icon-external-link"></i>
             {sidebarOpen && <span>View Main Website</span>}
           </Link>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="btn btn-danger btn-sm w-100 rounded-pill d-flex align-items-center justify-content-center gap-2 text-white border-0"
+            style={{ backgroundColor: "#dc3545" }}
+          >
+            <i className="feather icon-log-out"></i>
+            {sidebarOpen && <span>Logout</span>}
+          </button>
         </div>
       </aside>
 
