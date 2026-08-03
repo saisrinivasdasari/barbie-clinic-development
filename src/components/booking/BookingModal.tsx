@@ -943,18 +943,19 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                 </div>
 
                 <div className="mt-4 pt-2 border-top d-flex align-items-center justify-content-between">
-                  <button className="btn btn-outline-secondary rounded-pill px-4" type="button" onClick={() => setStep(3)}>
+                  <button className="btn btn-outline-secondary rounded-pill px-3 px-sm-4" type="button" onClick={() => setStep(3)} style={{ fontSize: '0.95rem' }}>
                     Back
                   </button>
-                  <button className="btn btn-lg btn-primary rounded-pill px-5 fw-bold shadow-sm" type="submit" disabled={loading}>
+                  <button className="btn btn-primary rounded-pill px-3 px-sm-4 fw-bold shadow-sm d-inline-flex align-items-center justify-content-center gap-1.5 text-nowrap" type="submit" disabled={loading} style={{ fontSize: '0.95rem' }}>
                     {loading ? (
                       <>
-                        <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                        <span className="spinner-border spinner-border-sm me-1" role="status"></span>
                         Booking...
                       </>
                     ) : (
                       <>
-                        Confirm Booking <i className="feather icon-check-circle ms-1"></i>
+                        <span>Confirm Booking</span>
+                        <i className="feather icon-check-circle" style={{ fontSize: '1.05rem' }}></i>
                       </>
                     )}
                   </button>

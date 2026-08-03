@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from "react-icons/fa";
+import { useBooking } from "@/context/BookingContext";
 
 export default function Footer() {
+  const { openBooking } = useBooking();
   return (
     <footer
       className="site-footer style-1 footer-dark background-blend-luminosity"
@@ -29,12 +33,13 @@ export default function Footer() {
                 data-wow-duration="0.8s"
               >
                 <div className="m-b25">
-                  <Link
-                    href="/contact"
-                    className="btn btn-lg btn-white text-primary btn-hover1"
+                  <button
+                    type="button"
+                    onClick={() => openBooking()}
+                    className="btn btn-lg btn-white text-primary btn-hover1 border-0"
                   >
-                    Book An Appointment
-                  </Link>
+                    Book Appointment
+                  </button>
                 </div>
               </div>
             </div>

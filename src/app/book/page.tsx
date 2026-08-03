@@ -34,7 +34,7 @@ export default function BookPage() {
               className="btn btn-primary btn-lg rounded-pill px-5 fw-bold shadow-sm"
               onClick={() => setIsModalOpen(true)}
             >
-              Open Booking Wizard <i className="feather icon-calendar ms-2"></i>
+              Book Appointment <i className="feather icon-calendar ms-2"></i>
             </button>
           </div>
         </div>

@@ -5,8 +5,10 @@ import Link from "next/link";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Preloader from "@/components/common/Preloader";
+import { useBooking } from "@/context/BookingContext";
 
 export default function Page() {
+  const { openBooking } = useBooking();
   return (
     <div className="page-wraper">
       {/* Preloader */}
@@ -130,9 +132,13 @@ export default function Page() {
                   </div>
 
                   <div className="position-relative pt-2" style={{ zIndex: 2 }}>
-                    <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2.5 shadow-sm fw-bold w-100 d-flex align-items-center justify-content-center gap-2">
-                      Book A Consultation <i className="feather icon-arrow-right fs-6"></i>
-                    </Link>
+                    <button 
+                      type="button"
+                      onClick={() => openBooking()} 
+                      className="btn btn-primary rounded-pill px-4 py-2.5 shadow-sm fw-bold w-100 d-flex align-items-center justify-content-center gap-2 border-0"
+                    >
+                      Book Appointment <i className="feather icon-calendar fs-6"></i>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -464,9 +470,13 @@ export default function Page() {
                     </div>
 
                     <div className="d-flex align-items-center justify-content-center gap-2 pt-3 border-top border-light-subtle">
-                      <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm">
-                        <i className="feather icon-calendar me-1.5"></i> Book Consultation
-                      </Link>
+                      <button 
+                        type="button"
+                        onClick={() => openBooking()} 
+                        className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm border-0"
+                      >
+                        <i className="feather icon-calendar me-1.5"></i> Book Appointment
+                      </button>
                       <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
@@ -507,9 +517,13 @@ export default function Page() {
                     </div>
 
                     <div className="d-flex align-items-center justify-content-center gap-2 pt-3 border-top border-light-subtle">
-                      <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm">
-                        <i className="feather icon-calendar me-1.5"></i> Book Consultation
-                      </Link>
+                      <button 
+                        type="button"
+                        onClick={() => openBooking()} 
+                        className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm border-0"
+                      >
+                        <i className="feather icon-calendar me-1.5"></i> Book Appointment
+                      </button>
                       <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
@@ -608,9 +622,13 @@ export default function Page() {
                   </div>
 
                   <div className="d-flex flex-wrap align-items-center gap-3">
-                    <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2.5 shadow-sm fw-bold">
-                      Book Consultation <i className="feather icon-arrow-right ms-1"></i>
-                    </Link>
+                    <button 
+                      type="button"
+                      onClick={() => openBooking()} 
+                      className="btn btn-primary rounded-pill px-4 py-2.5 shadow-sm fw-bold border-0"
+                    >
+                      Book Appointment <i className="feather icon-calendar ms-1"></i>
+                    </button>
                     <div className="d-flex align-items-center gap-2 border-start ps-3">
                       <i className="feather icon-phone-call text-primary fs-4"></i>
                       <div>

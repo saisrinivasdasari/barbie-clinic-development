@@ -6,8 +6,10 @@ import Link from "next/link";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Preloader from "@/components/common/Preloader";
+import { useBooking } from "@/context/BookingContext";
 
 export default function Page() {
+  const { openBooking } = useBooking();
   const [activeRegion, setActiveRegion] = useState("all");
 
   const branchesData = [
@@ -195,9 +197,13 @@ export default function Page() {
 
                   {/* Footer CTA */}
                   <div className="p-3 bg-light border-top text-center">
-                    <Link href="#contactForm" className="btn btn-primary rounded-pill w-100 fw-medium btn-sm">
-                      <i className="feather icon-calendar me-1"></i> Book Appointment with Dr. Rao
-                    </Link>
+                    <button 
+                      type="button"
+                      onClick={() => openBooking()} 
+                      className="btn btn-primary rounded-pill w-100 fw-medium btn-sm border-0"
+                    >
+                      <i className="feather icon-calendar me-1"></i> Book Appointment
+                    </button>
                   </div>
                 </div>
               </div>
@@ -248,9 +254,13 @@ export default function Page() {
 
                   {/* Footer CTA */}
                   <div className="p-3 bg-light border-top text-center">
-                    <Link href="#contactForm" className="btn btn-primary rounded-pill w-100 fw-medium btn-sm">
-                      <i className="feather icon-calendar me-1"></i> Book Appointment with Dr. Megha.mala
-                    </Link>
+                    <button 
+                      type="button"
+                      onClick={() => openBooking()} 
+                      className="btn btn-primary rounded-pill w-100 fw-medium btn-sm border-0"
+                    >
+                      <i className="feather icon-calendar me-1"></i> Book Appointment
+                    </button>
                   </div>
                 </div>
               </div>
@@ -339,12 +349,19 @@ export default function Page() {
 
                     {/* Dual Action Footer Bar */}
                     <div className="pt-3 mt-3 border-top d-flex align-items-center justify-content-between gap-2">
-                      <a href={`tel:${branch.phone}`} className="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold flex-grow-1" style={{ fontSize: '0.78rem' }}>
+                      <a href={`tel:${branch.phone}`} className={`btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold ${branch.isHQ ? 'flex-grow-1' : 'w-100'}`} style={{ fontSize: '0.78rem' }}>
                         <i className="feather icon-phone-call me-1"></i> Call Clinic
                       </a>
-                      <Link href="#contactForm" className="btn btn-sm btn-primary rounded-pill px-3 fw-bold flex-grow-1" style={{ fontSize: '0.78rem' }}>
-                        <i className="feather icon-calendar me-1"></i> Book Visit
-                      </Link>
+                      {branch.isHQ && (
+                        <button 
+                          type="button"
+                          onClick={() => openBooking()} 
+                          className="btn btn-sm btn-primary rounded-pill px-3 fw-bold flex-grow-1 border-0" 
+                          style={{ fontSize: '0.78rem' }}
+                        >
+                          <i className="feather icon-calendar me-1"></i> Book Appointment
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

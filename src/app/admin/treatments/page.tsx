@@ -189,18 +189,20 @@ export default function TreatmentManagementPage() {
 
                   <div className="d-flex align-items-center gap-1">
                     <button
-                      className="btn btn-sm btn-outline-secondary rounded-circle p-1.5"
+                      className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                       onClick={() => openEditModal(trt)}
                       title="Edit Treatment"
+                      style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                     >
-                      <i className="feather icon-edit-2"></i>
+                      <i className="feather icon-edit-2 text-secondary" style={{ fontSize: "0.825rem" }}></i>
                     </button>
                     <button
-                      className="btn btn-sm btn-outline-danger rounded-circle p-1.5"
+                      className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                       onClick={() => handleDeleteTreatment(trt.id)}
                       title="Delete Treatment"
+                      style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                     >
-                      <i className="feather icon-trash-2"></i>
+                      <i className="feather icon-trash-2 text-danger" style={{ fontSize: "0.825rem" }}></i>
                     </button>
                   </div>
                 </div>

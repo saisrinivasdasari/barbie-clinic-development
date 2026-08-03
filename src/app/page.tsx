@@ -215,10 +215,16 @@ export default function Page() {
                       Barbie Skin & Laser Clinic, backed by over 30 years of clinical experience. We specialize in advanced laser therapies, facial rejuvenation, and cosmetic treatments designed for your absolute skin health.
                     </div>
                     <div className="d-flex align-items-center flex-wrap gap-3">
-                      <Link href="/contact" className="btn btn-lg btn-icon btn-primary wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+                      <button 
+                        type="button"
+                        onClick={() => openBooking()} 
+                        className="btn btn-lg btn-icon btn-primary wow fadeInUp border-0" 
+                        data-wow-delay="0.6s" 
+                        data-wow-duration="0.8s"
+                      >
                         Book Appointment
                         <span className="right-icon"><i className="feather icon-arrow-right"></i></span>
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -655,9 +661,13 @@ export default function Page() {
                     </div>
 
                     <div className="d-flex align-items-center justify-content-center gap-2 pt-3 border-top border-light-subtle">
-                      <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm">
-                        <i className="feather icon-calendar me-1.5"></i> Book Consultation
-                      </Link>
+                      <button 
+                        type="button"
+                        onClick={() => openBooking()} 
+                        className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm border-0"
+                      >
+                        <i className="feather icon-calendar me-1.5"></i> Book Appointment
+                      </button>
                       <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
@@ -698,9 +708,13 @@ export default function Page() {
                     </div>
 
                     <div className="d-flex align-items-center justify-content-center gap-2 pt-3 border-top border-light-subtle">
-                      <Link href="/contact" className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm">
-                        <i className="feather icon-calendar me-1.5"></i> Book Consultation
-                      </Link>
+                      <button 
+                        type="button"
+                        onClick={() => openBooking()} 
+                        className="btn btn-primary rounded-pill px-4 py-2 shadow-xs fw-semibold flex-grow-1 btn-sm border-0"
+                      >
+                        <i className="feather icon-calendar me-1.5"></i> Book Appointment
+                      </button>
                       <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>

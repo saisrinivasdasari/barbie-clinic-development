@@ -21,6 +21,7 @@ export default function AppointmentsManagementPage() {
   // Active appointment for Detail Modal & Reschedule Modal
   const [detailApt, setDetailApt] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
+  const [showLegendPopup, setShowLegendPopup] = useState(false);
 
   // Reschedule Modal state
   const [rescheduleApt, setRescheduleApt] = useState(null);
@@ -331,150 +332,240 @@ export default function AppointmentsManagementPage() {
               <table className="table table-hover align-middle mb-0" style={{ fontSize: "0.85rem" }}>
                 <thead className="table-light text-muted">
                   <tr>
-                    <th className="ps-4">ID & Date</th>
-                    <th>Patient Name</th>
-                    <th>Phone</th>
-                    <th>Treatment</th>
-                    <th>Doctor</th>
-                    <th>Time Slot</th>
+                    <th className="ps-4">Appointment Slot</th>
+                    <th>Patient Details</th>
+                    <th>Treatment & Doctor</th>
                     <th>Status</th>
-                    <th className="text-end pe-4">Actions</th>
+                    <th className="text-end pe-4 position-relative">
+                      <div 
+                        className="d-inline-flex align-items-center gap-1 justify-content-end text-secondary" 
+                        style={{ cursor: "pointer", userSelect: "none" }}
+                        onClick={() => setShowLegendPopup(!showLegendPopup)}
+                        onMouseEnter={() => setShowLegendPopup(true)}
+                        onMouseLeave={() => setShowLegendPopup(false)}
+                      >
+                        <span>Actions</span>
+                        <i className="feather icon-help-circle text-primary" style={{ fontSize: "0.85rem" }}></i>
+                      </div>
+
+                      {showLegendPopup && (
+                        <div 
+                          className="position-absolute bg-white border border-light-subtle rounded-4 p-3 shadow-lg text-start"
+                          style={{
+                            right: "1.5rem",
+                            top: "2.5rem",
+                            width: "240px",
+                            zIndex: 1050,
+                            lineHeight: "1.5"
+                          }}
+                        >
+                          <h6 className="fw-bold text-secondary mb-2" style={{ fontSize: "0.8rem" }}>
+                            Actions Legend
+                          </h6>
+                          <div className="d-flex flex-column gap-2" style={{ fontSize: "0.75rem" }}>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-eye text-secondary" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">View Details</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-calendar text-primary" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">Reschedule Date & Time</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-check text-success" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">Accept Request</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-x text-danger" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">Reject / Cancel</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-check-square text-info" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">Mark Completed</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-refresh-cw text-warning" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">Re-open Request</span>
+                            </div>
+                            <div className="d-flex align-items-center gap-2">
+                              <span className="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center" style={{ width: 22, height: 22, pointerEvents: "none" }}>
+                                <i className="feather icon-trash-2 text-danger" style={{ fontSize: "0.7rem" }}></i>
+                              </span>
+                              <span className="text-muted">Delete Record</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {appointments.map((apt) => (
                     <tr key={apt.id}>
                       <td className="ps-4">
-                        <span className="font-monospace text-muted d-block small" style={{ fontSize: "0.725rem" }}>
-                          {apt.id}
-                        </span>
-                        <strong className="text-secondary">{apt.appointmentDate}</strong>
+                        <div className="fw-bold text-secondary mb-1">{apt.appointmentDate}</div>
+                        <div className="d-flex align-items-center gap-1.5 flex-wrap">
+                          <span className="badge bg-primary-subtle text-primary font-monospace" style={{ fontSize: "0.725rem" }}>
+                            <i className="feather icon-clock me-1"></i>{apt.appointmentTime}
+                          </span>
+                          <span className="font-monospace text-muted small d-none d-md-inline" style={{ fontSize: "0.675rem" }} title="Appointment ID">
+                            ({apt.id})
+                          </span>
+                        </div>
                       </td>
                       <td>
                         <div className="fw-bold text-secondary">{apt.customerName}</div>
-                        {apt.email && <span className="text-muted small" style={{ fontSize: "0.75rem" }}>{apt.email}</span>}
+                        <div className="d-flex flex-column gap-1 mt-1">
+                          <a href={`tel:${apt.phone}`} className="text-primary text-decoration-none fw-semibold small d-flex align-items-center gap-1">
+                            <i className="feather icon-phone" style={{ fontSize: "0.75rem" }}></i>
+                            {apt.phone}
+                          </a>
+                          {apt.email && (
+                            <span className="text-muted small d-flex align-items-center gap-1" style={{ fontSize: "0.725rem" }}>
+                              <i className="feather icon-mail" style={{ fontSize: "0.75rem" }}></i>
+                              {apt.email}
+                            </span>
+                          )}
+                        </div>
                       </td>
                       <td>
-                        <a href={`tel:${apt.phone}`} className="text-primary text-decoration-none fw-medium">
-                          {apt.phone}
-                        </a>
+                        <span className="badge bg-light text-secondary border text-wrap text-start d-block mb-1" style={{ maxWidth: "220px", lineHeight: "1.3" }}>
+                          {apt.treatmentName}
+                        </span>
+                        <div className="text-muted small d-flex align-items-center gap-1.5" style={{ fontSize: "0.75rem" }}>
+                          <i className="feather icon-user text-primary" style={{ fontSize: "0.75rem" }}></i>
+                          <span>{apt.doctorName}</span>
+                        </div>
                       </td>
                       <td>
-                        <span className="badge bg-light text-secondary border">{apt.treatmentName}</span>
-                      </td>
-                      <td className="fw-medium text-secondary">{apt.doctorName}</td>
-                      <td>
-                        <span className="badge bg-primary-subtle text-primary font-monospace">{apt.appointmentTime}</span>
-                      </td>
-                      <td>
-                        <select
-                          className={`form-select form-select-sm fw-bold border-0 rounded-pill py-1 px-2.5 ${
-                            apt.status === "Accepted"
-                              ? "bg-success text-white"
-                              : apt.status === "Pending"
-                              ? "bg-warning text-dark"
-                              : apt.status === "Completed"
-                              ? "bg-info text-white"
-                              : apt.status === "Rejected"
-                              ? "bg-danger text-white"
-                              : "bg-secondary text-white"
-                          }`}
-                          style={{ fontSize: "0.775rem", cursor: "pointer", width: "125px" }}
-                          value={apt.status}
-                          disabled={updatingId === apt.id}
-                          onChange={(e) => handleUpdateStatus(apt.id, e.target.value)}
-                        >
-                          <option value="Pending" className="bg-white text-dark">🟡 Pending</option>
-                          <option value="Accepted" className="bg-white text-dark">🟢 Accepted</option>
-                          <option value="Completed" className="bg-white text-dark">🔵 Completed</option>
-                          <option value="Rejected" className="bg-white text-dark">🔴 Rejected</option>
-                          <option value="Cancelled" className="bg-white text-dark">⚪ Cancelled</option>
-                        </select>
+                        <span className={`badge px-3 py-2 rounded-pill fw-bold d-inline-flex align-items-center gap-1.5 ${
+                          apt.status === "Accepted"
+                            ? "bg-success-subtle text-success border border-success-subtle"
+                            : apt.status === "Pending"
+                            ? "bg-warning-subtle text-dark border border-warning-subtle"
+                            : apt.status === "Completed"
+                            ? "bg-info-subtle text-info border border-info-subtle"
+                            : apt.status === "Rejected"
+                            ? "bg-danger-subtle text-danger border border-danger-subtle"
+                            : "bg-secondary-subtle text-secondary border border-secondary-subtle"
+                        }`} style={{ fontSize: "0.75rem" }}>
+                          <span className="rounded-circle d-inline-block" style={{
+                            width: 6,
+                            height: 6,
+                            backgroundColor: apt.status === "Accepted" ? "#198754" : apt.status === "Pending" ? "#ffc107" : apt.status === "Completed" ? "#0dcaf0" : apt.status === "Rejected" ? "#dc3545" : "#6c757d"
+                          }}></span>
+                          {apt.status}
+                        </span>
                       </td>
                       <td className="text-end pe-4">
                         <div className="d-flex align-items-center justify-content-end gap-1.5">
+                          {/* View details */}
                           <button
-                            className="btn btn-sm btn-outline-secondary rounded-circle p-1.5"
+                            className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                             onClick={() => setDetailApt(apt)}
                             title="View Details"
+                            style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                           >
-                            <i className="feather icon-eye"></i>
+                            <i className="feather icon-eye text-secondary" style={{ fontSize: "0.825rem" }}></i>
                           </button>
 
+                          {/* Reschedule */}
+                          {(apt.status === "Pending" || apt.status === "Accepted") && (
+                            <button
+                              className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
+                              disabled={updatingId === apt.id}
+                              onClick={() => openRescheduleModal(apt)}
+                              title="Reschedule Date & Time"
+                              style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                            >
+                              <i className="feather icon-calendar text-primary" style={{ fontSize: "0.825rem" }}></i>
+                            </button>
+                          )}
+
+                          {/* Contextual actions */}
                           {apt.status === "Pending" && (
                             <>
+                              {/* Accept */}
                               <button
-                                className="btn btn-sm btn-success rounded-pill px-2.5 py-1"
+                                className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Accepted")}
                                 title="Accept Appointment"
-                                style={{ fontSize: "0.75rem" }}
+                                style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                               >
-                                Accept
+                                <i className="feather icon-check text-success fw-bold" style={{ fontSize: "0.825rem" }}></i>
                               </button>
+                              {/* Reject */}
                               <button
-                                className="btn btn-sm btn-outline-primary rounded-pill px-2.5 py-1"
-                                disabled={updatingId === apt.id}
-                                onClick={() => openRescheduleModal(apt)}
-                                title="Reschedule Time/Date"
-                                style={{ fontSize: "0.75rem" }}
-                              >
-                                <i className="feather icon-calendar me-1"></i>Reschedule
-                              </button>
-                              <button
-                                className="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1"
+                                className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Rejected")}
                                 title="Reject Appointment"
-                                style={{ fontSize: "0.75rem" }}
+                                style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                               >
-                                Reject
+                                <i className="feather icon-x text-danger fw-bold" style={{ fontSize: "0.825rem" }}></i>
                               </button>
                             </>
                           )}
 
                           {apt.status === "Accepted" && (
                             <>
+                              {/* Complete */}
                               <button
-                                className="btn btn-sm btn-info text-white rounded-pill px-2.5 py-1"
+                                className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Completed")}
                                 title="Complete Appointment"
-                                style={{ fontSize: "0.75rem" }}
+                                style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                               >
-                                Complete
+                                <i className="feather icon-check-square text-info" style={{ fontSize: "0.825rem" }}></i>
                               </button>
+                              {/* Cancel */}
                               <button
-                                className="btn btn-sm btn-outline-danger rounded-pill px-2.5 py-1"
+                                className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                                 disabled={updatingId === apt.id}
                                 onClick={() => handleUpdateStatus(apt.id, "Cancelled")}
                                 title="Cancel Appointment"
-                                style={{ fontSize: "0.75rem" }}
+                                style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                               >
-                                Cancel
+                                <i className="feather icon-x text-danger fw-bold" style={{ fontSize: "0.825rem" }}></i>
                               </button>
                             </>
                           )}
 
                           {(apt.status === "Cancelled" || apt.status === "Rejected") && (
                             <button
-                              className="btn btn-sm btn-outline-warning text-dark rounded-pill px-2 py-0.5"
+                              className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                               disabled={updatingId === apt.id}
                               onClick={() => handleUpdateStatus(apt.id, "Pending")}
                               title="Re-open Appointment"
-                              style={{ fontSize: "0.75rem" }}
+                              style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                             >
-                              Re-open
+                              <i className="feather icon-refresh-cw text-warning" style={{ fontSize: "0.825rem" }}></i>
                             </button>
                           )}
 
+                          {/* Delete */}
                           <button
-                            className="btn btn-sm btn-outline-danger rounded-circle p-1.5 ms-1"
+                            className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
                             disabled={updatingId === apt.id}
                             onClick={() => handleDeleteAppointment(apt.id)}
                             title="Delete Appointment"
+                            style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
                           >
-                            <i className="feather icon-trash-2"></i>
+                            <i className="feather icon-trash-2 text-danger" style={{ fontSize: "0.825rem" }}></i>
                           </button>
                         </div>
                       </td>

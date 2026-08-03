@@ -234,9 +234,14 @@ export default function Page() {
                               <span className="text-muted" style={{ fontSize: '0.75rem' }}>{service.role}</span>
                             </div>
                           </div>
-                          <Link href="/contact" className="btn btn-primary btn-sm rounded-pill px-3" style={{ fontSize: '0.8rem' }}>
-                            Book Consult <i className="feather icon-arrow-right ms-1"></i>
-                          </Link>
+                           <button 
+                            type="button"
+                            onClick={() => openBooking()}
+                            className="btn btn-primary btn-sm rounded-pill px-3 border-0" 
+                            style={{ fontSize: '0.8rem' }}
+                          >
+                            Book Appointment <i className="feather icon-calendar ms-1"></i>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -271,9 +276,13 @@ export default function Page() {
                       Gently removes dead skin cells to address acne spots, sun damage, fine lines, and dullness, revealing refreshed skin.
                     </p>
                   </div>
-                  <Link href="/contact" className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium">
-                    Book Procedure <i className="feather icon-arrow-right ms-1"></i>
-                  </Link>
+                  <button 
+                    type="button"
+                    onClick={() => openBooking()} 
+                    className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium"
+                  >
+                    Book Appointment <i className="feather icon-calendar ms-1"></i>
+                  </button>
                 </div>
               </div>
 
@@ -292,9 +301,13 @@ export default function Page() {
                       Safe and quick removal of warts, skin tags, and benign skin lesions using targeted liquid nitrogen cooling technology.
                     </p>
                   </div>
-                  <Link href="/contact" className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium">
-                    Book Procedure <i className="feather icon-arrow-right ms-1"></i>
-                  </Link>
+                  <button 
+                    type="button"
+                    onClick={() => openBooking()} 
+                    className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium"
+                  >
+                    Book Appointment <i className="feather icon-calendar ms-1"></i>
+                  </button>
                 </div>
               </div>
 
@@ -313,9 +326,13 @@ export default function Page() {
                       Advanced Q-switched laser technology breaks down deep ink pigments safely without harming surrounding skin tissue.
                     </p>
                   </div>
-                  <Link href="/contact" className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium">
-                    Book Procedure <i className="feather icon-arrow-right ms-1"></i>
-                  </Link>
+                  <button 
+                    type="button"
+                    onClick={() => openBooking()} 
+                    className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium"
+                  >
+                    Book Appointment <i className="feather icon-calendar ms-1"></i>
+                  </button>
                 </div>
               </div>
 
@@ -334,9 +351,13 @@ export default function Page() {
                       Non-surgical skin tightening procedures utilizing radiofrequency to firm sagging skin and boost natural collagen synthesis.
                     </p>
                   </div>
-                  <Link href="/contact" className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium">
-                    Book Procedure <i className="feather icon-arrow-right ms-1"></i>
-                  </Link>
+                  <button 
+                    type="button"
+                    onClick={() => openBooking()} 
+                    className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium"
+                  >
+                    Book Appointment <i className="feather icon-calendar ms-1"></i>
+                  </button>
                 </div>
               </div>
 
@@ -355,9 +376,13 @@ export default function Page() {
                       Targeted clinical laser and microneedling therapies for reducing acne scars, stretch marks, and evening skin texture.
                     </p>
                   </div>
-                  <Link href="/contact" className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium">
-                    Book Procedure <i className="feather icon-arrow-right ms-1"></i>
-                  </Link>
+                  <button 
+                    type="button"
+                    onClick={() => openBooking()} 
+                    className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium"
+                  >
+                    Book Appointment <i className="feather icon-calendar ms-1"></i>
+                  </button>
                 </div>
               </div>
 
@@ -376,9 +401,13 @@ export default function Page() {
                       Comprehensive diagnostic and clinical treatments for scalp scaling, chronic skin allergies, and psoriasis patches.
                     </p>
                   </div>
-                  <Link href="/contact" className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium">
-                    Book Procedure <i className="feather icon-arrow-right ms-1"></i>
-                  </Link>
+                  <button 
+                    type="button"
+                    onClick={() => openBooking()} 
+                    className="btn btn-sm btn-outline-primary rounded-pill w-100 fw-medium"
+                  >
+                    Book Appointment <i className="feather icon-calendar ms-1"></i>
+                  </button>
                 </div>
               </div>
             </div>

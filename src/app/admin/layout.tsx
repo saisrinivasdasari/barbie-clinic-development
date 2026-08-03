@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="d-flex min-vh-100 bg-light">
+    <div className="d-flex vh-100 overflow-hidden bg-light">
       {/* Sidebar Navigation */}
       <aside
         className={`bg-dark text-white p-3 d-flex flex-column transition-all ${
@@ -26,6 +26,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         style={{
           width: sidebarOpen ? "260px" : "80px",
           minWidth: sidebarOpen ? "260px" : "80px",
+          height: "100vh",
           transition: "all 0.25s ease-in-out",
           zIndex: 100,
         }}
@@ -84,7 +85,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-grow-1 d-flex flex-column min-w-0 overflow-x-hidden">
+      <div className="flex-grow-1 d-flex flex-column min-w-0 vh-100 overflow-hidden">
         {/* Sleek Modern Admin Header Strip */}
         <header className="bg-white border-bottom border-light-subtle px-4 py-3 d-flex align-items-center justify-content-between shadow-xs" style={{ minHeight: "64px" }}>
           {/* Left: Location & Title */}
@@ -134,7 +135,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </header>
 
         {/* Content Body */}
-        <main className="p-4 flex-grow-1">{children}</main>
+        <main className="p-4 flex-grow-1 overflow-y-auto">{children}</main>
       </div>
     </div>
   );

@@ -81,6 +81,18 @@ export default function Header() {
                       <span>Contact Us</span>
                     </Link>
                   </li>
+                  <li className="mt-3 px-3 d-lg-none">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        openBooking();
+                      }}
+                      className="btn btn-primary w-100 rounded-pill py-2.5 fw-semibold text-white border-0"
+                    >
+                      Book Appointment
+                    </button>
+                  </li>
                 </ul>
 
                 <div className="dz-social-icon">

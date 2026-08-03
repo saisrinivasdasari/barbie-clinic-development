@@ -502,10 +502,12 @@ export default function DoctorManagementPage() {
                               <div key={b.id} className="d-flex align-items-center justify-content-between p-2 bg-light rounded-3 border">
                                 <span className="fw-bold text-secondary small">{b.blockedDate}</span>
                                 <button
-                                  className="btn btn-sm btn-outline-danger rounded-circle p-1"
+                                  className="btn btn-sm btn-light border rounded-circle p-0 hover-scale shadow-xs"
                                   onClick={() => handleUnblock("date", b.id)}
+                                  style={{ width: 28, height: 28, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                                  title="Unblock Date"
                                 >
-                                  <i className="feather icon-trash-2"></i>
+                                  <i className="feather icon-trash-2 text-danger" style={{ fontSize: "0.775rem" }}></i>
                                 </button>
                               </div>
                             ))}
@@ -532,10 +534,12 @@ export default function DoctorManagementPage() {
                                   <span className="text-secondary small">{b.blockedDate}</span>
                                 </div>
                                 <button
-                                  className="btn btn-sm btn-outline-danger rounded-circle p-1"
+                                  className="btn btn-sm btn-light border rounded-circle p-0 hover-scale shadow-xs"
                                   onClick={() => handleUnblock("slot", b.id)}
+                                  style={{ width: 28, height: 28, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                                  title="Unblock Slot"
                                 >
-                                  <i className="feather icon-trash-2"></i>
+                                  <i className="feather icon-trash-2 text-danger" style={{ fontSize: "0.775rem" }}></i>
                                 </button>
                               </div>
                             ))}
