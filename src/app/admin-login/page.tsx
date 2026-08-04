@@ -27,13 +27,8 @@ function LoginForm() {
 
       const data = await res.json();
       if (res.ok && data.success) {
-        const currentPath = window.location.pathname.replace(/\/$/, "");
-        const targetPath = from.replace(/\/$/, "");
-        if (currentPath === targetPath) {
-          window.location.reload();
-        } else {
-          window.location.href = from;
-        }
+        router.push(from);
+        router.refresh();
       } else {
         setError(data.error || "Invalid username or password");
       }
