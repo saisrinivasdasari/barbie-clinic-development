@@ -194,6 +194,11 @@ export default function Footer() {
                           <span>Contact & Clinics</span>
                         </Link>
                       </li>
+                      <li>
+                        <Link href="/admin">
+                          <span className="text-white-50 small" style={{ fontSize: "0.825rem" }}>Staff Portal</span>
+                        </Link>
+                      </li>
                     </ul>
                   </div>
                 </div>

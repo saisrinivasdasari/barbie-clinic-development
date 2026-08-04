@@ -21,17 +21,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     try {
       const res = await fetch("/api/admin/logout", { method: "POST" });
       if (res.ok) {
-        router.push("/admin/login");
+        router.push("/admin-login");
         router.refresh();
       }
     } catch (err) {
       console.error("Logout failed:", err);
     }
   };
-
-  if (pathname === "/admin/login") {
-    return <>{children}</>;
-  }
 
   return (
     <div className="d-flex vh-100 overflow-hidden bg-light">

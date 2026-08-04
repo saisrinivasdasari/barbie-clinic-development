@@ -5,8 +5,13 @@ import { verifyToken } from "./lib/auth";
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Normalize pathname to remove trailing slash
+  const cleanPath = pathname.replace(/\/$/, "");
+
+  console.log(`[Proxy] Intercepted path: ${pathname} | Clean: ${cleanPath}`);
+
   // Skip check for login endpoints/pages
-  if (pathname === "/admin/login" || pathname === "/api/admin/login") {
+  if (cleanPath === "/admin-login" || cleanPath === "/api/admin/login") {
     return NextResponse.next();
   }
 
@@ -22,7 +27,7 @@ export async function proxy(request: NextRequest) {
       return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
     // Otherwise redirect to login page
-    const loginUrl = new URL("/admin/login", request.url);
+    const loginUrl = new URL("/admin-login", request.url);
     loginUrl.searchParams.set("from", pathname);
     return NextResponse.redirect(loginUrl);
   }
