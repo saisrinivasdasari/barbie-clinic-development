@@ -20,7 +20,7 @@ export default function Page() {
       type: "Main Headquarters",
       address: "Saidatta Arcade, Opp. Liberty Cinema, Himayath Nagar, Hyderabad, Telangana 500029",
       hours: "Mon–Sun: 10:00 AM – 8:00 PM",
-      phone: "+91 8832421234",
+      phone: "+91 8885985515",
       tag: "Vitiligo & Laser HQ",
       isHQ: true
     },
@@ -31,7 +31,7 @@ export default function Page() {
       type: "Telangana",
       address: "Near Women's College Road, Koti, Hyderabad, Telangana 500095",
       hours: "Mon–Sat: 10:00 AM – 7:30 PM",
-      phone: "+91 8832421234",
+      phone: "+91 8885985515",
       tag: "Aesthetic & Laser Therapy",
       isHQ: false
     },
@@ -42,7 +42,7 @@ export default function Page() {
       type: "Kukatpally",
       address: "Road No. 1, Near Metro Station, KPHB Colony, Hyderabad, Telangana 500072",
       hours: "Mon–Sat: 10:00 AM – 8:00 PM",
-      phone: "+91 8832421234",
+      phone: "+91 8885985515",
       tag: "Laser Hair & Skin Care",
       isHQ: false
     },
@@ -53,7 +53,7 @@ export default function Page() {
       type: "Andhra Pradesh",
       address: "Dwaraka Nagar Main Road, Visakhapatnam, Andhra Pradesh 530016",
       hours: "Mon–Sat: 10:00 AM – 7:30 PM",
-      phone: "+91 8374817355",
+      phone: "+91 8885985515",
       tag: "Dermatology & Hair Care",
       isHQ: false
     },
@@ -64,7 +64,7 @@ export default function Page() {
       type: "Andhra Pradesh",
       address: "MG Road, Opp. PWS Complex, Vijayawada, Andhra Pradesh 520010",
       hours: "Mon–Sat: 10:00 AM – 7:30 PM",
-      phone: "+91 8832421234",
+      phone: "+91 8885985515",
       tag: "Vitiligo & Cosmetic Care",
       isHQ: false
     },
@@ -75,7 +75,7 @@ export default function Page() {
       type: "Andhra Pradesh",
       address: "KT Road, Near Railway Circle, Tirupati, Andhra Pradesh 517501",
       hours: "Mon–Sat: 10:00 AM – 7:00 PM",
-      phone: "+91 8772262232",
+      phone: "+91 8885985515",
       tag: "Skin & Laser Procedures",
       isHQ: false
     },
@@ -86,7 +86,7 @@ export default function Page() {
       type: "Andhra Pradesh",
       address: "Danavaipeta Main Road, Rajahmundry, Andhra Pradesh 533103",
       hours: "Mon–Sat: 10:00 AM – 7:00 PM",
-      phone: "+91 8832421234",
+      phone: "+91 8885985515",
       tag: "Clinical Dermatology",
       isHQ: false
     }
@@ -372,7 +372,7 @@ export default function Page() {
 
         {/* Map & Form */}
         <div className="map-wrapper height-sm overflow-hidden" style={{ minHeight: 350 }}>
-          <iframe className="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.5029314981774!2d78.47953251487707!3d17.411634588065552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99e89d1b092f%3A0xe543e06efc25e2cd!2sHimayatnagar%2C%20Hyderabad%2C%20Telangana%20500029!5e0!3m2!1sen!2sin!4v1757506574164!5m2!1sen!2sin" style={{ border: 0, minHeight: 350 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+          <iframe className="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8000819049622!2d78.48366326956958!3d17.40217127868932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dd04ee5899%3A0x848ce3d9756397e4!2sBarbie%20Skin%20%26%20Laser%20Clinic!5e0!3m2!1sen!2sin!4v1785833072353!5m2!1sen!2sin" style={{ border: 0, minHeight: 350 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
         <section id="contactForm" className="content-inner bg-light py-5">
@@ -390,26 +390,29 @@ export default function Page() {
                   <form className="dzForm" onSubmit={async (e) => {
                     e.preventDefault();
                     const form = e.target as HTMLFormElement;
-                    const formData = {
-                      name: (form.elements.namedItem("dzName") as HTMLInputElement).value,
-                      email: (form.elements.namedItem("dzEmail") as HTMLInputElement).value,
-                      phone: (form.elements.namedItem("dzPhoneNumber") as HTMLInputElement).value,
-                      message: (form.elements.namedItem("dzMessage") as HTMLTextAreaElement).value,
-                    };
+                    const name = (form.elements.namedItem("dzName") as HTMLInputElement).value;
+                    const email = (form.elements.namedItem("dzEmail") as HTMLInputElement).value;
+                    const phone = (form.elements.namedItem("dzPhoneNumber") as HTMLInputElement).value;
+                    const message = (form.elements.namedItem("dzMessage") as HTMLTextAreaElement).value;
+
+                    const formData = { name, email, phone, message };
+
                     try {
-                      const res = await fetch("/api/contact", {
+                      await fetch("/api/contact", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(formData),
                       });
-                      if (res.ok) {
-                        alert("Thank you! Your inquiry has been sent. Our medical team will contact you shortly.");
-                        form.reset();
-                      }
                     } catch (err) {
-                      alert("Thank you! Your inquiry has been received.");
-                      form.reset();
+                      console.error(err);
                     }
+
+                    // Format message and launch WhatsApp
+                    const waNumber = "918885985515";
+                    const msgText = `Hello Barbie Skin & Laser Clinic,\n\nI would like to make an inquiry:\n- *Name*: ${name}\n- *Phone*: ${phone}\n- *Email*: ${email}\n- *Message / Symptoms*: ${message}`;
+                    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msgText)}`;
+                    window.open(waUrl, "_blank");
+                    form.reset();
                   }}>
                     <div className="row g-3">
                       <div className="col-sm-12">
@@ -465,7 +468,7 @@ export default function Page() {
                         <span className="small text-muted" style={{ fontSize: '0.75rem' }}>Available 10 AM – 8 PM</span>
                       </div>
                     </div>
-                    <a href="tel:+918832421234" className="d-block fw-bold text-primary text-decoration-none fs-5 mt-1">+91 8832421234</a>
+                    <a href="tel:+918885985515" className="d-block fw-bold text-primary text-decoration-none fs-5 mt-1">+91 8885985515</a>
                   </div>
                 </div>
               </div>

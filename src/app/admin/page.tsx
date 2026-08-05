@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { formatDateDDMMYYYY } from "@/lib/dateUtils";
 
 export default function AdminDashboardPage() {
   const [data, setData] = useState(null);
@@ -192,7 +193,7 @@ export default function AdminDashboardPage() {
                       {pendingList.slice(0, 6).map((apt) => (
                         <tr key={apt.id}>
                           <td className="ps-4">
-                            <div className="fw-bold text-secondary mb-1">{apt.appointmentDate}</div>
+                            <div className="fw-bold text-secondary mb-1">{formatDateDDMMYYYY(apt.appointmentDate)}</div>
                             <span className="badge bg-primary-subtle text-primary font-monospace" style={{ fontSize: '0.725rem' }}>
                               <i className="feather icon-clock me-1"></i>{apt.appointmentTime}
                             </span>

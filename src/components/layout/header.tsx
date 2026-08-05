@@ -127,8 +127,8 @@ export default function Header() {
                         </div>
                         <div className="widget-content">
                           <h6 className="title text-primary">Call HQ</h6>
-                          <a href="tel:+918832421234" className="text-secondary">
-                            +91 8832421234
+                          <a href="tel:+918885985515" className="text-secondary">
+                            +91 8885985515
                           </a>
                         </div>
                       </div>
@@ -194,8 +194,8 @@ export default function Header() {
                   </a>
                 </li>
                 <li>
-                  <a href="tel:+918832421234" className="text-body">
-                    +91 8832421234
+                  <a href="tel:+918885985515" className="text-body">
+                    +91 8885985515
                   </a>
                 </li>
               </ul>

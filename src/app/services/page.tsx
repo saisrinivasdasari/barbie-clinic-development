@@ -115,7 +115,7 @@ export default function Page() {
     },
     {
       question: "How do I book a consultation with Dr. M.N. Rao or Dr. Megha.mala?",
-      answer: "You can schedule a consultation directly through our online appointment form on the website or by calling our direct helpline at +91 8832421234."
+      answer: "You can schedule a consultation directly through our online appointment form on the website or by calling our direct helpline at +91 8885985515."
     }
   ];
 

@@ -236,8 +236,8 @@ export default function Footer() {
                   <div className="icon-content">
                     <h5 className="dz-title">Call Us</h5>
                     <p>
-                      <a href="tel:+918832421234" className="text-body">
-                        +91 8832421234
+                      <a href="tel:+918885985515" className="text-body">
+                        +91 8885985515
                       </a>
                     </p>
                   </div>
@@ -301,6 +301,17 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      {/* Floating WhatsApp Widget */}
+      <a
+        href="https://wa.me/918885985515?text=Hello%20Barbie%20Skin%20%26%20Laser%20Clinic%2C%20I%20would%20like%20to%20inquire%20about%20a%20consultation."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="position-fixed bottom-0 end-0 m-4 shadow-lg rounded-circle d-flex align-items-center justify-content-center bg-success text-white hover-scale"
+        style={{ width: 56, height: 56, zIndex: 1080, cursor: "pointer" }}
+        title="Chat on WhatsApp"
+      >
+        <FaWhatsapp style={{ fontSize: "1.9rem" }} />
+      </a>
     </footer>
   );
 }

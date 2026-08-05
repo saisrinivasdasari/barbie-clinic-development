@@ -17,15 +17,7 @@ export default function Page() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   // Appointment Form State
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    date: "",
-    time: "",
-    services: [] as string[],
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
+
 
   const servicesData = [
     {
@@ -155,43 +147,7 @@ export default function Page() {
     }
   ];
 
-  const handleCheckboxChange = (serviceName: string) => {
-    setFormState((prev) => {
-      const exists = prev.services.includes(serviceName);
-      if (exists) {
-        return { ...prev, services: prev.services.filter((s) => s !== serviceName) };
-      } else {
-        return { ...prev, services: [...prev.services, serviceName] };
-      }
-    });
-  };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("/api/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
-      });
-
-      if (res.ok) {
-        setFormSubmitted(true);
-        setTimeout(() => {
-          setFormSubmitted(false);
-          setFormState({ name: "", email: "", phone: "", date: "", time: "", services: [] });
-        }, 6000);
-      }
-    } catch (err) {
-      console.error("Failed to submit appointment to database:", err);
-      // Still show submission feedback to user
-      setFormSubmitted(true);
-      setTimeout(() => {
-        setFormSubmitted(false);
-        setFormState({ name: "", email: "", phone: "", date: "", time: "", services: [] });
-      }, 6000);
-    }
-  };
 
   return (
     <div className="page-wraper">
@@ -668,7 +624,7 @@ export default function Page() {
                       >
                         <i className="feather icon-calendar me-1.5"></i> Book Appointment
                       </button>
-                      <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
+                      <a href="tel:+918885985515" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
                     </div>
@@ -715,7 +671,7 @@ export default function Page() {
                       >
                         <i className="feather icon-calendar me-1.5"></i> Book Appointment
                       </button>
-                      <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
+                      <a href="tel:+918885985515" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
                     </div>
@@ -966,120 +922,148 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Map & Booking Form Section */}
-        <section className="content-wrapper style-8 bg-white py-5">
+        {/* Visit Our Clinic & Location Highlight Section */}
+        <section className="content-wrapper style-8 bg-light py-5 position-relative overflow-hidden">
           <div className="container">
-            <div className="row g-4 align-items-center">
-              <div className="col-lg-6">
-                <div className="rounded-4 overflow-hidden shadow-sm border position-relative" style={{ minHeight: 400 }}>
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.5029314981774!2d78.47953251487707!3d17.411634588065552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99e89d1b092f%3A0xe543e06efc25e2cd!2sHimayatnagar%2C%20Hyderabad%2C%20Telangana%20500029!5e0!3m2!1sen!2sin!4v1757506574164!5m2!1sen!2sin"
-                    width="100%"
-                    height="450"
-                    style={{ border: 0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    title="Barbie Clinic Location Map"
-                  ></iframe>
-                  <div className="bg-secondary text-white p-3 position-absolute bottom-0 start-0 end-0 m-3 rounded-3 shadow">
-                    <h6 className="fw-bold mb-1">Himayath Nagar HQ:</h6>
-                    <p className="small mb-1">Saidatta Arcade, Himayath Nagar, Hyderabad, 500029</p>
-                    <p className="small mb-0 text-warning">Mon-Sat: 10:00am - 8:00pm | Sun: 10:00am - 1:30pm</p>
+            {/* Section Header */}
+            <div className="text-center max-w-700 mx-auto mb-5">
+              <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold mb-2.5" style={{ fontSize: "0.825rem", letterSpacing: "0.5px" }}>
+                <i className="feather icon-map-pin me-1.5"></i> VISIT OUR CLINIC
+              </span>
+              <h2 className="title fw-bold text-secondary mb-2" style={{ fontSize: "2.2rem" }}>
+                Experience World-Class Dermatology Care
+              </h2>
+              <p className="text-muted mb-0" style={{ fontSize: "0.95rem" }}>
+                Step into our state-of-the-art facility in Himayath Nagar, Hyderabad. Advanced US-FDA approved technologies, hygienic environment, and board-certified experts.
+              </p>
+            </div>
+
+            <div className="row g-4 align-items-stretch">
+              {/* Left Column: Interactive Map */}
+              <div className="col-lg-6 d-flex">
+                <div className="rounded-4 overflow-hidden shadow-sm border border-light-subtle bg-white w-100 d-flex flex-column position-relative" style={{ minHeight: 440 }}>
+                  <div className="flex-grow-1 position-relative">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8000819049622!2d78.48366326956958!3d17.40217127868932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99dd04ee5899%3A0x848ce3d9756397e4!2sBarbie%20Skin%20%26%20Laser%20Clinic!5e0!3m2!1sen!2sin!4v1785833072353!5m2!1sen!2sin"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, minHeight: 380 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      title="Barbie Clinic Location Map"
+                    ></iframe>
+                  </div>
+                  <div className="bg-secondary text-white p-3.5 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div className="d-flex align-items-center gap-2.5">
+                      <div className="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style={{ width: 38, height: 38 }}>
+                        <i className="feather icon-map-pin fs-5"></i>
+                      </div>
+                      <div>
+                        <h6 className="fw-bold mb-0 text-white" style={{ fontSize: "0.9rem" }}>Barbie Skin & Laser Clinic</h6>
+                        <span className="text-white-50 small" style={{ fontSize: "0.775rem" }}>Himayath Nagar HQ • Hyderabad</span>
+                      </div>
+                    </div>
+                    <a
+                      href="https://maps.google.com/?q=Barbie+Skin+%26+Laser+Clinic+Himayathnagar+Hyderabad"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-sm btn-light rounded-pill fw-bold text-secondary px-3 py-2 d-flex align-items-center gap-1.5 shadow-xs"
+                      style={{ fontSize: "0.8rem" }}
+                    >
+                      <i className="feather icon-navigation text-primary"></i> Directions
+                    </a>
                   </div>
                 </div>
               </div>
 
-              <div className="col-lg-6">
-                <div className="bg-secondary text-white p-4 p-md-5 rounded-4 shadow">
-                  <h2 className="fw-bold text-white mb-2">Book Your Appointment</h2>
-                  <p className="small text-light mb-4">Fill in your details below to schedule your consultation with our dermatologists.</p>
-
-                  {formSubmitted ? (
-                    <div className="alert alert-success bg-success text-white border-0 rounded-3 p-4 text-center">
-                      <i className="feather icon-check-circle fs-1 d-block mb-2"></i>
-                      <h4 className="fw-bold">Appointment Requested!</h4>
-                      <p className="mb-0 small">Thank you, {formState.name || "Patient"}. Our clinical coordinator will call you shortly to confirm your slot.</p>
+              {/* Right Column: Premium Information & Action Card */}
+              <div className="col-lg-6 d-flex">
+                <div className="bg-white rounded-4 p-4 p-md-5 border border-light-subtle shadow-sm w-100 d-flex flex-column justify-content-between">
+                  <div>
+                    {/* Header with status badge */}
+                    <div className="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+                      <div>
+                        <span className="text-muted d-block small fw-bold" style={{ fontSize: "0.75rem", letterSpacing: "0.5px" }}>HEADQUARTERS</span>
+                        <h3 className="fw-bold text-secondary mb-0">Himayath Nagar Center</h3>
+                      </div>
+                      <span className="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1.5 fw-bold small">
+                        <i className="feather icon-check-circle me-1"></i> Open For Consultations
+                      </span>
                     </div>
-                  ) : (
-                    <form onSubmit={handleFormSubmit}>
-                      <div className="row g-3">
-                        <div className="col-12">
-                          <input
-                            type="text"
-                            className="form-control bg-white"
-                            placeholder="Your Full Name"
-                            required
-                            value={formState.name}
-                            onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                          />
+
+                    <p className="text-muted small mb-4" style={{ fontSize: "0.875rem", lineHeight: "1.5" }}>
+                      Our premier clinical center is equipped with advanced laser suites, customized treatment rooms, and dedicated specialist consultation chambers.
+                    </p>
+
+                    {/* Information Grid Cards */}
+                    <div className="d-flex flex-column gap-3 mb-4">
+                      {/* Location Address */}
+                      <div className="d-flex align-items-start gap-3 p-3 rounded-3 bg-light border border-light-subtle">
+                        <div className="bg-primary-subtle text-primary rounded-3 p-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 44, height: 44 }}>
+                          <i className="feather icon-map-pin fs-5"></i>
                         </div>
-                        <div className="col-md-6">
-                          <input
-                            type="email"
-                            className="form-control bg-white"
-                            placeholder="Your Email"
-                            required
-                            value={formState.email}
-                            onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <input
-                            type="tel"
-                            className="form-control bg-white"
-                            placeholder="Phone Number"
-                            required
-                            value={formState.phone}
-                            onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <input
-                            type="date"
-                            className="form-control bg-white"
-                            required
-                            value={formState.date}
-                            onChange={(e) => setFormState({ ...formState, date: e.target.value })}
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <input
-                            type="time"
-                            className="form-control bg-white"
-                            required
-                            value={formState.time}
-                            onChange={(e) => setFormState({ ...formState, time: e.target.value })}
-                          />
-                        </div>
-                        <div className="col-12">
-                          <label className="form-label small text-light fw-semibold">Select Desired Treatments:</label>
-                          <div className="row g-2">
-                            {["Vitiligo Laser Care", "Anti Acne & Pimples", "PRP Hairfall Therapy", "Laser Hair Removal", "Melasma & Pigmentation"].map((srv, idx) => (
-                              <div key={idx} className="col-6">
-                                <div className="form-check">
-                                  <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id={`srv-${idx}`}
-                                    checked={formState.services.includes(srv)}
-                                    onChange={() => handleCheckboxChange(srv)}
-                                  />
-                                  <label className="form-check-label small text-light" htmlFor={`srv-${idx}`}>
-                                    {srv}
-                                  </label>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="col-12 mt-4">
-                          <button type="submit" className="btn btn-lg btn-white text-secondary fw-bold w-100 rounded-pill">
-                            <i className="feather icon-calendar me-2 text-primary"></i> Confirm Appointment
-                          </button>
+                        <div>
+                          <h6 className="fw-bold text-secondary mb-1" style={{ fontSize: "0.875rem" }}>Clinic Address</h6>
+                          <p className="text-muted small mb-0" style={{ lineHeight: "1.4", fontSize: "0.825rem" }}>
+                            Saidatta Arcade, 3rd Floor, Himayath Nagar Main Road, Above KFC / Near Liberty, Hyderabad, Telangana 500029
+                          </p>
                         </div>
                       </div>
-                    </form>
-                  )}
+
+                      {/* Working Hours */}
+                      <div className="d-flex align-items-start gap-3 p-3 rounded-3 bg-light border border-light-subtle">
+                        <div className="bg-warning-subtle text-warning-emphasis rounded-3 p-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 44, height: 44 }}>
+                          <i className="feather icon-clock fs-5"></i>
+                        </div>
+                        <div>
+                          <h6 className="fw-bold text-secondary mb-1" style={{ fontSize: "0.875rem" }}>OPD Timings</h6>
+                          <div className="d-flex flex-column gap-0.5 text-muted small" style={{ fontSize: "0.825rem" }}>
+                            <span><strong>Monday – Saturday:</strong> 10:00 AM – 8:00 PM</span>
+                            <span><strong>Sunday:</strong> 10:00 AM – 1:30 PM (Prior Appointment)</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Phone & Support */}
+                      <div className="d-flex align-items-start gap-3 p-3 rounded-3 bg-light border border-light-subtle">
+                        <div className="bg-info-subtle text-info rounded-3 p-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 44, height: 44 }}>
+                          <i className="feather icon-phone-call fs-5"></i>
+                        </div>
+                        <div>
+                          <h6 className="fw-bold text-secondary mb-1" style={{ fontSize: "0.875rem" }}>Phone & WhatsApp Support</h6>
+                          <div className="d-flex align-items-center gap-3 flex-wrap" style={{ fontSize: "0.85rem" }}>
+                            <a href="tel:+918885985515" className="fw-bold text-primary text-decoration-none">
+                              <i className="feather icon-phone me-1"></i>+91 8885985515
+                            </a>
+                            <span className="text-muted">•</span>
+                            <a href="https://wa.me/918885985515" target="_blank" rel="noopener noreferrer" className="fw-bold text-success text-decoration-none">
+                              <i className="feather icon-message-square me-1"></i>Chat on WhatsApp
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions Bar */}
+                  <div className="pt-3 border-top border-light-subtle d-flex flex-wrap align-items-center gap-3">
+                    <Link
+                      href="/book"
+                      className="btn btn-primary btn-lg rounded-pill fw-bold px-4 py-3 shadow-xs d-flex align-items-center justify-content-center gap-2 flex-grow-1 text-white"
+                      style={{ fontSize: "0.925rem" }}
+                    >
+                      <i className="feather icon-calendar fs-5"></i>
+                      <span>Book Appointment Online</span>
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="btn btn-outline-secondary btn-lg rounded-pill fw-bold px-4 py-3 d-flex align-items-center justify-content-center gap-2 text-secondary"
+                      style={{ fontSize: "0.925rem" }}
+                    >
+                      <i className="feather icon-arrow-right"></i>
+                      <span>Get in Touch</span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

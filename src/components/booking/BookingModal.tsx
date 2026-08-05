@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 interface BookingModalProps {
@@ -14,6 +14,9 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const timeSlotsRef = useRef<HTMLDivElement>(null);
+  const continueBtnRef = useRef<HTMLDivElement>(null);
+  const isDateUserSelectedRef = useRef(false);
 
   const defaultTreatments = [
     {
@@ -213,6 +216,31 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
     }
   }, [step, selectedDate]);
 
+  // Auto-scroll to time slots AFTER slots finish loading when user selects a date
+  useEffect(() => {
+    if (!slotsLoading && isDateUserSelectedRef.current) {
+      isDateUserSelectedRef.current = false;
+      const timer = setTimeout(() => {
+        if (timeSlotsRef.current) {
+          timeSlotsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [slotsLoading]);
+
+  // Auto-scroll down to "Continue to Details" button after selecting a time slot
+  useEffect(() => {
+    if (selectedSlot && step === 3) {
+      const timer = setTimeout(() => {
+        if (continueBtnRef.current) {
+          continueBtnRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedSlot, step]);
+
   const fetchTreatments = async () => {
     try {
       const res = await fetch("/api/booking/treatments");
@@ -324,7 +352,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
           const avail = Array.isArray(json.slots) && json.slots.length > 0 ? json.slots : all.filter((s) => !booked.includes(s));
           setAvailableSlots(avail);
         } else {
-          setSlotsReason(json.reason || "Doctor unavailable on this date.");
+          setSlotsReason(json.reason || "Doctor is not available on the selected date.");
           setAllSlots([]);
           setBookedSlots([]);
           setAvailableSlots([]);
@@ -345,6 +373,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
   };
 
   const handleDateChange = (newDate) => {
+    isDateUserSelectedRef.current = true;
     setSelectedDate(newDate);
     setSelectedSlot("");
     if (selectedDoctor) {
@@ -405,7 +434,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
         }).catch(console.error);
 
         const fallbackMsg = `Name: ${customerName}\nPhone: ${customerPhone}\nTreatment: ${selectedTreatment?.title || "Skin Care"}\nDoctor: ${selectedDoctor?.name || "Dr. M.N. Rao"}\nDate: ${selectedDate}\nTime: ${selectedSlot || "10:00 AM"}`;
-        const fallbackWaUrl = `https://wa.me/918832421234?text=${encodeURIComponent(fallbackMsg)}`;
+        const fallbackWaUrl = `https://wa.me/918885985515?text=${encodeURIComponent(fallbackMsg)}`;
         const fallbackResult = {
           appointmentId: `apt_${Date.now()}`,
           whatsappUrl: fallbackWaUrl,
@@ -442,7 +471,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
       }).catch(console.error);
 
       const fallbackMsg = `Name: ${customerName}\nPhone: ${customerPhone}\nTreatment: ${selectedTreatment?.title || "Skin Care"}\nDoctor: ${selectedDoctor?.name || "Dr. M.N. Rao"}\nDate: ${selectedDate}\nTime: ${selectedSlot || "10:00 AM"}`;
-      const fallbackWaUrl = `https://wa.me/918832421234?text=${encodeURIComponent(fallbackMsg)}`;
+      const fallbackWaUrl = `https://wa.me/918885985515?text=${encodeURIComponent(fallbackMsg)}`;
       const fallbackResult = {
         appointmentId: `apt_${Date.now()}`,
         whatsappUrl: fallbackWaUrl,
@@ -541,7 +570,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
           )}
 
           {/* Modal Body */}
-          <div className="modal-body p-4" style={{ maxHeight: "70vh", overflowY: "auto" }}>
+          <div className="modal-body p-4 custom-pink-scrollbar" style={{ maxHeight: "75vh", overflowY: "auto" }}>
             
             {/* STEP 1: Select Treatment */}
             {step === 1 && (
@@ -588,9 +617,9 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
             {/* STEP 2: Select Doctor */}
             {step === 2 && (
               <div>
-                <div className="d-flex align-items-center justify-content-between mb-3">
+                <div className="d-flex align-items-center justify-content-between mb-3 gap-2">
                   <p className="text-muted small mb-0">Select your preferred specialist for <strong>{selectedTreatment?.title}</strong>:</p>
-                  <button className="btn btn-link btn-sm text-primary p-0 fw-medium" onClick={() => setStep(1)} style={{ fontSize: '0.8rem' }}>
+                  <button className="btn btn-link btn-sm text-primary p-0 fw-bold flex-shrink-0 text-nowrap" onClick={() => setStep(1)} style={{ fontSize: '0.825rem' }}>
                     <i className="feather icon-arrow-left me-1"></i>Change Treatment
                   </button>
                 </div>
@@ -636,16 +665,16 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
             {/* STEP 3: Select Date & Time */}
             {step === 3 && (
               <div>
-                <div className="d-flex align-items-center justify-content-between mb-3">
-                  <div>
-                    <span className="badge bg-light text-secondary border me-2" style={{ fontSize: '0.75rem' }}>
+                <div className="d-flex align-items-center justify-content-between mb-3 gap-2">
+                  <div className="d-flex align-items-center gap-1.5 flex-wrap min-w-0 me-1">
+                    <span className="badge bg-light text-secondary border me-1 text-truncate" style={{ fontSize: '0.75rem', maxWidth: "160px" }}>
                       <i className="feather icon-check text-primary me-1"></i>{selectedTreatment?.title}
                     </span>
-                    <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
+                    <span className="badge bg-light text-secondary border text-truncate" style={{ fontSize: '0.75rem', maxWidth: "140px" }}>
                       <i className="feather icon-user text-primary me-1"></i>{selectedDoctor?.name}
                     </span>
                   </div>
-                  <button className="btn btn-link btn-sm text-primary p-0 fw-medium" onClick={() => setStep(2)} style={{ fontSize: '0.8rem' }}>
+                  <button className="btn btn-link btn-sm text-primary p-0 fw-bold flex-shrink-0 text-nowrap" onClick={() => setStep(2)} style={{ fontSize: '0.825rem' }}>
                     <i className="feather icon-arrow-left me-1"></i>Back
                   </button>
                 </div>
@@ -749,7 +778,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                   </div>
 
                   {/* Right: Available 30-min Time Slots */}
-                  <div className="col-md-7">
+                  <div className="col-md-7" ref={timeSlotsRef}>
                     <label className="form-label small fw-bold text-secondary mb-1.5">
                       2. Select Available 30-Min Time Slot
                     </label>
@@ -781,7 +810,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                           </span>
                         </div>
 
-                        <div className="d-flex flex-wrap gap-2 max-h-56 overflow-y-auto p-1">
+                        <div className="d-flex flex-wrap gap-2 max-h-56 overflow-y-auto p-1 custom-pink-scrollbar">
                           {(allSlots.length > 0 ? allSlots : availableSlots).map((slot) => {
                             const [hStr, mStr] = slot.split(":");
                             let h = parseInt(hStr, 10);
@@ -846,7 +875,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                         </div>
 
                         {selectedSlot && (
-                          <div className="mt-3 text-end">
+                          <div className="mt-3 text-end" ref={continueBtnRef}>
                             <button className="btn btn-primary rounded-pill px-4 fw-bold shadow-xs" onClick={() => setStep(4)}>
                               Continue to Details <i className="feather icon-arrow-right ms-1"></i>
                             </button>
@@ -862,9 +891,9 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
             {/* STEP 4: Customer Details */}
             {step === 4 && (
               <form onSubmit={handleSubmitBooking}>
-                <div className="d-flex align-items-center justify-content-between mb-3">
+                <div className="d-flex align-items-center justify-content-between mb-3 gap-2">
                   <p className="text-muted small mb-0">Please fill in your details to confirm booking:</p>
-                  <button className="btn btn-link btn-sm text-primary p-0 fw-medium" type="button" onClick={() => setStep(3)} style={{ fontSize: '0.8rem' }}>
+                  <button className="btn btn-link btn-sm text-primary p-0 fw-bold flex-shrink-0 text-nowrap" type="button" onClick={() => setStep(3)} style={{ fontSize: '0.825rem' }}>
                     <i className="feather icon-arrow-left me-1"></i>Back
                   </button>
                 </div>
@@ -903,7 +932,8 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                     <input
                       type="text"
                       required
-                      className="form-control rounded-3 p-2.5 border-secondary-subtle"
+                      className="form-control rounded-3 p-2.5 bg-white shadow-none"
+                      style={{ border: "1px solid #ced4da" }}
                       placeholder="e.g. Ramesh Kumar"
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
@@ -914,7 +944,8 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                     <input
                       type="tel"
                       required
-                      className="form-control rounded-3 p-2.5 border-secondary-subtle"
+                      className="form-control rounded-3 p-2.5 bg-white shadow-none"
+                      style={{ border: "1px solid #ced4da" }}
                       placeholder="+91 98765 43210"
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
@@ -924,7 +955,8 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                     <label className="form-label small fw-bold text-secondary mb-1">Email Address (Optional)</label>
                     <input
                       type="email"
-                      className="form-control rounded-3 p-2.5 border-secondary-subtle"
+                      className="form-control rounded-3 p-2.5 bg-white shadow-none"
+                      style={{ border: "1px solid #ced4da" }}
                       placeholder="ramesh@example.com"
                       value={customerEmail}
                       onChange={(e) => setCustomerEmail(e.target.value)}
@@ -933,7 +965,8 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                   <div className="col-sm-12">
                     <label className="form-label small fw-bold text-secondary mb-1">Notes / Symptoms (Optional)</label>
                     <textarea
-                      className="form-control rounded-3 p-2.5 border-secondary-subtle"
+                      className="form-control rounded-3 p-2.5 bg-white shadow-none"
+                      style={{ border: "1px solid #ced4da" }}
                       rows={2}
                       placeholder="Mention any specific concerns or symptoms..."
                       value={customerNotes}
@@ -943,7 +976,7 @@ export default function BookingModal({ isOpen, onClose, initialTreatmentId }: Bo
                 </div>
 
                 <div className="mt-4 pt-2 border-top d-flex align-items-center justify-content-between">
-                  <button className="btn btn-outline-secondary rounded-pill px-3 px-sm-4" type="button" onClick={() => setStep(3)} style={{ fontSize: '0.95rem' }}>
+                  <button className="btn btn-outline-secondary rounded-pill px-3 px-sm-4 flex-shrink-0 text-nowrap" type="button" onClick={() => setStep(3)} style={{ fontSize: '0.95rem' }}>
                     Back
                   </button>
                   <button className="btn btn-primary rounded-pill px-3 px-sm-4 fw-bold shadow-sm d-inline-flex align-items-center justify-content-center gap-1.5 text-nowrap" type="submit" disabled={loading} style={{ fontSize: '0.95rem' }}>

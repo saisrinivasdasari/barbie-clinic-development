@@ -58,11 +58,13 @@ export async function GET(req: Request) {
       console.error("Error parsing workingDays:", e);
     }
 
+    const docDisplayName = doc.name.startsWith("Dr.") ? doc.name : `Dr. ${doc.name}`;
+
     if (!workingDays.includes(dayName)) {
       return NextResponse.json({
         success: true,
         available: false,
-        reason: `Dr. ${doc.name} is not available on ${dayName}s.`,
+        reason: `${docDisplayName} is not available on the selected date.`,
         slots: [],
       });
     }
@@ -77,7 +79,7 @@ export async function GET(req: Request) {
       return NextResponse.json({
         success: true,
         available: false,
-        reason: `Dr. ${doc.name} is unavailable on ${dateStr} (${blockedDates[0].reason || "Leave"}).`,
+        reason: `${docDisplayName} is not available on the selected date.`,
         slots: [],
       });
     }

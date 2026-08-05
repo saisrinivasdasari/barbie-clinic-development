@@ -89,7 +89,7 @@ export async function POST(req: Request) {
     } catch (e) {}
 
     const messageText = `Name: ${customerNameVal}\nPhone: ${phoneVal}\nTreatment: ${treatmentName}\nDoctor: ${doctorName}\nDate: ${formattedDate}\nTime: ${formattedTime}`;
-    const whatsappPhone = "918832421234";
+    const whatsappPhone = "918885985515";
     const whatsappUrl = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(messageText)}`;
 
     return NextResponse.json(

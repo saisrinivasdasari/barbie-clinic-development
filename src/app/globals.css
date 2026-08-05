@@ -20,6 +20,50 @@ body {
   overflow-x: hidden;
 }
 
+/* Custom Pink Scrollbars for All Browsers & Modal Containers */
+* {
+  scrollbar-width: thin !important;
+  scrollbar-color: #e25b8b #fff0f5 !important;
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar,
+div::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar,
+.custom-pink-scrollbar::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track,
+.custom-pink-scrollbar::-webkit-scrollbar-track {
+  background: #fff0f5 !important;
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb,
+.custom-pink-scrollbar::-webkit-scrollbar-thumb {
+  background: #e25b8b !important;
+  background: linear-gradient(180deg, #ff69b4, #e25b8b) !important;
+  border-radius: 10px !important;
+  border: 1.5px solid #fff0f5 !important;
+}
+
+::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover,
+div::-webkit-scrollbar-thumb:hover,
+.modal-body::-webkit-scrollbar-thumb:hover,
+.custom-pink-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ff1493 !important;
+  background: linear-gradient(180deg, #ff1493, #d03b70) !important;
+}
+
 /* Glassmorphism & Micro-animations */
 .glass-card {
   background: rgba(255, 255, 255, 0.85);
@@ -59,9 +103,50 @@ body {
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 767px) {
+  .hero-banner.style-1 {
+    padding-top: 90px !important;
+    padding-bottom: 25px !important;
+  }
+
+  .hero-banner.style-1 .container {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-banner.style-1 .inner-wrapper {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  .hero-banner.style-1 .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .hero-banner.style-1 [class*="col-"] {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  .hero-thumbnail {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 12px 0 0 0 !important;
+    padding: 0 !important;
+  }
+
   .hero-thumbnail img.thumbnail {
-    height: 360px;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 380px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+    box-shadow: 0 15px 35px rgba(10, 51, 102, 0.15) !important;
   }
 }
 

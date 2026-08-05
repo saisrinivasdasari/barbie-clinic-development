@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { formatDateDDMMYYYY } from "@/lib/dateUtils";
 
 export default function DoctorManagementPage() {
   const [doctors, setDoctors] = useState([]);
@@ -500,7 +501,7 @@ export default function DoctorManagementPage() {
                           <div className="d-flex flex-column gap-2">
                             {selectedDoctor.blockedDates?.map((b) => (
                               <div key={b.id} className="d-flex align-items-center justify-content-between p-2 bg-light rounded-3 border">
-                                <span className="fw-bold text-secondary small">{b.blockedDate}</span>
+                                <span className="fw-bold text-secondary small">{formatDateDDMMYYYY(b.blockedDate)}</span>
                                 <button
                                   className="btn btn-sm btn-light border rounded-circle p-0 hover-scale shadow-xs"
                                   onClick={() => handleUnblock("date", b.id)}
@@ -531,7 +532,7 @@ export default function DoctorManagementPage() {
                                   <span className="badge bg-primary-subtle text-primary font-monospace me-1">
                                     {b.timeSlot}
                                   </span>
-                                  <span className="text-secondary small">{b.blockedDate}</span>
+                                  <span className="text-secondary small">{formatDateDDMMYYYY(b.blockedDate)}</span>
                                 </div>
                                 <button
                                   className="btn btn-sm btn-light border rounded-circle p-0 hover-scale shadow-xs"

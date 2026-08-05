@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { formatDateDDMMYYYY } from "@/lib/dateUtils";
 
 export default function AppointmentsManagementPage() {
   const [appointments, setAppointments] = useState([]);
@@ -30,6 +31,9 @@ export default function AppointmentsManagementPage() {
   const [rescheduleStatus, setRescheduleStatus] = useState("Accepted");
   const [rescheduleSaving, setRescheduleSaving] = useState(false);
   const [rescheduleSlotDropdownOpen, setRescheduleSlotDropdownOpen] = useState(false);
+  const [rescheduleBookedSlots, setRescheduleBookedSlots] = useState([]);
+  const [rescheduleSlotsLoading, setRescheduleSlotsLoading] = useState(false);
+  const [rescheduleDayUnavailableReason, setRescheduleDayUnavailableReason] = useState("");
 
   const rescheduleTimeSlotsList = [
     { value: "10:00", label: "10:00 AM" },
@@ -40,6 +44,8 @@ export default function AppointmentsManagementPage() {
     { value: "12:30", label: "12:30 PM" },
     { value: "13:00", label: "01:00 PM" },
     { value: "13:30", label: "01:30 PM" },
+    { value: "15:00", label: "03:00 PM" },
+    { value: "15:30", label: "03:30 PM" },
     { value: "16:00", label: "04:00 PM" },
     { value: "16:30", label: "04:30 PM" },
     { value: "17:00", label: "05:00 PM" },
@@ -57,6 +63,38 @@ export default function AppointmentsManagementPage() {
   useEffect(() => {
     fetchAppointments();
   }, [search, selectedDoctor, selectedTreatment, selectedStatus, selectedDate]);
+
+  useEffect(() => {
+    if (rescheduleApt && rescheduleDate) {
+      fetchRescheduleSlots(rescheduleApt.doctorId, rescheduleDate);
+    }
+  }, [rescheduleApt, rescheduleDate]);
+
+  const fetchRescheduleSlots = async (doctorId: string, dateStr: string) => {
+    if (!doctorId || !dateStr) return;
+    setRescheduleSlotsLoading(true);
+    setRescheduleDayUnavailableReason("");
+    try {
+      const res = await fetch(`/api/booking/available-slots?doctorId=${doctorId}&date=${dateStr}`);
+      const json = await res.json();
+      if (json.success) {
+        if (json.available) {
+          const booked = [
+            ...(Array.isArray(json.bookedSlots) ? json.bookedSlots : []),
+            ...(Array.isArray(json.blockedSlots) ? json.blockedSlots : []),
+          ];
+          setRescheduleBookedSlots(booked);
+        } else {
+          setRescheduleDayUnavailableReason(json.reason || "Doctor is not available on the selected date.");
+          setRescheduleBookedSlots([]);
+        }
+      }
+    } catch (e) {
+      console.error("Error fetching reschedule slots:", e);
+    } finally {
+      setRescheduleSlotsLoading(false);
+    }
+  };
 
   const fetchMetadata = async () => {
     try {
@@ -94,8 +132,10 @@ export default function AppointmentsManagementPage() {
     }
   };
 
-  const handleUpdateStatus = async (appointmentId: string, newStatus: string) => {
+  const handleUpdateStatus = async (appointmentId: string, newStatus: string, targetApt?: any) => {
     setUpdatingId(appointmentId);
+    const aptToNotify = targetApt || appointments.find((a) => a.id === appointmentId) || detailApt;
+
     try {
       const res = await fetch("/api/admin/appointments", {
         method: "PATCH",
@@ -106,6 +146,19 @@ export default function AppointmentsManagementPage() {
         fetchAppointments();
         if (detailApt && detailApt.id === appointmentId) {
           setDetailApt({ ...detailApt, status: newStatus });
+        }
+
+        // Redirect to WhatsApp when an appointment is accepted
+        if (newStatus === "Accepted" && aptToNotify) {
+          const rawPhone = aptToNotify.customerPhone || aptToNotify.phone || "";
+          const cleanPhone = rawPhone.replace(/[^0-9]/g, "");
+          const formattedPhone = cleanPhone.startsWith("91") ? cleanPhone : `91${cleanPhone}`;
+          const formattedDate = formatDateDDMMYYYY(aptToNotify.appointmentDate);
+          const msg = encodeURIComponent(
+            `Hello ${aptToNotify.customerName || "Patient"}, your appointment for ${aptToNotify.treatmentName || "Consultation"} with ${aptToNotify.doctorName || "Doctor"} at Barbie Dermatology Clinic on ${formattedDate} at ${aptToNotify.appointmentTime} has been CONFIRMED. Thank you!`
+          );
+          const waUrl = `https://wa.me/${formattedPhone}?text=${msg}`;
+          window.open(waUrl, "_blank");
         }
       }
     } catch (e) {
@@ -168,7 +221,7 @@ export default function AppointmentsManagementPage() {
         const cleanPhone = rescheduleApt.phone?.replace(/[^0-9]/g, "") || "";
         const formattedPhone = cleanPhone.startsWith("91") ? cleanPhone : `91${cleanPhone}`;
         const msg = encodeURIComponent(
-          `Hello ${rescheduleApt.customerName || "Patient"}, your appointment for ${rescheduleApt.treatmentName || "Consultation"} with ${rescheduleApt.doctorName || "Doctor"} at Barbie Dermatology Clinic has been rescheduled to ${rescheduleDate} at ${rescheduleTime}. Status: ${rescheduleStatus}. Thank you!`
+          `Hello ${rescheduleApt.customerName || "Patient"}, your appointment for ${rescheduleApt.treatmentName || "Consultation"} with ${rescheduleApt.doctorName || "Doctor"} at Barbie Dermatology Clinic has been rescheduled to ${formatDateDDMMYYYY(rescheduleDate)} at ${rescheduleTime}. Status: ${rescheduleStatus}. Thank you!`
         );
         const waUrl = `https://wa.me/${formattedPhone}?text=${msg}`;
         window.open(waUrl, "_blank");
@@ -415,7 +468,7 @@ export default function AppointmentsManagementPage() {
                   {appointments.map((apt) => (
                     <tr key={apt.id}>
                       <td className="ps-4">
-                        <div className="fw-bold text-secondary mb-1">{apt.appointmentDate}</div>
+                        <div className="fw-bold text-secondary mb-1">{formatDateDDMMYYYY(apt.appointmentDate)}</div>
                         <div className="d-flex align-items-center gap-1.5 flex-wrap">
                           <span className="badge bg-primary-subtle text-primary font-monospace" style={{ fontSize: "0.725rem" }}>
                             <i className="feather icon-clock me-1"></i>{apt.appointmentTime}
@@ -499,12 +552,12 @@ export default function AppointmentsManagementPage() {
                             <>
                               {/* Accept */}
                               <button
-                                className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
-                                disabled={updatingId === apt.id}
-                                onClick={() => handleUpdateStatus(apt.id, "Accepted")}
-                                title="Accept Appointment"
-                                style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
-                              >
+                                  className="btn btn-sm btn-light border rounded-circle p-2 hover-scale shadow-xs"
+                                  disabled={updatingId === apt.id}
+                                  onClick={() => handleUpdateStatus(apt.id, "Accepted", apt)}
+                                  title="Accept Appointment"
+                                  style={{ width: 32, height: 32, display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                                >
                                 <i className="feather icon-check text-success fw-bold" style={{ fontSize: "0.825rem" }}></i>
                               </button>
                               {/* Reject */}
@@ -607,7 +660,7 @@ export default function AppointmentsManagementPage() {
                       <select
                         className="form-select form-select-sm fw-bold border text-secondary"
                         value={detailApt.status}
-                        onChange={(e) => handleUpdateStatus(detailApt.id, e.target.value)}
+                        onChange={(e) => handleUpdateStatus(detailApt.id, e.target.value, detailApt)}
                       >
                         <option value="Pending">🟡 Pending</option>
                         <option value="Accepted">🟢 Accepted</option>
@@ -636,7 +689,7 @@ export default function AppointmentsManagementPage() {
                     </div>
                     <div className="col-6 mt-2">
                       <span className="text-muted d-block" style={{ fontSize: "0.75rem" }}>Date</span>
-                      <strong className="text-primary">{detailApt.appointmentDate}</strong>
+                      <strong className="text-primary">{formatDateDDMMYYYY(detailApt.appointmentDate)}</strong>
                     </div>
                     <div className="col-6 mt-2">
                       <span className="text-muted d-block" style={{ fontSize: "0.75rem" }}>Time Slot</span>
@@ -699,7 +752,7 @@ export default function AppointmentsManagementPage() {
                       {rescheduleApt.treatmentName} • <strong>{rescheduleApt.doctorName}</strong>
                     </p>
                     <div className="text-muted fs-8 mt-1">
-                      Current Slot: <span className="text-danger fw-bold">{rescheduleApt.appointmentDate} at {rescheduleApt.appointmentTime}</span>
+                      Current Slot: <span className="text-danger fw-bold">{formatDateDDMMYYYY(rescheduleApt.appointmentDate)} at {rescheduleApt.appointmentTime}</span>
                     </div>
                   </div>
 
@@ -716,14 +769,27 @@ export default function AppointmentsManagementPage() {
 
                   <div className="mb-3 position-relative">
                     <label className="form-label small fw-bold text-secondary mb-1">New Available Time Slot</label>
+                    
+                    {rescheduleDayUnavailableReason && (
+                      <div className="alert alert-warning p-2 rounded-3 mb-2 small" style={{ fontSize: "0.8rem" }}>
+                        <i className="feather icon-alert-triangle me-1"></i>{rescheduleDayUnavailableReason}
+                      </div>
+                    )}
+
                     <div className="dropdown">
                       <button
                         type="button"
                         className="btn bg-white border border-light-subtle text-secondary w-100 rounded-3 p-2.5 text-start d-flex align-items-center justify-content-between fw-semibold shadow-xs"
                         onClick={() => setRescheduleSlotDropdownOpen(!rescheduleSlotDropdownOpen)}
+                        disabled={rescheduleSlotsLoading}
                       >
-                        <span className="text-secondary">
-                          {rescheduleTimeSlotsList.find((s) => s.value === rescheduleTime)?.label || rescheduleTime}
+                        <span className="text-secondary d-flex align-items-center gap-2">
+                          <i className="feather icon-clock text-primary"></i>
+                          {rescheduleSlotsLoading ? (
+                            <span className="text-muted small">Loading slots for date...</span>
+                          ) : (
+                            rescheduleTimeSlotsList.find((s) => s.value === rescheduleTime || s.label === rescheduleTime)?.label || rescheduleTime
+                          )}
                         </span>
                         <i className="feather icon-chevron-down ms-1 text-muted"></i>
                       </button>
@@ -736,10 +802,10 @@ export default function AppointmentsManagementPage() {
                             onClick={() => setRescheduleSlotDropdownOpen(false)}
                           />
                           <div
-                            className="shadow-lg border border-light-subtle rounded-3 p-1 w-100 position-absolute bg-white"
+                            className="shadow-lg border border-light-subtle rounded-3 p-1 w-100 position-absolute bg-white custom-pink-scrollbar"
                             style={{
-                              maxHeight: "190px",
-                              overflowY: "scroll",
+                              maxHeight: "220px",
+                              overflowY: "auto",
                               WebkitOverflowScrolling: "touch",
                               zIndex: 1050,
                               top: "100%",
@@ -747,22 +813,54 @@ export default function AppointmentsManagementPage() {
                               boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
                             }}
                           >
-                            {rescheduleTimeSlotsList.map((s) => (
-                              <button
-                                key={s.value}
-                                type="button"
-                                className={`dropdown-item rounded-2 py-2 px-3 small fw-medium d-flex align-items-center justify-content-between ${
-                                  rescheduleTime === s.value ? "active bg-primary text-white" : "text-secondary"
-                                }`}
-                                onClick={() => {
-                                  setRescheduleTime(s.value);
-                                  setRescheduleSlotDropdownOpen(false);
-                                }}
-                              >
-                                <span>{s.label}</span>
-                                {rescheduleTime === s.value && <i className="feather icon-check"></i>}
-                              </button>
-                            ))}
+                            {rescheduleTimeSlotsList.map((s) => {
+                              const isBooked = rescheduleBookedSlots.includes(s.value) || rescheduleBookedSlots.includes(s.label) || rescheduleDayUnavailableReason !== "";
+                              const isCurrentAptSlot = rescheduleApt?.appointmentDate === rescheduleDate && (rescheduleApt?.appointmentTime === s.value || rescheduleApt?.appointmentTime === s.label);
+                              const isBlocked = isBooked && !isCurrentAptSlot;
+                              const isSelected = rescheduleTime === s.value || rescheduleTime === s.label;
+
+                              return (
+                                <button
+                                  key={s.value}
+                                  type="button"
+                                  disabled={isBlocked}
+                                  className={`dropdown-item rounded-2 py-2 px-3 small fw-medium d-flex align-items-center justify-content-between transition-all ${
+                                    isSelected
+                                      ? "active bg-primary text-white fw-bold"
+                                      : isBlocked
+                                      ? "bg-light text-muted text-decoration-line-through opacity-75"
+                                      : "text-secondary"
+                                  }`}
+                                  style={{
+                                    cursor: isBlocked ? "not-allowed" : "pointer",
+                                    pointerEvents: isBlocked ? "none" : "auto",
+                                  }}
+                                  onClick={() => {
+                                    if (!isBlocked) {
+                                      setRescheduleTime(s.value);
+                                      setRescheduleSlotDropdownOpen(false);
+                                    }
+                                  }}
+                                >
+                                  <div className="d-flex align-items-center gap-2">
+                                    <i className={`feather ${isSelected ? "icon-check-circle" : isBlocked ? "icon-slash text-danger" : "icon-clock text-primary"}`} style={{ fontSize: "0.8rem" }}></i>
+                                    <span>{s.label}</span>
+                                    {isCurrentAptSlot && (
+                                      <span className="badge bg-info-subtle text-info border border-info-subtle rounded-pill ms-1" style={{ fontSize: "0.625rem" }}>
+                                        Current Slot
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {isSelected && <i className="feather icon-check"></i>}
+                                  {isBlocked && (
+                                    <span className="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill" style={{ fontSize: "0.625rem" }}>
+                                      Booked / Blocked
+                                    </span>
+                                  )}
+                                </button>
+                              );
+                            })}
                           </div>
                         </>
                       )}

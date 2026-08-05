@@ -477,7 +477,7 @@ export default function Page() {
                       >
                         <i className="feather icon-calendar me-1.5"></i> Book Appointment
                       </button>
-                      <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
+                      <a href="tel:+918885985515" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
                     </div>
@@ -524,7 +524,7 @@ export default function Page() {
                       >
                         <i className="feather icon-calendar me-1.5"></i> Book Appointment
                       </button>
-                      <a href="tel:+918832421234" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
+                      <a href="tel:+918885985515" className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: 38, height: 38 }} title="Call HQ Clinic">
                         <i className="feather icon-phone-call fs-6"></i>
                       </a>
                     </div>
@@ -633,7 +633,7 @@ export default function Page() {
                       <i className="feather icon-phone-call text-primary fs-4"></i>
                       <div>
                         <span className="d-block text-muted" style={{ fontSize: '0.75rem' }}>Direct Helpline</span>
-                        <a href="tel:+918832421234" className="fw-bold text-secondary text-decoration-none" style={{ fontSize: '0.9rem' }}>+91 8832421234</a>
+                        <a href="tel:+918885985515" className="fw-bold text-secondary text-decoration-none" style={{ fontSize: '0.9rem' }}>+91 8885985515</a>
                       </div>
                     </div>
                   </div>
