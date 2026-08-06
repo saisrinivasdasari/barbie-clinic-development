@@ -203,7 +203,7 @@ export default function Page() {
             </div>
 
             <div className="dz-flex-wrapper m-b30">
-              {servicesData.map((service, index) => {
+              {servicesData.slice(0, 5).map((service, index) => {
                 const isActive = activeService === index;
                 return (
                   <div
