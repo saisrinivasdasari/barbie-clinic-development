@@ -3,6 +3,9 @@ import { db, libsqlClient } from "@/lib/db";
 import { appointments } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -47,7 +50,10 @@ export async function GET(req: Request) {
       list = list.filter((a) => a.appointmentDate === date);
     }
 
-    return NextResponse.json({ success: true, count: list.length, data: list });
+    return NextResponse.json(
+      { success: true, count: list.length, data: list },
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate" } }
+    );
   } catch (error: any) {
     console.error("Error fetching appointments:", error);
     return NextResponse.json({ error: "Failed to fetch appointments." }, { status: 500 });

@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { treatments, doctorTreatments, doctors } from "@/db/schema";
-import { eq } from "drizzle-orm";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function GET() {
   try {
@@ -23,7 +25,14 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json(
+      { success: true, data },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
+      }
+    );
   } catch (error: any) {
     console.error("Error fetching booking treatments:", error);
     return NextResponse.json({ error: "Failed to fetch treatments." }, { status: 500 });

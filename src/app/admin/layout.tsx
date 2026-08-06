@@ -8,7 +8,6 @@ import { useState } from "react";
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const navItems = [
     { label: "Dashboard", href: "/admin", icon: "feather icon-grid" },
@@ -33,36 +32,42 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <div className="d-flex vh-100 overflow-hidden bg-light">
       {/* Sidebar Navigation */}
       <aside
-        className={`bg-dark text-white p-3 d-flex flex-column transition-all ${
-          sidebarOpen ? "w-64" : "w-16"
-        }`}
+        className="bg-dark text-white p-3 d-flex flex-column"
         style={{
-          width: sidebarOpen ? "260px" : "80px",
-          minWidth: sidebarOpen ? "260px" : "80px",
+          width: "260px",
+          minWidth: "260px",
           height: "100vh",
-          transition: "all 0.25s ease-in-out",
           zIndex: 100,
         }}
       >
-        {/* Brand Logo */}
-        <div className="d-flex align-items-center justify-content-between pb-3 mb-3 border-bottom border-secondary">
-          <Link href="/admin" className="d-flex align-items-center gap-2 text-decoration-none text-white overflow-hidden">
-            <div className="bg-primary text-white rounded-circle p-2 d-flex align-items-center justify-content-center shadow-xs" style={{ width: 36, height: 36 }}>
-              <i className="feather icon-activity fs-5"></i>
-            </div>
-            {sidebarOpen && (
-              <div>
-                <span className="fw-bold fs-6 text-white d-block" style={{ lineHeight: '1.2' }}>Barbie Clinic</span>
-                <span className="badge bg-primary-subtle text-primary" style={{ fontSize: '0.65rem' }}>ADMIN PANEL</span>
+        {/* Brand Logo Header */}
+        <div className="pb-3 mb-3 border-bottom border-secondary text-center">
+          <Link href="/admin" className="text-decoration-none d-block overflow-hidden">
+            <div className="d-flex flex-column align-items-center text-center">
+              {/* Full Width White Logo Container */}
+              <div className="bg-white p-3 rounded-4 shadow-sm w-100 d-flex align-items-center justify-content-center">
+                <img
+                  src="/barbie-logo.png"
+                  alt="Barbie Skin & Laser Clinic"
+                  style={{ height: "48px", maxWidth: "100%", objectFit: "contain" }}
+                />
               </div>
-            )}
+              {/* Admin Badge Below Logo */}
+              <div className="mt-2.5">
+                <span 
+                  className="badge text-white px-3.5 py-1.5 rounded-pill fw-bold" 
+                  style={{ 
+                    fontSize: "0.72rem", 
+                    letterSpacing: "1.2px", 
+                    background: "linear-gradient(90deg, #FF69B4, #FF1493)",
+                    boxShadow: "0 2px 8px rgba(255, 20, 147, 0.4)"
+                  }}
+                >
+                  ADMIN PORTAL
+                </span>
+              </div>
+            </div>
           </Link>
-          <button
-            className="btn btn-sm btn-outline-light border-0 rounded-circle p-1.5"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            <i className={`feather ${sidebarOpen ? "icon-chevron-left" : "icon-chevron-right"}`}></i>
-          </button>
         </div>
 
         {/* Navigation Links */}
@@ -79,7 +84,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 style={{ fontSize: "0.9rem" }}
               >
                 <i className={`${item.icon} fs-5`}></i>
-                {sidebarOpen && <span>{item.label}</span>}
+                <span>{item.label}</span>
               </Link>
             );
           })}
@@ -92,7 +97,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="btn btn-outline-light btn-sm w-100 rounded-pill d-flex align-items-center justify-content-center gap-2"
           >
             <i className="feather icon-external-link"></i>
-            {sidebarOpen && <span>View Main Website</span>}
+            <span>View Main Website</span>
           </Link>
           <button
             type="button"
@@ -101,7 +106,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             style={{ backgroundColor: "#dc3545" }}
           >
             <i className="feather icon-log-out"></i>
-            {sidebarOpen && <span>Logout</span>}
+            <span>Logout</span>
           </button>
         </div>
       </aside>

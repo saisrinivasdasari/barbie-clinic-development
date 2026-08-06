@@ -69,7 +69,7 @@ async function seed() {
       subtitle: "Hair Regrowth & Restoration",
       description: "Advanced PRP treatment for hair loss, dandruff, acne scars, under eye, and neck rejuvenation using your own plasma growth factors.",
       durationMinutes: 45,
-      imageUrl: "/images/procedures/scars.png",
+      imageUrl: "/images/procedures/prp.png",
       category: "Hair Restoration",
     },
     {

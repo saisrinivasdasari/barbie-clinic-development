@@ -351,14 +351,14 @@ export default function Page() {
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
                           <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Telangana Expansion</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Koti & KPHB Colony Branches</h5>
+                          <h5 className="fw-bold text-secondary mb-1.5">KPHP Colony Branch</h5>
                           <div className="d-flex align-items-center gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
                               <i className="feather icon-map-pin text-primary me-1"></i>Greater Hyderabad Reach
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Expanded clinical accessibility across Hyderabad with state-of-the-art branch locations in Koti and KPHB Colony (Kukatpally).
+                            Expanded clinical accessibility across Hyderabad with a state-of-the-art branch location in KPHP Colony (Kukatpally).
                           </p>
                         </div>
                       </div>
@@ -370,14 +370,14 @@ export default function Page() {
                         <div className="bg-white p-4 rounded-4 shadow-sm border border-light-subtle hover-lift position-relative overflow-hidden">
                           <div className="position-absolute top-0 start-0 end-0" style={{ height: 3, background: "linear-gradient(90deg, #FF69B4, #FF1493)" }}></div>
                           <span className="badge bg-primary-subtle text-primary px-3 py-1.5 rounded-pill fw-bold fs-6 mb-2">Andhra Pradesh Network</span>
-                          <h5 className="fw-bold text-secondary mb-1.5">Vizag, Vijayawada, Tirupati & Rajahmundry</h5>
+                          <h5 className="fw-bold text-secondary mb-1.5">Vizag, Vijayawada, Tirupati & Ananthapur</h5>
                           <div className="d-flex align-items-center justify-content-md-end gap-1.5 mb-2">
                             <span className="badge bg-light text-secondary border" style={{ fontSize: '0.75rem' }}>
                               <i className="feather icon-map-pin text-primary me-1"></i>Andhra Pradesh Centers
                             </span>
                           </div>
                           <p className="mb-0 text-muted small" style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-                            Launched regional clinical centers across Andhra Pradesh (Visakhapatnam, Vijayawada, Tirupati, and Rajahmundry), bringing USFDA laser tech closer to home.
+                            Launched regional clinical centers across Andhra Pradesh (Visakhapatnam, Vijayawada, Tirupati, and Ananthapur), bringing USFDA laser tech closer to home.
                           </p>
                         </div>
                       </div>

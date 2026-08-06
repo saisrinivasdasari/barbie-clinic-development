@@ -1,12 +1,90 @@
 // @ts-nocheck
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Preloader from "@/components/common/Preloader";
 import { useBooking } from "@/context/BookingContext";
+
+const defaultServicesData = [
+  {
+    id: "trt_vitiligo",
+    title: "Vitiligo Treatment",
+    subtitle: "Dedicated Vitiligo Care",
+    desc: "Dedicated vitiligo treatment center utilizing advanced targeted laser technology for clearing white patches safely and effectively.",
+    img: "/images/procedures/vitiligo.png",
+    features: [
+      "Laser Treatment for White Patches",
+      "High Success Rate & Compliance",
+      "Individualized Protocols"
+    ],
+    doctor: "Dr. M.N. Rao",
+    role: "Senior Dermatologist",
+    doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
+  },
+  {
+    id: "trt_acne",
+    title: "Anti Acne & Pimples",
+    subtitle: "Clear & Spotless Skin",
+    desc: "Clinical and aesthetic treatments tailored to clear active acne, control sebum production, and prevent future breakouts.",
+    img: "/images/procedures/peeling.png",
+    features: [
+      "Acne & Pimple Control",
+      "Customized Chemical Peeling",
+      "Effective Medical Extraction"
+    ],
+    doctor: "Dr. G. Megha.mala",
+    role: "Aesthetic Specialist",
+    doctorImg: "/Doctor-imgs/Dr. G. Megha.mala.png"
+  },
+  {
+    id: "trt_prp",
+    title: "PRP for Hairfall",
+    subtitle: "Hair Regrowth & Restoration",
+    desc: "Advanced PRP treatment for hair loss, dandruff, acne scars, under eye, and neck rejuvenation using your own plasma growth factors.",
+    img: "/images/procedures/prp.png",
+    features: [
+      "Halts Hair Loss & Thinning",
+      "Acne Scar Rejuvenation",
+      "Safe & Natural Procedure"
+    ],
+    doctor: "Dr. M.N. Rao",
+    role: "Senior Dermatologist",
+    doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
+  },
+  {
+    id: "trt_hair_removal",
+    title: "Unwanted Hair Removal",
+    subtitle: "Painless Laser Reduction",
+    desc: "Ditch the wax and razors. Enjoy smooth, hair-free skin with our safe, quick, and painless laser hair removal procedures.",
+    img: "/images/about/why_choose_laser.png",
+    features: [
+      "USFDA Approved Laser Tech",
+      "Painless & Zero Downtime",
+      "Safe on All Skin Types"
+    ],
+    doctor: "Dr. G. Megha.mala",
+    role: "Aesthetic Specialist",
+    doctorImg: "/Doctor-imgs/Dr. G. Megha.mala.png"
+  },
+  {
+    id: "trt_colour",
+    title: "Colour Improvement",
+    subtitle: "Skin Brightening & Tone",
+    desc: "Advanced laser treatments targeted at pigmented skin lesions, dark skin spots, melasma, and overall complexion improvement.",
+    img: "/images/procedures/tightening.png",
+    features: [
+      "Clears Dark Spots & Melasma",
+      "Pigmented Skin Lesion Care",
+      "Evens Out Tone & Complexion"
+    ],
+    doctor: "Dr. M.N. Rao",
+    role: "Senior Dermatologist",
+    doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
+  }
+];
 
 export default function Page() {
   const { openBooking } = useBooking();
@@ -15,87 +93,38 @@ export default function Page() {
   const [openFaq, setOpenFaq] = useState(0);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [servicesData, setServicesData] = useState(defaultServicesData);
 
-  // Appointment Form State
+  useEffect(() => {
+    fetchLiveServices();
+  }, []);
 
-
-  const servicesData = [
-    {
-      id: 0,
-      title: "Vitiligo Treatment",
-      subtitle: "Dedicated Vitiligo Care",
-      desc: "Dedicated vitiligo treatment center utilizing advanced targeted laser technology for clearing white patches safely and effectively.",
-      img: "/images/procedures/vitiligo.png",
-      features: [
-        "Laser Treatment for White Patches",
-        "High Success Rate & Compliance",
-        "Individualized Protocols"
-      ],
-      doctor: "Dr. M.N. Rao",
-      role: "Senior Dermatologist",
-      doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
-    },
-    {
-      id: 1,
-      title: "Anti Acne & Pimples",
-      subtitle: "Clear & Spotless Skin",
-      desc: "Clinical and aesthetic treatments tailored to clear active acne, control sebum production, and prevent future breakouts.",
-      img: "/images/procedures/peeling.png",
-      features: [
-        "Acne & Pimple Control",
-        "Customized Chemical Peeling",
-        "Effective Medical Extraction"
-      ],
-      doctor: "Dr. G. Megha.mala",
-      role: "Aesthetic Specialist",
-      doctorImg: "/Doctor-imgs/Dr. G. Megha.mala.png"
-    },
-    {
-      id: 2,
-      title: "PRP for Hairfall",
-      subtitle: "Hair Regrowth & Restoration",
-      desc: "Advanced PRP treatment for hair loss, dandruff, acne scars, under eye, and neck rejuvenation using your own plasma growth factors.",
-      img: "/images/procedures/scars.png",
-      features: [
-        "Halts Hair Loss & Thinning",
-        "Acne Scar Rejuvenation",
-        "Safe & Natural Procedure"
-      ],
-      doctor: "Dr. M.N. Rao",
-      role: "Senior Dermatologist",
-      doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
-    },
-    {
-      id: 3,
-      title: "Unwanted Hair Removal",
-      subtitle: "Painless Laser Reduction",
-      desc: "Ditch the wax and razors. Enjoy smooth, hair-free skin with our safe, quick, and painless laser hair removal procedures.",
-      img: "/images/about/why_choose_laser.png",
-      features: [
-        "USFDA Approved Laser Tech",
-        "Painless & Zero Downtime",
-        "Safe on All Skin Types"
-      ],
-      doctor: "Dr. G. Megha.mala",
-      role: "Aesthetic Specialist",
-      doctorImg: "/Doctor-imgs/Dr. G. Megha.mala.png"
-    },
-    {
-      id: 4,
-      title: "Colour Improvement",
-      subtitle: "Skin Brightening & Tone",
-      desc: "Advanced laser treatments targeted at pigmented skin lesions, dark skin spots, melasma, and overall complexion improvement.",
-      img: "/images/procedures/tightening.png",
-      features: [
-        "Clears Dark Spots & Melasma",
-        "Pigmented Skin Lesion Care",
-        "Evens Out Tone & Complexion"
-      ],
-      doctor: "Dr. M.N. Rao",
-      role: "Senior Dermatologist",
-      doctorImg: "/Doctor-imgs/Dr. M.N. Rao.png"
+  const fetchLiveServices = async () => {
+    try {
+      const res = await fetch("/api/booking/treatments", { cache: "no-store" });
+      const json = await res.json();
+      if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        const live = json.data.map((trt, idx) => ({
+          id: trt.id || idx,
+          title: trt.title,
+          subtitle: trt.subtitle || trt.category || "Clinical Treatment",
+          desc: trt.description || "Safe and effective clinical care protocol tailored by senior specialists.",
+          img: trt.imageUrl || "/images/procedures/peeling.png",
+          features: [
+            trt.subtitle || "Expert Clinical Care",
+            `${trt.durationMinutes || 30} Mins Duration`,
+            "USFDA Approved Protocols"
+          ],
+          doctor: trt.doctors && trt.doctors.length > 0 ? trt.doctors[0].name : "Dr. M.N. Rao",
+          role: trt.doctors && trt.doctors.length > 0 ? (trt.doctors[0].title || "Specialist") : "Senior Dermatologist",
+          doctorImg: trt.doctors && trt.doctors.length > 0 ? (trt.doctors[0].photoUrl || "/Doctor-imgs/Dr. M.N. Rao.png") : "/Doctor-imgs/Dr. M.N. Rao.png",
+        }));
+        setServicesData(live);
+      }
+    } catch (e) {
+      console.error("Failed to fetch live services on landing page:", e);
     }
-  ];
+  };
 
   const faqData = [
     {

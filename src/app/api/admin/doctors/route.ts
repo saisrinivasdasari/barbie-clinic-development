@@ -3,6 +3,9 @@ import { db } from "@/lib/db";
 import { doctors, doctorBlockedDates, doctorBlockedSlots, appointments } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // GET /api/admin/doctors - Get all doctors with their schedule, blocked dates, and blocked slots
 export async function GET(req: Request) {
   try {
@@ -35,10 +38,16 @@ export async function GET(req: Request) {
       
       // Also fetch doctor appointments
       const docApts = await db.select().from(appointments).where(eq(appointments.doctorId, doctorId));
-      return NextResponse.json({ success: true, data: { ...single, appointments: docApts } });
+      return NextResponse.json(
+        { success: true, data: { ...single, appointments: docApts } },
+        { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate" } }
+      );
     }
 
-    return NextResponse.json({ success: true, data: result });
+    return NextResponse.json(
+      { success: true, data: result },
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate" } }
+    );
   } catch (error: any) {
     console.error("Error fetching admin doctors:", error);
     return NextResponse.json({ error: "Failed to fetch doctors." }, { status: 500 });

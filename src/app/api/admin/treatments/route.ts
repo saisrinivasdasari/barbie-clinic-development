@@ -28,7 +28,7 @@ const defaultTreatmentsList = [
     subtitle: "Hair Regrowth & Restoration",
     description: "Advanced PRP treatment for hair loss, dandruff, acne scars, under eye, and neck rejuvenation using your own plasma growth factors.",
     durationMinutes: 45,
-    imageUrl: "/images/procedures/scars.png",
+    imageUrl: "/images/procedures/prp.png",
     category: "Hair Restoration",
   },
   {
@@ -114,6 +114,9 @@ const defaultTreatmentsList = [
   },
 ];
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // GET /api/admin/treatments
 export async function GET() {
   try {
@@ -121,10 +124,9 @@ export async function GET() {
     const allMappings = await db.select().from(doctorTreatments);
     const allDocs = await db.select().from(doctors);
 
-    // Auto-seed missing treatments into Turso DB
-    const existingIds = new Set(allTrts.map((t) => t.id));
-    for (const dt of defaultTreatmentsList) {
-      if (!existingIds.has(dt.id)) {
+    // Auto-seed default treatments ONLY IF database treatments table is completely empty (0 items)
+    if (allTrts.length === 0) {
+      for (const dt of defaultTreatmentsList) {
         try {
           await db.insert(treatments).values(dt).onConflictDoNothing();
           for (const doc of allDocs) {
@@ -138,12 +140,7 @@ export async function GET() {
           // ignore duplicate insert
         }
       }
-    }
-
-    // Re-fetch all treatments after auto-seed
-    allTrts = await db.select().from(treatments);
-    if (!allTrts || allTrts.length === 0) {
-      allTrts = defaultTreatmentsList;
+      allTrts = await db.select().from(treatments);
     }
 
     const result = allTrts.map((trt) => {
@@ -159,10 +156,24 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ success: true, data: result });
+    return NextResponse.json(
+      { success: true, data: result },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
+      }
+    );
   } catch (error: any) {
     console.error("Error fetching treatments:", error);
-    return NextResponse.json({ success: true, data: defaultTreatmentsList });
+    return NextResponse.json(
+      { success: true, data: defaultTreatmentsList },
+      {
+        headers: {
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        },
+      }
+    );
   }
 }
 

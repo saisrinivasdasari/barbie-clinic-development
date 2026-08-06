@@ -147,7 +147,7 @@ export default function Footer() {
                       </li>
                       <li>
                         <Link href="/contact#branchesSection">
-                          <span>KPHB & Koti (Hyd)</span>
+                          <span>KPHP Colony (Hyd)</span>
                         </Link>
                       </li>
                       <li>
@@ -162,7 +162,7 @@ export default function Footer() {
                       </li>
                       <li>
                         <Link href="/contact#branchesSection">
-                          <span>Rajahmundry</span>
+                          <span>Ananthapur</span>
                         </Link>
                       </li>
                     </ul>

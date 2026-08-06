@@ -3,6 +3,9 @@ import { db, libsqlClient } from "@/lib/db";
 import { appointments, doctors, treatments } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET() {
   try {
     let allAppointments = [];
@@ -26,20 +29,23 @@ export async function GET() {
     const pendingApts = allAppointments.filter((a) => a.status === "Pending");
     const acceptedApts = allAppointments.filter((a) => a.status === "Accepted");
 
-    return NextResponse.json({
-      success: true,
-      stats: {
-        todaysAppointments: todayApts.length,
-        pendingAppointments: pendingApts.length,
-        acceptedAppointments: acceptedApts.length,
-        totalDoctors: allDocs.length,
-        totalTreatments: allTrts.length,
-        totalAppointments: allAppointments.length,
+    return NextResponse.json(
+      {
+        success: true,
+        stats: {
+          todaysAppointments: todayApts.length,
+          pendingAppointments: pendingApts.length,
+          acceptedAppointments: acceptedApts.length,
+          totalDoctors: allDocs.length,
+          totalTreatments: allTrts.length,
+          totalAppointments: allAppointments.length,
+        },
+        todaysList: todayApts,
+        pendingList: pendingApts,
+        recentList: allAppointments.slice(0, 10),
       },
-      todaysList: todayApts,
-      pendingList: pendingApts,
-      recentList: allAppointments.slice(0, 10),
-    });
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate" } }
+    );
   } catch (error: any) {
     console.error("Error fetching admin dashboard stats:", error);
     return NextResponse.json({ error: "Failed to fetch dashboard data." }, { status: 500 });

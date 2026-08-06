@@ -3,6 +3,9 @@ import { db } from "@/lib/db";
 import { doctors, doctorBlockedDates } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -33,11 +36,14 @@ export async function GET(req: Request) {
 
     const blockedDates = blockedDatesList.map((item) => item.blockedDate);
 
-    return NextResponse.json({
-      success: true,
-      workingDays,
-      blockedDates,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        workingDays,
+        blockedDates,
+      },
+      { headers: { "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate" } }
+    );
   } catch (error: any) {
     console.error("Error fetching blocked dates:", error);
     return NextResponse.json({ error: "Failed to fetch blocked dates." }, { status: 500 });

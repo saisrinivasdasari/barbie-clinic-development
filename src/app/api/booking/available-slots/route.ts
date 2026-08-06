@@ -3,6 +3,9 @@ import { db } from "@/lib/db";
 import { doctors, appointments, doctorBlockedDates, doctorBlockedSlots } from "@/db/schema";
 import { eq, and, ne, or } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);

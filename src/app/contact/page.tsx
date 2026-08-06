@@ -25,20 +25,9 @@ export default function Page() {
       isHQ: true
     },
     {
-      id: "koti",
+      id: "kphp",
       region: "telangana",
-      name: "Koti Branch",
-      type: "Telangana",
-      address: "Near Women's College Road, Koti, Hyderabad, Telangana 500095",
-      hours: "Mon–Sat: 10:00 AM – 7:30 PM",
-      phone: "+91 8885985515",
-      tag: "Aesthetic & Laser Therapy",
-      isHQ: false
-    },
-    {
-      id: "kphb",
-      region: "telangana",
-      name: "KPHB Colony Branch",
+      name: "KPHP Colony",
       type: "Kukatpally",
       address: "Road No. 1, Near Metro Station, KPHB Colony, Hyderabad, Telangana 500072",
       hours: "Mon–Sat: 10:00 AM – 8:00 PM",
@@ -80,14 +69,14 @@ export default function Page() {
       isHQ: false
     },
     {
-      id: "rajahmundry",
+      id: "ananthapur",
       region: "ap",
-      name: "Rajahmundry Branch",
+      name: "Ananthapur",
       type: "Andhra Pradesh",
-      address: "Danavaipeta Main Road, Rajahmundry, Andhra Pradesh 533103",
+      address: "Ganga Gouri Theatre Road, beside Narayana Junior College.",
       hours: "Mon–Sat: 10:00 AM – 7:00 PM",
       phone: "+91 8885985515",
-      tag: "Clinical Dermatology",
+      tag: "Dermatology & Laser Care",
       isHQ: false
     }
   ];
@@ -286,21 +275,21 @@ export default function Page() {
                 className={`btn rounded-pill px-4 py-2 fw-bold btn-sm transition-all ${activeRegion === "all" ? "btn-primary shadow-sm" : "btn-white bg-white text-secondary border border-light-subtle"}`}
                 onClick={() => setActiveRegion("all")}
               >
-                <i className="feather icon-map me-1.5"></i> All Locations (7)
+                <i className="feather icon-map me-1.5"></i> All Locations ({branchesData.length})
               </button>
               <button
                 type="button"
                 className={`btn rounded-pill px-4 py-2 fw-bold btn-sm transition-all ${activeRegion === "telangana" ? "btn-primary shadow-sm" : "btn-white bg-white text-secondary border border-light-subtle"}`}
                 onClick={() => setActiveRegion("telangana")}
               >
-                <i className="feather icon-navigation me-1.5"></i> Telangana & Hyd (3)
+                <i className="feather icon-navigation me-1.5"></i> Telangana & Hyd ({branchesData.filter(b => b.region === "telangana").length})
               </button>
               <button
                 type="button"
                 className={`btn rounded-pill px-4 py-2 fw-bold btn-sm transition-all ${activeRegion === "ap" ? "btn-primary shadow-sm" : "btn-white bg-white text-secondary border border-light-subtle"}`}
                 onClick={() => setActiveRegion("ap")}
               >
-                <i className="feather icon-navigation me-1.5"></i> Andhra Pradesh (4)
+                <i className="feather icon-navigation me-1.5"></i> Andhra Pradesh ({branchesData.filter(b => b.region === "ap").length})
               </button>
             </div>
 
